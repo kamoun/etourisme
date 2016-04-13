@@ -1,0 +1,6 @@
+services:
+    redirect.after.login:
+        class: Etourisme\UsersBundle\Redirection\AfterLoginRedirection
+        arguments: ['@router' ,'@session']
+    
+    
