@@ -1,0 +1,24 @@
+users_homepage:
+    path:     /Connected
+    defaults: { _controller: UsersBundle:Default:index }
+new_user:
+    path:     /Connected/NewUser
+    defaults: { _controller: UsersBundle:Default:new }
+list_users:
+    path:     /Connected/Listusers
+    defaults: { _controller: UsersBundle:Default:viewUsers}
+delete_user:
+    path:     /Connected/Users/{id}/Deleteuser
+    defaults: { _controller: UsersBundle:Default:deleteUser}
+    requirements:
+        id:  \d+
+edit_user:
+    path:     /Connected/User/edit/{id}
+    defaults: { _controller: "UsersBundle:Default:editUser" }
+    requirements:
+        id:  \d+
+
+
+update_user:
+    path:     /Connected/User/{id}/update
+    defaults: { _controller: "UsersBundle:Default:update" }

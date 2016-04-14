@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+{% block stylesheet %}
+    {{ parent()}}
+    <link rel="stylesheet" href="{{asset('GNUASSETS/plugins/datatables/dataTables.bootstrap.css')}}">
+{% endblock%}
+{% block content %}
+    {{ parent()}}
+    <section class="content-header">
+        <h1>
+
+            Gestion Utilisateurs
+
+        </h1>
+    </section>
+    <section class="content">
+
+       <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <center>Edition  Utilisateur</center>
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+    <form method="post" action="{{ path('update_user',{ id: entity.id})}}">
+
+            
+        <div class="form-group input-group">
+                                <span class="input-group-addon">@</span>
+                                {{ form_widget(form.email, { 'attr': {'class': 'form-control', 'placeholder': 'Email'|trans } }) }}
+                                {{ form_errors(form.email) }}
+                            </div>
+            <div class="form-group input-group">
+                                <span class="input-group-addon">@</span>
+                                {{ form_widget(form.username, { 'attr': {'class': 'form-control', 'placeholder': 'Pseudo'|trans } }) }}
+                                {{ form_errors(form.username) }}
+                            </div>
+           
+           
+<div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                {{ form_widget(form.roles, { 'attr': {'class': 'form-control', 'placeholder': 'Pseudo'|trans ,'required':'required'} }) }}
+                                {{ form_errors(form.roles) }}
+                            </div>   
+                             <div class="form-group input-group">
+                                <span class="input-group-addon"><i class=" fa fa-key"></i></span>
+                                    {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control', 'placeholder': 'Password'|trans } }) }}
+                                    {{ form_errors(form.plainPassword.first) }}
+                            </div>
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class=" fa fa-key"></i></span>
+                                    {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control', 'placeholder': 'Password'|trans } }) }}
+                                    {{ form_errors(form.plainPassword.second) }}
+                            </div>
+                           
+                            {{ form_rest(form) }}
+                            <div>
+                            <input class="btn btn-lg btn-primary btn-block" type="submit" value="{{ 'Valider'|trans }}">
+                        </div>
+    </form>
+     </div>
+
+
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+   
+</section>
+
+{% endblock %}
+{% block javascript %}
+    {{ parent()}}
+    <script src="{{asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
+    <script>
+        $(function () {
+       
+        $('#example2').DataTable({
+          "paging": true,
+          "lengthChange": false,
+          "searching": false,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false
+        });
+      });
+</script>
+{% endblock%}
