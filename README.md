@@ -1,2 +1,12 @@
-# etourisme
-Solutions e-tourisme
+# Bootstrap
+app/bootstrap*
+ 
+# Symfony directories
+vendor/*
+*/logs/*
+*/cache/*
+web/uploads/*
+web/bundles/*
+ 
+# Configuration files
+app/config/parameters.ini
