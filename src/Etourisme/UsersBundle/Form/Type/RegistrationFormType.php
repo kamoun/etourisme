@@ -20,7 +20,7 @@ class RegistrationFormType extends AbstractType
         $builder
                 
            
-             ->add('roles',ChoiceType::class,array('choices'=>array('ROLE_ADMIN'=>'ADMIN','ROLE_SIMPLEUSER'=>'Simple utilisateur'),'mapped' => false,'multiple'=>false,'expanded'=>true, 'placeholder' => 'Choose an option'))
+             ->add('roles',ChoiceType::class,array('choices'=>array('ADMIN'=>'ADMIN','SIMPLEUSER'=>'Simple utilisateur'),'mapped' => false,'multiple'=>false,'expanded'=>true, 'placeholder' => 'Choose an option'))
             
             ;
     }
