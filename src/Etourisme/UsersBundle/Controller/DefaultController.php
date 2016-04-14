@@ -39,7 +39,7 @@ class DefaultController extends Controller {
     }
 
     public function editUserAction($id) {
-        if (true === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if (true === $this->get('security.authorization_checker')->isGranted('ADMIN')) {
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('UsersBundle:Utilisateur')->find($id);
 
@@ -76,7 +76,7 @@ class DefaultController extends Controller {
      *
      */
     public function updateAction(Request $request, $id) {
-        if (true === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if (true === $this->get('security.authorization_checker')->isGranted('ADMIN')) {
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('UsersBundle:Utilisateur')->find($id);
             //$groupe = $em->getRepository('ControleBundle:Groupe')->findByControlleur($entity);
