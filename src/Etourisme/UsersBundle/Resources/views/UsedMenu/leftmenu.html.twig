@@ -13,8 +13,8 @@
                 <i class="fa fa-group"></i> <span>Gestion des utilisateurs</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
                  <ul class="treeview-menu">
-                <li><a href="{{ path('new_user')}}"><i class="fa fa-plus"></i> Nouveau utilisateur</a></li>
-                <li><a href="{{ path('list_users')}}"><i class="fa fa-eye"></i> Consulter les utilisateurs</a></li>
+                <li><a href="{{ path('new_user')}}"><i class="fa fa-user-plus"></i> Nouveau utilisateur</a></li>
+                <li><a href="{{ path('list_users')}}"><i class="fa fa-table"></i> Consulter les utilisateurs</a></li>
                
               </ul>
               
@@ -22,13 +22,22 @@
             
             <li class="active treeview ">
               <a href="#">
-                <i class="fa fa-group"></i> <span>Gestion des hôtels</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-hotel"></i> <span>Gestion des hôtels</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
                  <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-plus"></i> Nouveau hôtel</a></li>
-                <li><a href="{{ path('list_hotels')}}"><i class="fa fa-home"></i> Consulter les hôtels</a></li>
-                <li><a href="#"><i class="fa fa-dollar"></i> Tarifs</a></li>
-                <li><a href="#"><i class="fa fa-eye"></i> Consulter les tarifs</a></li>
+                <li><a href="{{ path('create_hotel')}}"><i class="fa fa-plus-circle"></i> Nouveau hôtel</a></li>
+                <li><a href="{{ path('list_hotels')}}"><i class="fa fa-table"></i> Consulter les hôtels</a></li>             
+              </ul>
+              
+            </li>
+            
+            <li class="active treeview ">
+              <a href="#">
+                <i class="fa fa-credit-card"></i> <span>Gestion des tarifs</span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+                 <ul class="treeview-menu">
+                <li><a href="#"><i class="fa fa-money"></i> Définir les tarifs</a></li>
+                <li><a href="#"><i class="fa fa-table"></i> Consulter les tarifs</a></li>
                
               </ul>
               

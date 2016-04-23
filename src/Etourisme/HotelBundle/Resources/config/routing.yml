@@ -1,6 +1,9 @@
 hotel_homepage:
     path:     /Connected
     defaults: { _controller: HotelBundle:Default:index }
+create_hotel:
+    path:     /Connected/Hotel/Create
+    defaults: { _controller: "HotelBundle:Default:createHotel" }
 list_hotels:
-    path:     /Connected/Listhotels
+    path:     /Connected/Hotel/List
     defaults: { _controller: HotelBundle:Default:viewHotels}

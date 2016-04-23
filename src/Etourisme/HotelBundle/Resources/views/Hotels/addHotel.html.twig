@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block stylesheet %}
+    {{ parent()}}
+
+{% endblock%}
+{% block content %}
+    <section class="content">
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <center>Nouveau hôtel</center>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="dataTable_wrapper">
+                    <form method="post" action="{{ path('create_hotel')}}">
+
+
+
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class=" fa fa-group"></i></span>
+                                {{ form_widget(form.nomHotel, { 'attr': {'class': 'form-control', 'placeholder': 'Nom d`hôtel'} }) }}
+                            {{ form_errors(form.nomHotel) }}
+                        </div>
+
+                        
+                        <div>
+                            <input class="btn btn-lg btn-primary btn-block" type="submit" value="{{ 'Valider'}}">
+                        </div>
+                    </form>
+                </div>
+
+
+            </div>
+            <!-- /.panel-body -->
+        </div>
+
+    </section> 
+
+{% endblock %}
+{% block javascript %}
+    {{ parent()}}
+{% endblock%}
