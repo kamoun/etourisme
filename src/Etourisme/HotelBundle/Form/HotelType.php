@@ -5,6 +5,8 @@ namespace Etourisme\HotelBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+ use Symfony\Component\Form\Extension\Core\Type\TextType;
+ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class HotelType extends AbstractType
 {
@@ -15,7 +17,7 @@ class HotelType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nomHotel')
+            ->add('nomHotel', TextType::class,array('label' => 'Nom d`hôtel'))
             ->add('ville')
             ->add('descrip')
             ->add('details')
@@ -23,7 +25,7 @@ class HotelType extends AbstractType
             ->add('img2')
             ->add('img3')
             ->add('img4')
-            ->add('categorie')
+            ->add('categorie',  ChoiceType::class,array('choices'=>array('test1'=>'test1','test2'=>'test2')))
             ->add('promotion')
             ->add('dispo')
             ->add('age_min')

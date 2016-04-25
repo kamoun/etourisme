@@ -6,35 +6,54 @@
 {% block content %}
     <section class="content">
 
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <center>Nouveau hôtel</center>
-            </div>
-            <!-- /.panel-heading -->
-            <div class="panel-body">
-                <div class="dataTable_wrapper">
-                    <form method="post" action="{{ path('create_hotel')}}">
+      
 
+      
+     <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+              <!-- general form elements -->
+              <div class="panel panel-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Nouveau hôtel</h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+                
+                <form method="post" action="{{ path('create_hotel')}}" role="form">
+                <div class="box-body">
+                    <div class="form-group">
+                      
+                       {{ form_label(form.nomHotel) }}   
+                       {{ form_widget(form.nomHotel, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': 'Nom d`hôtel'} }) }}
+                       {{ form_errors(form.nomHotel) }}                 
+                    </div>
 
-
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><i class=" fa fa-group"></i></span>
-                                {{ form_widget(form.nomHotel, { 'attr': {'class': 'form-control', 'placeholder': 'Nom d`hôtel'} }) }}
-                            {{ form_errors(form.nomHotel) }}
-                        </div>
-
-                        
-                        <div>
-                            <input class="btn btn-lg btn-primary btn-block" type="submit" value="{{ 'Valider'}}">
-                        </div>
-                    </form>
+                    <div class="form-group input-group">
+                      <label>Catégorie</label>
+                      {{ form_widget(form.categorie, { 'attr': { 'class': 'form-control', 'placeholder': 'Catégorie d`hôtel'} }) }}
+                        {{ form_errors(form.categorie) }}
+                      <select class="form-control">
+                        <option>option 1</option>
+                        <option>option 2</option>
+                        <option>option 3</option>
+                        <option>option 4</option>
+                        <option>option 5</option>
+                      </select>
+                    </div>
+                       {{ form_rest(form) }}
+                   <div>
+                            <input class="btn  btn-default" type="submit" value="{{ 'Valider' }}">
+                            <input class="btn  btn-default" type="reset" value="{{ 'Annuler' }}">
+                       
+                    </div>                  
                 </div>
-
-
-            </div>
-            <!-- /.panel-body -->
-        </div>
-
+                </form>
+               
+              </div><!-- /.box -->
+             </div><!--/.col (right) -->
+          </div>   <!-- /.row -->
+                        
+                        
     </section> 
 
 {% endblock %}

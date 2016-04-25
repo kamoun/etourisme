@@ -1,25 +1,19 @@
 {% extends 'base.html.twig' %}
 {% block stylesheet %}
     {{ parent()}}
-     <link rel="stylesheet" href="{{asset('GNUASSETS/plugins/datatables/dataTables.bootstrap.css')}}">
-    
+     <link rel="stylesheet" href="{{asset('GNUASSETS/plugins/datatables/dataTables.bootstrap.css')}}">  
 {% endblock%}
 
 {% block content %}
     {{ parent()}}
 
- <div class="wrapper">    
-    <div class="content-wrapper">
+
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
             Gestion des utilisateurs
           </h1>
-          <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Tables</a></li>
-            <li class="active">Data tables</li>
-          </ol>
+         
         </section>
         
     <section class="content">
@@ -65,16 +59,14 @@
             </div><!-- /.col -->
           </div><!-- /.row -->
         </section><!-- /.content -->
-      </div><!-- /.content-wrapper -->
- </div><!-- /.wrapper -->   
+
 {% endblock %}
 
 
 
 {% block javascript %}
     {{ parent()}}
-     <!-- jQuery 2.1.4 -->
-        <script src="{{asset('GNUASSETS/plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
+     
     <script src="{{asset('GNUASSETS/plugins/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('GNUASSETS/plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
      <script>
@@ -87,7 +79,7 @@
                 "oLanguage": {
                     "sSearch": "Rechercher",
                     "sLengthMenu": "Afficher _MENU_ Par Page",
-                    "sZeroRecords": "<center style=\"color:blue;\">Vous N avez aucun utilisateur</center>",
+                    "sZeroRecords": "<center style=\"color:blue;\">Vous n`avez aucun utilisateur</center>",
                     "sInfo": "afficher _START_ à _END_ de _TOTAL_",
                     "sInfoEmpty": " ",
                     "sInfoFiltered": "(filtered from _MAX_ total )",

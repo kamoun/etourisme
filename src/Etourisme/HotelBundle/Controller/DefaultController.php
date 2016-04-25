@@ -22,7 +22,7 @@ class DefaultController extends Controller
         $form = $this->createHotelForm($entity);
         $form->handleRequest($request);
         if ($form->isValid()) {
-             die("here");
+             
             $em->persist($entity);
             $em->flush();
             return $this->redirect($this->generateUrl('list_hotels'));

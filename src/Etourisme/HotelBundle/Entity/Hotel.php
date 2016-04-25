@@ -31,7 +31,7 @@ class Hotel
     /**
      * @var string
      *
-     * @ORM\Column(name="ville", type="string", length=50)
+     * @ORM\Column(name="ville", type="string",nullable=true, length=50)
      */
     private $ville;
 
