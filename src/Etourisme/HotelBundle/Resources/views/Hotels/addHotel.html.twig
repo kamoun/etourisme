@@ -1,7 +1,8 @@
 {% extends 'base.html.twig' %}
 {% block stylesheet %}
     {{ parent()}}
-
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{asset('GNUASSETS/plugins/select2/select2.min.css')}}">
 {% endblock%}
 {% block content %}
     <section class="content">
@@ -22,26 +23,31 @@
                 <form method="post" action="{{ path('create_hotel')}}" role="form">
                 <div class="box-body">
                     <div class="form-group">
-                      
                        {{ form_label(form.nomHotel) }}   
                        {{ form_widget(form.nomHotel, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': 'Nom d`hôtel'} }) }}
-                       {{ form_errors(form.nomHotel) }}                 
+                       {{ form_errors(form.nomHotel) }}
+                    </div>
+                    
+                    <p>{{ form_label(form.categorie) }}</p>
+                    <div class="form-group input-group col-md-12">                         
+                        {{ form_widget(form.categorie, { 'attr': { 'class': 'form-control select2', 'style':'width: 100%;', 'placeholder': 'Catégorie'} }) }}
+                            {{ form_errors(form.categorie) }}
+                        <span class="input-group-btn">
+                          <button class="btn btn-primary dropdown-toggle" type="button"><i class="fa  fa-plus"></i></button>
+                        </span>
+                    </div>
+                    
+                    <p>{{ form_label(form.ville) }}</p>  
+                    <div class="form-group input-group col-md-12">
+                        {{ form_widget(form.ville, { 'attr': { 'class': 'form-control', 'placeholder': 'Ville'} }) }}
+                        {{ form_errors(form.ville) }}
+                      <span class="input-group-btn">
+                        <button class="btn btn-primary dropdown-toggle" type="button"><i class="fa  fa-plus"></i></button>
+                      </span>
                     </div>
 
+       
                     <div class="form-group input-group col-md-12">
-                      <label>Catégorie</label>
-                      {{ form_widget(form.categorie, { 'attr': { 'class': 'form-control', 'placeholder': 'Catégorie d`hôtel'} }) }}
-                        {{ form_errors(form.categorie) }}
-                    
-                    </div> 
-                        <div class="form-group input-group col-md-12">
-                      <label>Ville</label>
-                      {{ form_widget(form.ville, { 'attr': { 'class': 'form-control', 'placeholder': 'Ville'} }) }}
-                        {{ form_errors(form.ville) }}
-                    
-                    </div>
-                        
-                          <div class="form-group input-group col-md-12">
                       <label>Description</label>
                       {{ form_widget(form.descrip, { 'attr': { 'class': 'form-control', 'placeholder': 'Description'} }) }}
                         {{ form_errors(form.descrip) }}
@@ -123,4 +129,11 @@
 {% endblock %}
 {% block javascript %}
     {{ parent()}}
+        <script src="{{asset('GNUASSETS/plugins/select2/select2.full.min.js')}}"></script>
+     <script>
+      $(function () {
+        //Initialize Select2 Elements
+        $(".select2").select2();
+          });
+        </script>
 {% endblock%}

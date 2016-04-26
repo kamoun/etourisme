@@ -11,11 +11,11 @@ class UserAdmin implements FixtureInterface {
     public function load(ObjectManager $manager) {
         $admin = new Utilisateur;
 
-        $admin->setNom("test2");
-        $admin->setPrenom("test2");
-        $admin->setEmail('test2@gmail.com');
-        $admin->setUsername('test2');
-        $admin->setPlainPassword('test2');
+        $admin->setNom("kamoun");
+        $admin->setPrenom("malik");
+        $admin->setEmail('kamoun.malik@gmail.com');
+        $admin->setUsername('malik');
+        $admin->setPlainPassword('malik');
         $admin->addRole("ROLE_ADMIN");
         $admin->setEnabled(true);
         $manager->persist($admin);

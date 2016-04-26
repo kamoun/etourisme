@@ -41,7 +41,7 @@ class DefaultController extends Controller {
         $this->get('session')->getFlashBag()->add(
                 'info', 'Utilisateur supprimé!!.'
         );
-        return $this->render('UsersBundle:Default:index.html.twig');
+        return $this->redirect($this->generateUrl('list_users'));
     }
 
     public function editUserAction($id) {
@@ -102,7 +102,7 @@ class DefaultController extends Controller {
                     $entity->removeRole('ROLE_ADMIN');
                 
                 } else {
-                    $entity->removeRole('ROLE_SIMPLEUSER');
+                    $entity->removeRole('ROLE_UTILISATEUR');
                 }
 
 

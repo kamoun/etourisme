@@ -22,7 +22,7 @@ class RegistrationFormType extends AbstractType
             ->add('nom')
                -> add('prenom')
            
-             ->add('roles',ChoiceType::class,array('choices'=>array('ROLE_ADMIN'=>'ADMIN','ROLE_SIMPLEUSER'=>'Simple utilisateur'),'mapped' => false,'multiple'=>false,'expanded'=>true, 'placeholder' => 'Choose an option'))
+             ->add('roles',ChoiceType::class,array('choices'=>array('ROLE_ADMIN'=>'ROLE_ADMIN','ROLE_UTILISATEUR'=>'ROLE_UTILISATEUR'),'mapped' => false,'multiple'=>false,'expanded'=>true, 'placeholder' => 'Choose an option'))
             
             ;
     }

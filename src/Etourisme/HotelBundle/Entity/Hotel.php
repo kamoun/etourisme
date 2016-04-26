@@ -38,76 +38,76 @@ class Hotel
     /**
      * @var string
      *
-     * @ORM\Column(name="descrip", type="text")
+     * @ORM\Column(name="descrip", type="text", nullable=true)
      */
     private $descrip;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="details", type="text")
+     * @ORM\Column(name="details", type="text", nullable=true)
      */
     private $details;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="img1", type="string", length=50)
+     * @ORM\Column(name="img1", type="string", length=50, nullable=true)
      */
     private $img1;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="img2", type="string", length=50)
+     * @ORM\Column(name="img2", type="string", length=50, nullable=true)
      */
     private $img2;
     
      /**
      * @var string
      *
-     * @ORM\Column(name="img3", type="string", length=50)
+     * @ORM\Column(name="img3", type="string", length=50, nullable=true)
      */
     private $img3;
     
      /**
      * @var string
      *
-     * @ORM\Column(name="img4", type="string", length=50)
+     * @ORM\Column(name="img4", type="string", length=50, nullable=true)
      */
     private $img4;
      /**
      * @var string
      *
-     * @ORM\Column(name="categorie", type="string", length=20)
+     * @ORM\Column(name="categorie", type="string", length=20, nullable=true)
      */
     private $categorie;
     
      /**
      * @var string
      *
-     * @ORM\Column(name="promotion", type="text")
+     * @ORM\Column(name="promotion", type="text", nullable=true)
      */
     private $promotion;
     
      /**
      * @var string
      *
-     * @ORM\Column(name="dispo", type="string", length=20)
+     * @ORM\Column(name="dispo", type="string", length=20, nullable=true)
      */
     private $dispo;
     
     /**
      * @var int
      *
-     * @ORM\Column(name="age_min", type="integer")
+     * @ORM\Column(name="age_min", type="integer", nullable=true)
      */
     private $age_min;
 
      /**
      * @var int
      *
-     * @ORM\Column(name="age_max", type="integer")
+     * @ORM\Column(name="age_max", type="integer", nullable=true)
      */
     private $age_max;
 

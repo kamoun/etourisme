@@ -26,7 +26,7 @@ class DefaultController extends Controller
              
             $em->persist($entity);
             $em->flush();
-            return $this->redirect($this->generateUrl('list_hotels'));
+            return $this->redirect($this->generateUrl('create_hotel'));
         }
          return $this->render('HotelBundle:Hotels:addHotel.html.twig', array(
                     'entity' => $entity,
