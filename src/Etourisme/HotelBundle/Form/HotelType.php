@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
  use Symfony\Component\Form\Extension\Core\Type\TextType;
  use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class HotelType extends AbstractType
 {
@@ -25,7 +26,8 @@ class HotelType extends AbstractType
             ->add('img2')
             ->add('img3')
             ->add('img4')
-            ->add('categorie',  ChoiceType::class,array('choices'=>array('test1'=>'test1','test2'=>'test2')))
+            ->add('categorie',EntityType::class, array('class' => 'HotelBundle:Categorie', 'expanded' => false, 'required'    => true,
+    'placeholder' => 'Choisir la catégorie',))
             ->add('promotion')
             ->add('dispo')
             ->add('age_min')

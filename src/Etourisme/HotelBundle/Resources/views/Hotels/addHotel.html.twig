@@ -28,17 +28,81 @@
                        {{ form_errors(form.nomHotel) }}                 
                     </div>
 
-                    <div class="form-group input-group">
+                    <div class="form-group input-group col-md-12">
                       <label>Catégorie</label>
                       {{ form_widget(form.categorie, { 'attr': { 'class': 'form-control', 'placeholder': 'Catégorie d`hôtel'} }) }}
                         {{ form_errors(form.categorie) }}
-                      <select class="form-control">
-                        <option>option 1</option>
-                        <option>option 2</option>
-                        <option>option 3</option>
-                        <option>option 4</option>
-                        <option>option 5</option>
-                      </select>
+                    
+                    </div> 
+                        <div class="form-group input-group col-md-12">
+                      <label>Ville</label>
+                      {{ form_widget(form.ville, { 'attr': { 'class': 'form-control', 'placeholder': 'Ville'} }) }}
+                        {{ form_errors(form.ville) }}
+                    
+                    </div>
+                        
+                          <div class="form-group input-group col-md-12">
+                      <label>Description</label>
+                      {{ form_widget(form.descrip, { 'attr': { 'class': 'form-control', 'placeholder': 'Description'} }) }}
+                        {{ form_errors(form.descrip) }}
+                    
+                    </div>
+                        
+                           <div class="form-group input-group col-md-12">
+                      <label>Description</label>
+                      {{ form_widget(form.details, { 'attr': { 'class': 'form-control', 'placeholder': 'Détails'} }) }}
+                        {{ form_errors(form.details) }}
+                    
+                    </div>
+                        
+                           <div class="form-group input-group col-md-12">
+                      <label>Image 1</label>
+                      {{ form_widget(form.img1, { 'attr': { 'class': 'form-control', 'placeholder': 'Img1'} }) }}
+                        {{ form_errors(form.img1) }}
+                    
+                    </div>
+                        
+                          <div class="form-group input-group col-md-12">
+                      <label>Image 2</label>
+                      {{ form_widget(form.img2, { 'attr': { 'class': 'form-control', 'placeholder': 'Img2'} }) }}
+                        {{ form_errors(form.img2) }}
+                    
+                    </div>
+                         <div class="form-group input-group col-md-12">
+                      <label>Image 3</label>
+                      {{ form_widget(form.img3, { 'attr': { 'class': 'form-control', 'placeholder': 'Img3'} }) }}
+                        {{ form_errors(form.img3) }}
+                    
+                    </div>
+                         <div class="form-group input-group col-md-12">
+                      <label>Image 4</label>
+                      {{ form_widget(form.img4, { 'attr': { 'class': 'form-control', 'placeholder': 'Img4'} }) }}
+                        {{ form_errors(form.img4) }}
+                    
+                    </div>
+                         <div class="form-group input-group col-md-12">
+                      <label>Promotion</label>
+                      {{ form_widget(form.promotion, { 'attr': { 'class': 'form-control', 'placeholder': 'Promotion'} }) }}
+                        {{ form_errors(form.promotion) }}
+                    
+                    </div>
+                         <div class="form-group input-group col-md-12">
+                      <label>Disponible</label>
+                      {{ form_widget(form.dispo, { 'attr': { 'class': 'form-control', 'placeholder': 'Disponible'} }) }}
+                        {{ form_errors(form.dispo) }}
+                    
+                    </div>
+                          <div class="form-group input-group col-md-12">
+                      <label>Age Min</label>
+                      {{ form_widget(form.age_min, { 'attr': { 'class': 'form-control', 'placeholder': 'age_min'} }) }}
+                        {{ form_errors(form.age_min) }}
+                    
+                    </div>
+                          <div class="form-group input-group col-md-12">
+                      <label>Age Min</label>
+                      {{ form_widget(form.age_max, { 'attr': { 'class': 'form-control', 'placeholder': 'age_max'} }) }}
+                        {{ form_errors(form.age_max) }}
+                    
                     </div>
                        {{ form_rest(form) }}
                    <div>

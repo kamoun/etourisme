@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Etourisme\UsersBundle\Entity\Utilisateur;
 use Etourisme\UsersBundle\Form\Type\RegistrationFormType;
+use Etourisme\UsersBundle\Form\Type\RegistrationEditFormType;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 class DefaultController extends Controller {
 
@@ -21,8 +23,12 @@ class DefaultController extends Controller {
     }
 
     public function viewUsersAction() {
+        $query = $this->getDoctrine()->getManager()
+                        ->createQuery('SELECT u FROM UsersBundle:Utilisateur u WHERE NOT u.id LIKE :id'
+                        )->setParameter('id',$this->getUser()->getId());
+        $users = $query->getResult();
 
-        $users = $this->getDoctrine()->getRepository('UsersBundle:Utilisateur')->findAll();
+       
         return $this->render('UsersBundle:Users:listusers.html.twig', array('users' => $users));
     }
 
@@ -39,7 +45,7 @@ class DefaultController extends Controller {
     }
 
     public function editUserAction($id) {
-        if (true === $this->get('security.authorization_checker')->isGranted('ADMIN')) {
+        if (true === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('UsersBundle:Utilisateur')->find($id);
 
@@ -63,7 +69,7 @@ class DefaultController extends Controller {
      * @return \Symfony\Component\Form\Form The form
      */
     private function createEditForm(\Etourisme\UsersBundle\Entity\Utilisateur $entity) {
-        $form = $this->createForm(RegistrationFormType::class, $entity, array(
+        $form = $this->createForm(RegistrationEditFormType::class, $entity, array(
             'action' => $this->generateUrl('update_user', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
@@ -76,7 +82,7 @@ class DefaultController extends Controller {
      *
      */
     public function updateAction(Request $request, $id) {
-        if (true === $this->get('security.authorization_checker')->isGranted('ADMIN')) {
+        if (true === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('UsersBundle:Utilisateur')->find($id);
             //$groupe = $em->getRepository('ControleBundle:Groupe')->findByControlleur($entity);
@@ -85,20 +91,18 @@ class DefaultController extends Controller {
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find User entity.');
             }
-            $editForm = $this->createForm(RegistrationFormType::class, $entity);
+            $editForm = $this->createForm(RegistrationEditFormType::class, $entity);
             $editForm->handleRequest($request);
             if ($editForm->isValid()) {
+                //var_dump($_POST['roles']);
+                //die("here");
+                $role = $_POST['roles'];
 
-                $role = $editForm['roles']->getData();
-
-                if ($entity->hasRole('CONTROLEUR')) {
-                    $entity->removeRole('CONTROLEUR');
-                } elseif ($entity->hasRole('RAMASSEUR')) {
-                    $entity->removeRole('RAMASSEUR');
-                } elseif ($entity->hasRole('POSE_COLLE')) {
-                    $entity->removeRole('POSE_COLLE');
+                if ($entity->hasRole('ROLE_ADMIN')) {
+                    $entity->removeRole('ROLE_ADMIN');
+                
                 } else {
-                    $entity->removeRole('COLLAGE_CARTE');
+                    $entity->removeRole('ROLE_SIMPLEUSER');
                 }
 
 

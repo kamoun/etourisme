@@ -9,6 +9,7 @@ use Etourisme\HotelBundle\Entity\Hotel;
 use Etourisme\HotelBundle\Form\HotelType;
 
 
+
 class DefaultController extends Controller
 {
     public function indexAction()

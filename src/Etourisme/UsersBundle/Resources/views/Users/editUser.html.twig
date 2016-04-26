@@ -14,57 +14,83 @@
     </section>
     <section class="content">
 
-       <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <center>Edition  Utilisateur</center>
-                            </div>
-                            <!-- /.panel-heading -->
-                            <div class="panel-body">
-                                <div class="dataTable_wrapper">
-    <form method="post" action="{{ path('update_user',{ id: entity.id})}}">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <center>Edition  Utilisateur</center>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="dataTable_wrapper">
 
-            
-        <div class="form-group input-group">
-                                <span class="input-group-addon">@</span>
-                                {{ form_widget(form.email, { 'attr': {'class': 'form-control', 'placeholder': 'Email'|trans } }) }}
-                                {{ form_errors(form.email) }}
+                    <form method="post" action="{{ path('update_user',{ id: entity.id})}}">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                {{ form_widget(form.nom, { 'attr': {'class': 'form-control', 'placeholder': 'Nom'} }) }}
+                            <span>{{ form_errors(form.nom)}}</span>
+                        </div>
+
+
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                {{ form_widget(form.prenom, { 'attr': {'class': 'form-control', 'placeholder': 'Prenom'} }) }}
+                            <span>{{ form_errors(form.prenom)}}</span>
+                        </div>
+
+
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">@</span>
+                            {{ form_widget(form.email, { 'attr': {'class': 'form-control', 'placeholder': 'Email' } }) }}
+                            {{ form_errors(form.email) }}
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">@</span>
+                            {{ form_widget(form.username, { 'attr': {'class': 'form-control', 'placeholder': 'Login' } }) }}
+                            {{ form_errors(form.username) }}
+                        </div>
+
+
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <div id="registration_form_roles" class="form-control" required="required" placeholder="Pseudo">
+                                {% if 'ROLE_ADMIN' in entity.roles %}
+                                    <input id="registration_form_roles_0" type="radio" value="ROLE_ADMIN" required="required" name="roles" checked="checked">
+                                    <label class="required" for="registration_form_roles_0">Administrateur</label>
+                                    <input id="registration_form_roles_1" type="radio" value="ROLE_SIMPLEUSER" required="required"  name="roles">
+                                    <label class="required" for="registration_form_roles_1">Utilisateur</label>
+                                {% else %}
+                                    <input id="registration_form_roles_0" type="radio" value="ROLE_ADMIN" required="required" name="roles" >
+                                    <label class="required" for="registration_form_roles_0">ROLE_ADMIN</label>
+                                    <input id="registration_form_roles_1" type="radio" value="ROLE_SIMPLEUSER" required="required" name="roles" checked="checked">
+                                    <label class="required" for="registration_form_roles_1">Utilisateur</label>
+                                {% endif %}
                             </div>
-            <div class="form-group input-group">
-                                <span class="input-group-addon">@</span>
-                                {{ form_widget(form.username, { 'attr': {'class': 'form-control', 'placeholder': 'Pseudo'|trans } }) }}
-                                {{ form_errors(form.username) }}
-                            </div>
-           
-           
-<div class="form-group input-group">
-                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                {{ form_widget(form.roles, { 'attr': {'class': 'form-control', 'placeholder': 'Pseudo'|trans ,'required':'required'} }) }}
-                                {{ form_errors(form.roles) }}
-                            </div>   
-                             <div class="form-group input-group">
-                                <span class="input-group-addon"><i class=" fa fa-key"></i></span>
-                                    {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control', 'placeholder': 'Password'|trans } }) }}
-                                    {{ form_errors(form.plainPassword.first) }}
-                            </div>
-                            <div class="form-group input-group">
-                                <span class="input-group-addon"><i class=" fa fa-key"></i></span>
-                                    {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control', 'placeholder': 'Password'|trans } }) }}
-                                    {{ form_errors(form.plainPassword.second) }}
-                            </div>
-                           
-                            {{ form_rest(form) }}
-                            <div>
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class=" fa fa-key"></i></span>
+                                {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control', 'placeholder': 'Password'|trans } }) }}
+                                {{ form_errors(form.plainPassword.first) }}
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class=" fa fa-key"></i></span>
+                                {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control', 'placeholder': 'Password'|trans } }) }}
+                                {{ form_errors(form.plainPassword.second) }}
+                        </div>
+
+                        {{ form_rest(form) }}
+                        <div>
                             <input class="btn btn-lg btn-primary btn-block" type="submit" value="{{ 'Valider'|trans }}">
                         </div>
-    </form>
-     </div>
+                    </form>
+                </div>
 
 
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-   
-</section>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+
+    </section>
 
 {% endblock %}
 {% block javascript %}
@@ -73,15 +99,22 @@
     <script src="{{asset('assets/plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
     <script>
         $(function () {
-       
-        $('#example2').DataTable({
-          "paging": true,
-          "lengthChange": false,
-          "searching": false,
-          "ordering": true,
-          "info": true,
-          "autoWidth": false
+
+
+
+
+
+
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false
+            });
+
+
         });
-      });
-</script>
+    </script>
 {% endblock%}

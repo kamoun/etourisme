@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-class RegistrationFormType extends AbstractType
+class RegistrationEditFormType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -20,11 +20,9 @@ class RegistrationFormType extends AbstractType
         $builder
                 
             ->add('nom')
-               -> add('prenom')
+               -> add('prenom');
            
-             ->add('roles',ChoiceType::class,array('choices'=>array('ROLE_ADMIN'=>'ADMIN','ROLE_SIMPLEUSER'=>'Simple utilisateur'),'mapped' => false,'multiple'=>false,'expanded'=>true, 'placeholder' => 'Choose an option'))
             
-            ;
     }
     
     /**
