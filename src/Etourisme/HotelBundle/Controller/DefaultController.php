@@ -42,8 +42,39 @@ class DefaultController extends Controller
     }
     
     public function viewHotelsAction() {
+        $hotels = $this->getDoctrine()->getRepository('HotelBundle:Hotel')->findAll();
+        return $this->render('HotelBundle:Hotels:listHotels.html.twig', array('hotels' => $hotels));
+    }
+    
+    public function editHotelAction($id) {
+        if (true === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            $em = $this->getDoctrine()->getManager();
+            $entity = $em->getRepository('UsersBundle:Utilisateur')->find($id);
 
- 
-        return $this->render('HotelBundle:Hotels:listHotels.html.twig');
+            if (!$entity) {
+                throw $this->createNotFoundException('Impossible de trouver Cet Utilisateur');
+            }
+            $editForm = $this->createEditForm($entity);
+
+            return $this->render('UsersBundle:Users:editUser.html.twig', array(
+                        'entity' => $entity,
+                        'form' => $editForm->createView(),
+            ));
+        } else {
+            throw new AccessDeniedException();
+        }
+    }
+    
+    
+     public function deleteHotelAction($id) {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getDoctrine()->getRepository('UsersBundle:Utilisateur')->find($id);
+        $users = $this->getDoctrine()->getRepository('UsersBundle:Utilisateur')->findAll();
+        $em->remove($user);
+        $em->flush();
+        $this->get('session')->getFlashBag()->add(
+                'info', 'Utilisateur supprimé!!.'
+        );
+        return $this->redirect($this->generateUrl('list_users'));
     }
 }

@@ -7,3 +7,9 @@ create_hotel:
 list_hotels:
     path:     /Connected/Hotel/List
     defaults: { _controller: HotelBundle:Default:viewHotels}
+delete_hotel:
+    path:     /Connected/Hotel/Delete
+    defaults: { _controller: "HotelBundle:Default:deleteHotel" }    
+edit_hotel:
+    path:     /Connected/Hotel/Delete
+    defaults: { _controller: "HotelBundle:Default:editHotel" }  

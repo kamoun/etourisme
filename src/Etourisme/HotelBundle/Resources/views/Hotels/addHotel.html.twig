@@ -30,19 +30,19 @@
                     
                     <p>{{ form_label(form.categorie) }}</p>
                     <div class="form-group input-group col-md-12">                         
-                        {{ form_widget(form.categorie, { 'attr': { 'class': 'form-control select2', 'style':'width: 100%;', 'placeholder': 'Catégorie'} }) }}
+                        {{ form_widget(form.categorie, { 'attr': {'id':'cat', 'class': 'form-control select2', 'style':'width: 100%;', 'placeholder': 'Catégorie'} }) }}
                             {{ form_errors(form.categorie) }}
                         <span class="input-group-btn">
-                          <button class="btn btn-primary dropdown-toggle" type="button"><i class="fa  fa-plus"></i></button>
+                          <button id="pluscat" class="btn btn-primary dropdown-toggle" type="button" onclick="getNewValueSelect('categorie');"><i class="fa  fa-plus"></i></button>
                         </span>
                     </div>
-                    
+
                     <p>{{ form_label(form.ville) }}</p>  
                     <div class="form-group input-group col-md-12">
-                        {{ form_widget(form.ville, { 'attr': { 'class': 'form-control', 'placeholder': 'Ville'} }) }}
+                        {{ form_widget(form.ville, { 'attr': {'id':'ville', 'class': 'form-control select2', 'style':'width: 100%;', 'placeholder': 'Ville'} }) }}
                         {{ form_errors(form.ville) }}
                       <span class="input-group-btn">
-                        <button class="btn btn-primary dropdown-toggle" type="button"><i class="fa  fa-plus"></i></button>
+                        <button id="plusville" class="btn btn-primary dropdown-toggle" type="button" onclick="getNewValueSelect('ville');" ><i class="fa  fa-plus"></i></button>
                       </span>
                     </div>
 
@@ -134,6 +134,34 @@
       $(function () {
         //Initialize Select2 Elements
         $(".select2").select2();
+        
           });
+          var newValueCat=null;
+          var newValueVille=null;
+           function getAutoComplete() {
+     //    var value=$(".select2").select2('data')[0]['text'];
+     //   alert(value);
+    //   alert(document.getElementsByClassName("select2-search__field").length);
+    //var test =document.getElementById("autocat").value;
+   
+     newValue = document.getElementById("autoComplete").value;
+ // document.getElementById("demo").innerHTML = x;
+ //alert("hmd"+x);
+    }
+    
+    function getNewValueSelect(value) {
+        newValueVille=null;
+        newValueCat=null; 
+        if(value=='categorie')
+        {
+            newValueCat=newValue;  
+        }
+        else if(value=='ville')
+        {
+            newValueVille=newValue;
+        }
+        alert('ville'+newValueVille);
+        alert('cat'+newValueCat);
+    }
         </script>
 {% endblock%}
