@@ -110,6 +110,10 @@ class Hotel
      * @ORM\Column(name="age_max", type="integer", nullable=true)
      */
     private $age_max;
+    /**
+     * @ORM\OneToMany(targetEntity="Etourisme\HotelBundle\Entity\Image",mappedBy="hotelimages",cascade={"All"})
+     */
+    private $images;
 
 
     /**
@@ -432,5 +436,47 @@ class Hotel
     public function getAgeMax()
     {
         return $this->age_max;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add image
+     *
+     * @param \Etourisme\HotelBundle\Entity\Hotel $image
+     *
+     * @return Hotel
+     */
+    public function addImage(\Etourisme\HotelBundle\Entity\Image $image)
+    {
+        $this->images[] = $image;
+        $image->setHotelimages($this);
+       
+        return $this;
+    }
+
+    /**
+     * Remove image
+     *
+     * @param \Etourisme\HotelBundle\Entity\Hotel $image
+     */
+    public function removeImage(\Etourisme\HotelBundle\Entity\Image $image)
+    {
+        $this->images->removeElement($image);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getImages()
+    {
+        return $this->images;
     }
 }

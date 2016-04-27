@@ -6,10 +6,6 @@
 {% endblock%}
 {% block content %}
     <section class="content">
-
-      
-
-      
      <div class="row">
             <!-- left column -->
             <div class="col-md-12">
@@ -20,7 +16,7 @@
                 </div><!-- /.box-header -->
                 <!-- form start -->
                 
-                <form method="post" action="{{ path('create_hotel')}}" role="form">
+                <form method="post" action="{{ path('create_hotel')}}" role="form" enctype="multipart/form-data">
                 <div class="box-body">
                     <div class="form-group">
                        {{ form_label(form.nomHotel) }}   
@@ -55,48 +51,62 @@
                     </div>
                         
                            <div class="form-group input-group col-md-12">
-                      <label>Description</label>
-                      {{ form_widget(form.details, { 'attr': { 'class': 'form-control', 'placeholder': 'Détails'} }) }}
+                      <label>Détails</label>
+                        {{ form_widget(form.details, { 'attr': { 'class': 'form-control', 'placeholder': 'Détails'} }) }}
                         {{ form_errors(form.details) }}
-                    
+                         
                     </div>
                         
-                           <div class="form-group input-group col-md-12">
+                    <div class="form-group input-group col-md-12">
                       <label>Image 1</label>
                       {{ form_widget(form.img1, { 'attr': { 'class': 'form-control', 'placeholder': 'Img1'} }) }}
-                        {{ form_errors(form.img1) }}
-                    
+                        {{ form_errors(form.img1) }}                   
                     </div>
                         
-                          <div class="form-group input-group col-md-12">
+                    <div class="form-group input-group col-md-12">
                       <label>Image 2</label>
                       {{ form_widget(form.img2, { 'attr': { 'class': 'form-control', 'placeholder': 'Img2'} }) }}
-                        {{ form_errors(form.img2) }}
-                    
+                        {{ form_errors(form.img2) }}                   
                     </div>
-                         <div class="form-group input-group col-md-12">
+                    <div class="form-group input-group col-md-12">
                       <label>Image 3</label>
                       {{ form_widget(form.img3, { 'attr': { 'class': 'form-control', 'placeholder': 'Img3'} }) }}
-                        {{ form_errors(form.img3) }}
-                    
+                        {{ form_errors(form.img3) }}                   
                     </div>
-                         <div class="form-group input-group col-md-12">
+                    <div class="form-group input-group col-md-12">
                       <label>Image 4</label>
                       {{ form_widget(form.img4, { 'attr': { 'class': 'form-control', 'placeholder': 'Img4'} }) }}
-                        {{ form_errors(form.img4) }}
-                    
+                        {{ form_errors(form.img4) }}        
                     </div>
-                         <div class="form-group input-group col-md-12">
+                    
+ 
+                    <div class="row">
+                    <div class="col-xs-12">
+                     <div class="box box-success">
+                         
+                         <div id="id-box-body" class="box-body"> 
+                             
+                            {{ form_widget(form.images, { 'attr': {'placeholder': 'image'} }) }}
+                            {{ form_errors(form.images) }}                      
+                          
+                         </div><!-- /.box-body -->
+                       </div><!-- /.box -->
+                     </div><!-- /.col -->
+                   </div><!-- /.row -->
+                    
+                    
+                    
+                    
+                    
+                    <div class="form-group input-group col-md-12">
                       <label>Promotion</label>
                       {{ form_widget(form.promotion, { 'attr': { 'class': 'form-control', 'placeholder': 'Promotion'} }) }}
-                        {{ form_errors(form.promotion) }}
-                    
+                        {{ form_errors(form.promotion) }}                   
                     </div>
-                         <div class="form-group input-group col-md-12">
+                    <div class="form-group input-group col-md-12">
                       <label>Disponible</label>
                       {{ form_widget(form.dispo, { 'attr': { 'class': 'form-control', 'placeholder': 'Disponible'} }) }}
-                        {{ form_errors(form.dispo) }}
-                    
+                        {{ form_errors(form.dispo) }}                  
                     </div>
                           <div class="form-group input-group col-md-12">
                       <label>Age Min</label>
@@ -132,36 +142,111 @@
         <script src="{{asset('GNUASSETS/plugins/select2/select2.full.min.js')}}"></script>
      <script>
       $(function () {
+          //AutoComplete
         //Initialize Select2 Elements
         $(".select2").select2();
         
           });
           var newValueCat=null;
           var newValueVille=null;
+          //cette methode est appelle dans le fichier select2.full.min.js 
            function getAutoComplete() {
-     //    var value=$(".select2").select2('data')[0]['text'];
-     //   alert(value);
-    //   alert(document.getElementsByClassName("select2-search__field").length);
-    //var test =document.getElementById("autocat").value;
-   
-     newValue = document.getElementById("autoComplete").value;
- // document.getElementById("demo").innerHTML = x;
- //alert("hmd"+x);
-    }
-    
-    function getNewValueSelect(value) {
-        newValueVille=null;
-        newValueCat=null; 
-        if(value=='categorie')
-        {
-            newValueCat=newValue;  
-        }
-        else if(value=='ville')
-        {
-            newValueVille=newValue;
-        }
-        alert('ville'+newValueVille);
-        alert('cat'+newValueCat);
-    }
+        //    var value=$(".select2").select2('data')[0]['text'];
+            newValue = document.getElementById("autoComplete").value;
+        // document.getElementById("demo").innerHTML = x;
+        //alert("hmd"+x);
+           }
+           
+           function getNewValueSelect(value) {
+               newValueVille=null;
+               newValueCat=null; 
+               if(value==='categorie')
+               {
+                   newValueCat=newValue;  
+               }
+               else if(value==='ville')
+               {
+                   newValueVille=newValue;
+               }
+               alert('ville'+newValueVille);
+               alert('cat'+newValueCat);
+           }
         </script>
+        
+ <script type="text/javascript">
+     //upload images
+        $(document).ready(function () {
+            // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
+            var $container = $('div#hotel_images');
+            var $prototype = null;
+            if ($container.length === 0) {
+                $container = $('div#hotel_images');
+            }
+
+            if ($container.length === 0) {
+                $container = $('');
+            }
+
+            // On ajoute un lien pour ajouter une nouvelle image
+            var $lienAjout = $('<a href="#" id="ajout_image" class="btn btn-success">Ajouter une image</a><br /><br />');
+            $container.append($lienAjout);
+            var $col1 = '';
+             var $col2 = '';
+             var $table = $('<table id="example2" class="table table-striped table-bordered table-hover table-responsive"><thead><tr><th>Images</th><th>Action</th></tr></thead><tbody><tr><td>'+$col1+'</td><td>'+$col2+'</td></tr>');
+             $container.append($table);
+             var $tableend = $('</tbody></table>');
+
+            // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+            $lienAjout.click(function (e) {
+                ajouterImage($container);
+                e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+                return false;
+            });
+
+            // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
+            var index = $container.find(':input').length;
+
+            if (index > 0) {
+                // Pour chaque image déjà existante, on ajoute un lien de suppression
+                $container.children('div').each(function () {
+                    ajouterLienSuppression($(this));
+                });
+            }
+
+            // La fonction qui ajoute un formulaire Image
+            function ajouterImage($container) {
+                // Dans le contenu de l'attribut « data-prototype », on remplace :
+                // - le texte "__name__label__" qu'il contient par le label du champ
+                // - le texte "__name__" qu'il contient par le numéro du champ
+                 $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Image n°'+ (index + 1) )
+                        .replace(/__name__/g, index));
+                $('#example2 tbody').append($("#example2 tbody tr:last").clone());
+                // On ajoute au prototype un lien pour pouvoir supprimer la image
+                ajouterLienSuppression($prototype);
+
+                // On ajoute le prototype modifié à la fin de la balise <div>
+                $('#example2 tbody tr:last td:first').html($prototype);
+                $container.append($tableend);
+                // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+                index++;
+            }
+
+            // La fonction qui ajoute un lien de suppression d'une image
+            function ajouterLienSuppression($prototype) {
+                // Création du lien
+                $lienSuppression = $('<a id="remCF" href="#" class="btn btn-danger fa fa-trash"></a>');
+                // Ajout du lien
+                $('#example2 tbody tr:last td:last').html($lienSuppression);
+
+                // Ajout du listener sur le clic du lien
+                $lienSuppression.click(function (e) {
+                    $prototype.remove();                 
+                    $(this).parent().parent().remove(); 
+                    e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+                    return false;
+                });
+            }
+            
+        });
+    </script>
 {% endblock%}

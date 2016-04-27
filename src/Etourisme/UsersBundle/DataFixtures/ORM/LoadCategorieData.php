@@ -24,20 +24,24 @@ class CategorieFixture implements FixtureInterface {
         $manager->persist($categorie3);
         
         $categorie4 = new Categorie;
-        $categorie4->setLibelle('5 étoiles');
+        $categorie4->setLibelle('4 étoiles');
         $manager->persist($categorie4);
         
         $categorie5 = new Categorie;
-        $categorie5->setLibelle('Hôtel De Charme');
+        $categorie5->setLibelle('5 étoiles');
         $manager->persist($categorie5);
         
         $categorie6 = new Categorie;
-        $categorie6->setLibelle('Résidences');
+        $categorie6->setLibelle('Hôtel De Charme');
         $manager->persist($categorie6);
         
         $categorie7 = new Categorie;
-        $categorie7->setLibelle('Autres');
+        $categorie7->setLibelle('Résidences');
         $manager->persist($categorie7);
+        
+        $categorie8 = new Categorie;
+        $categorie8->setLibelle('Autres');
+        $manager->persist($categorie8);
 
 
 
