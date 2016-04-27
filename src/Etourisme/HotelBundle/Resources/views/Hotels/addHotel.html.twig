@@ -2,11 +2,16 @@
 {% block stylesheet %}
     {{ parent()}}
     <!-- Select2 -->
-    <link rel="stylesheet" href="{{asset('GNUASSETS/plugins/select2/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('GNUASSETS/plugins/select2/select2.css')}}">
+    <style type="text/css">
+        [class^='select2'] {
+         border-radius: 0px !important;
+       }
+    </style>
 {% endblock%}
 {% block content %}
-    <section class="content">
-     <div class="row">
+<section class="content">        
+  <div class="row">
             <!-- left column -->
             <div class="col-md-12">
               <!-- general form elements -->
@@ -20,7 +25,7 @@
                 <div class="box-body">
                     <div class="form-group">
                        {{ form_label(form.nomHotel) }}   
-                       {{ form_widget(form.nomHotel, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': 'Nom d`hôtel'} }) }}
+                       {{ form_widget(form.nomHotel, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': 'Nom'} }) }}
                        {{ form_errors(form.nomHotel) }}
                     </div>
                     
@@ -29,7 +34,7 @@
                         {{ form_widget(form.categorie, { 'attr': {'id':'cat', 'class': 'form-control select2', 'style':'width: 100%;', 'placeholder': 'Catégorie'} }) }}
                             {{ form_errors(form.categorie) }}
                         <span class="input-group-btn">
-                          <button id="pluscat" class="btn btn-primary dropdown-toggle" type="button" onclick="getNewValueSelect('categorie');"><i class="fa  fa-plus"></i></button>
+                          <button id="pluscat" class="btn btn-primary dropdown-toggle btn-sm" type="button" onclick="getNewValueSelect('categorie');"><i class="fa  fa-plus"></i></button>
                         </span>
                     </div>
 
@@ -38,48 +43,17 @@
                         {{ form_widget(form.ville, { 'attr': {'id':'ville', 'class': 'form-control select2', 'style':'width: 100%;', 'placeholder': 'Ville'} }) }}
                         {{ form_errors(form.ville) }}
                       <span class="input-group-btn">
-                        <button id="plusville" class="btn btn-primary dropdown-toggle" type="button" onclick="getNewValueSelect('ville');" ><i class="fa  fa-plus"></i></button>
+                        <button id="plusville" class="btn btn-primary dropdown-toggle btn-sm" type="button" onclick="getNewValueSelect('ville');" ><i class="fa  fa-plus"></i></button>
                       </span>
                     </div>
 
-       
                     <div class="form-group input-group col-md-12">
-                      <label>Description</label>
-                      {{ form_widget(form.descrip, { 'attr': { 'class': 'form-control', 'placeholder': 'Description'} }) }}
-                        {{ form_errors(form.descrip) }}
+                      <label>Remarque</label>
+                      {{ form_widget(form.promotion, { 'attr': { 'class': 'form-control', 'placeholder': 'Remarque'} }) }}
+                        {{ form_errors(form.promotion) }}                   
+                    </div> 
                     
-                    </div>
-                        
-                           <div class="form-group input-group col-md-12">
-                      <label>Détails</label>
-                        {{ form_widget(form.details, { 'attr': { 'class': 'form-control', 'placeholder': 'Détails'} }) }}
-                        {{ form_errors(form.details) }}
-                         
-                    </div>
-                        
-                    <div class="form-group input-group col-md-12">
-                      <label>Image 1</label>
-                      {{ form_widget(form.img1, { 'attr': { 'class': 'form-control', 'placeholder': 'Img1'} }) }}
-                        {{ form_errors(form.img1) }}                   
-                    </div>
-                        
-                    <div class="form-group input-group col-md-12">
-                      <label>Image 2</label>
-                      {{ form_widget(form.img2, { 'attr': { 'class': 'form-control', 'placeholder': 'Img2'} }) }}
-                        {{ form_errors(form.img2) }}                   
-                    </div>
-                    <div class="form-group input-group col-md-12">
-                      <label>Image 3</label>
-                      {{ form_widget(form.img3, { 'attr': { 'class': 'form-control', 'placeholder': 'Img3'} }) }}
-                        {{ form_errors(form.img3) }}                   
-                    </div>
-                    <div class="form-group input-group col-md-12">
-                      <label>Image 4</label>
-                      {{ form_widget(form.img4, { 'attr': { 'class': 'form-control', 'placeholder': 'Img4'} }) }}
-                        {{ form_errors(form.img4) }}        
-                    </div>
-                    
- 
+                    <!-- img start -->
                     <div class="row">
                     <div class="col-xs-12">
                      <div class="box box-success">
@@ -93,38 +67,35 @@
                        </div><!-- /.box -->
                      </div><!-- /.col -->
                    </div><!-- /.row -->
+                   <!-- img end -->
+                   
+                   <div class="form-group input-group col-md-12">
+                      <label>Description</label>
+                      {{ form_widget(form.descrip, { 'attr': { 'class': 'form-control', 'placeholder': 'Description'} }) }}
+                        {{ form_errors(form.descrip) }}
                     
-                    
-                    
-                    
-                    
-                    <div class="form-group input-group col-md-12">
-                      <label>Promotion</label>
-                      {{ form_widget(form.promotion, { 'attr': { 'class': 'form-control', 'placeholder': 'Promotion'} }) }}
-                        {{ form_errors(form.promotion) }}                   
                     </div>
+                        
                     <div class="form-group input-group col-md-12">
-                      <label>Disponible</label>
-                      {{ form_widget(form.dispo, { 'attr': { 'class': 'form-control', 'placeholder': 'Disponible'} }) }}
-                        {{ form_errors(form.dispo) }}                  
+                      <label>Détails</label>
+                        {{ form_widget(form.details, { 'attr': { 'class': 'form-control', 'placeholder': 'Détails'} }) }}
+                        {{ form_errors(form.details) }}
+                         
                     </div>
-                          <div class="form-group input-group col-md-12">
-                      <label>Age Min</label>
-                      {{ form_widget(form.age_min, { 'attr': { 'class': 'form-control', 'placeholder': 'age_min'} }) }}
+
+                    <div class="form-group input-group col-md-12">
+                      <label>Age enfant</label>
+                      {{ form_widget(form.age_min, { 'attr': { 'class': 'form-control', 'placeholder': 'Min'} }) }}
                         {{ form_errors(form.age_min) }}
-                    
                     </div>
-                          <div class="form-group input-group col-md-12">
-                      <label>Age Min</label>
-                      {{ form_widget(form.age_max, { 'attr': { 'class': 'form-control', 'placeholder': 'age_max'} }) }}
-                        {{ form_errors(form.age_max) }}
-                    
+                    <div class="form-group input-group col-md-12">
+                      {{ form_widget(form.age_max, { 'attr': { 'class': 'form-control', 'placeholder': 'Max'} }) }}
+                      {{ form_errors(form.age_max) }}
                     </div>
                        {{ form_rest(form) }}
-                   <div>
+                    <div>
                             <input class="btn  btn-default" type="submit" value="{{ 'Valider' }}">
-                            <input class="btn  btn-default" type="reset" value="{{ 'Annuler' }}">
-                       
+                            <input class="btn  btn-default" type="reset" value="{{ 'Annuler' }}">          
                     </div>                  
                 </div>
                 </form>
@@ -141,12 +112,7 @@
     {{ parent()}}
         <script src="{{asset('GNUASSETS/plugins/select2/select2.full.min.js')}}"></script>
      <script>
-      $(function () {
-          //AutoComplete
-        //Initialize Select2 Elements
-        $(".select2").select2();
-        
-          });
+    
           var newValueCat=null;
           var newValueVille=null;
           //cette methode est appelle dans le fichier select2.full.min.js 
@@ -174,8 +140,10 @@
         </script>
         
  <script type="text/javascript">
-     //upload images
+     
         $(document).ready(function () {
+             $(".select2").select2();
+             //upload images
             // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
             var $container = $('div#hotel_images');
             var $prototype = null;

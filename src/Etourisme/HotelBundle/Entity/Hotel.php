@@ -3,6 +3,7 @@
 namespace Etourisme\HotelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Hotel
@@ -49,33 +50,6 @@ class Hotel
      */
     private $details;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="img1", type="string", length=50, nullable=true)
-     */
-    private $img1;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="img2", type="string", length=50, nullable=true)
-     */
-    private $img2;
-    
-     /**
-     * @var string
-     *
-     * @ORM\Column(name="img3", type="string", length=50, nullable=true)
-     */
-    private $img3;
-    
-     /**
-     * @var string
-     *
-     * @ORM\Column(name="img4", type="string", length=50, nullable=true)
-     */
-    private $img4;
      /**
      * @var string
      *
@@ -99,14 +73,16 @@ class Hotel
     
     /**
      * @var int
-     *
+     * 
      * @ORM\Column(name="age_min", type="integer", nullable=true)
+     * @Assert\Range(min = 0,max = 200)
      */
     private $age_min;
 
      /**
      * @var int
-     *
+     * 
+     * 
      * @ORM\Column(name="age_max", type="integer", nullable=true)
      */
     private $age_max;
