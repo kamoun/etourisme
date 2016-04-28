@@ -32,7 +32,6 @@
                         <th>Description</th>
                         <th>Détails</th>
                         <th>Catégorie</th>
-                        <th>Images</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -45,7 +44,7 @@
                                 <td>{{ hotel.descrip }}</td>
                                 <td>{{ hotel.details }}</td>
                                 <td>{{ hotel.categorie }}</td>
-                                <td>{{ hotel.img1 }}</td>
+                              
                               
                             <td>
                                 <a  class="confirmModal"   href="{{ path('delete_hotel',{id:hotel.id})}}"   title="Supprimer l'hôtel"><i class="fa fa-trash"></i></a>
