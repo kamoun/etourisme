@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Etourisme\UsersBundle\UsersBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Etourisme\HotelBundle\HotelBundle(),
+             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             
         ];
 

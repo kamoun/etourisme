@@ -5,7 +5,10 @@ namespace Etourisme\HotelBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Etourisme\HotelBundle\Entity\Hotel;
+use Etourisme\HotelBundle\Entity\Ville;
+use Etourisme\HotelBundle\Entity\Categorie;
 use Etourisme\HotelBundle\Form\HotelType;
 
 
@@ -76,5 +79,31 @@ class DefaultController extends Controller
                 'info', 'Utilisateur supprimé!!.'
         );
         return $this->redirect($this->generateUrl('list_users'));
+    }
+    
+    
+      public function addCategorieAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+        $categorie = new Categorie();
+        $categorie->setLibelle($_POST['categorie']);
+        $em->persist($categorie);
+        $em->flush();
+
+
+
+        return new JsonResponse($_POST['categorie'], 200);
+    }
+
+    public function addVilleAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+        $ville = new Ville();
+        $ville->setLibelle($_POST['ville']);
+        
+        $em->persist($ville);
+        $em->flush();
+
+
+
+        return new JsonResponse($_POST['ville'], 200);
     }
 }

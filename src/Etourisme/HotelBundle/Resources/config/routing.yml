@@ -13,3 +13,9 @@ delete_hotel:
 edit_hotel:
     path:     /Connected/Hotel/Delete
     defaults: { _controller: "HotelBundle:Default:editHotel" }  
+add_categorie:
+    path:     /Connected/Hotel/categorie
+    defaults: { _controller: "HotelBundle:Default:addCategorie" }
+add_ville:
+    path:     /Connected/Hotel/ville
+    defaults: { _controller: "HotelBundle:Default:addVille" }  

@@ -5,145 +5,190 @@
     <link rel="stylesheet" href="{{asset('GNUASSETS/plugins/select2/select2.css')}}">
     <style type="text/css">
         [class^='select2'] {
-         border-radius: 0px !important;
-       }
+            border-radius: 0px !important;
+        }
     </style>
 {% endblock%}
 {% block content %}
-<section class="content">        
-  <div class="row">
+    <section class="content">        
+        <div class="row">
             <!-- left column -->
             <div class="col-md-12">
-              <!-- general form elements -->
-              <div class="panel panel-primary">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Nouveau hôtel</h3>
-                </div><!-- /.box-header -->
-                <!-- form start -->
-                
-                <form method="post" action="{{ path('create_hotel')}}" role="form" enctype="multipart/form-data">
-                <div class="box-body">
-                    <div class="form-group">
-                       {{ form_label(form.nomHotel) }}   
-                       {{ form_widget(form.nomHotel, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': 'Nom'} }) }}
-                       {{ form_errors(form.nomHotel) }}
-                    </div>
-                    
-                    <p>{{ form_label(form.categorie) }}</p>
-                    <div class="form-group input-group col-md-12">                         
-                        {{ form_widget(form.categorie, { 'attr': {'id':'cat', 'class': 'form-control select2', 'style':'width: 100%;', 'placeholder': 'Catégorie'} }) }}
-                            {{ form_errors(form.categorie) }}
-                        <span class="input-group-btn">
-                          <button id="pluscat" class="btn btn-primary dropdown-toggle btn-sm" type="button" onclick="getNewValueSelect('categorie');"><i class="fa  fa-plus"></i></button>
-                        </span>
-                    </div>
+                <!-- general form elements -->
+                <div class="panel panel-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Nouveau hôtel</h3>
+                    </div><!-- /.box-header -->
+                    <!-- form start -->
 
-                    <p>{{ form_label(form.ville) }}</p>  
-                    <div class="form-group input-group col-md-12">
-                        {{ form_widget(form.ville, { 'attr': {'id':'ville', 'class': 'form-control select2', 'style':'width: 100%;', 'placeholder': 'Ville'} }) }}
-                        {{ form_errors(form.ville) }}
-                      <span class="input-group-btn">
-                        <button id="plusville" class="btn btn-primary dropdown-toggle btn-sm" type="button" onclick="getNewValueSelect('ville');" ><i class="fa  fa-plus"></i></button>
-                      </span>
-                    </div>
+                    <form method="post" action="{{ path('create_hotel')}}" role="form" enctype="multipart/form-data">
+                        <div class="box-body">
+                            <div class="form-group">
+                                {{ form_label(form.nomHotel) }}   
+                                {{ form_widget(form.nomHotel, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': 'Nom'} }) }}
+                                {{ form_errors(form.nomHotel) }}
+                            </div>
 
-                    <div class="form-group input-group col-md-12">
-                      <label>Remarque</label>
-                      {{ form_widget(form.promotion, { 'attr': { 'class': 'form-control', 'placeholder': 'Remarque'} }) }}
-                        {{ form_errors(form.promotion) }}                   
-                    </div> 
-                    
-                    <!-- img start -->
-                    <div class="row">
-                    <div class="col-xs-12">
-                     <div class="box box-success">
-                         
-                         <div id="id-box-body" class="box-body"> 
-                             
-                            {{ form_widget(form.images, { 'attr': {'placeholder': 'image'} }) }}
-                            {{ form_errors(form.images) }}                      
-                          
-                         </div><!-- /.box-body -->
-                       </div><!-- /.box -->
-                     </div><!-- /.col -->
-                   </div><!-- /.row -->
-                   <!-- img end -->
-                   
-                   <div class="form-group input-group col-md-12">
-                      <label>Description</label>
-                      {{ form_widget(form.descrip, { 'attr': { 'class': 'form-control', 'placeholder': 'Description'} }) }}
-                        {{ form_errors(form.descrip) }}
-                    
-                    </div>
-                        
-                    <div class="form-group input-group col-md-12">
-                      <label>Détails</label>
-                        {{ form_widget(form.details, { 'attr': { 'class': 'form-control', 'placeholder': 'Détails'} }) }}
-                        {{ form_errors(form.details) }}
-                         
-                    </div>
+                            <p>{{ form_label(form.categorie) }}</p>
+                            <div class="form-group input-group col-md-12">                         
+                                {{ form_widget(form.categorie, { 'attr': {'id':'cat', 'class': 'form-control select2', 'style':'width: 100%;', 'placeholder': 'Catégorie'} }) }}
+                                {{ form_errors(form.categorie) }}
+                                <span class="input-group-btn">
+                                    <button id="pluscat" class="btn btn-primary dropdown-toggle btn-sm" type="button" onclick="getNewValueSelect('categorie');"><i class="fa  fa-plus"></i></button>
+                                </span>
+                            </div>
 
-                    <div class="form-group input-group col-md-12">
-                      <label>Age enfant</label>
-                      {{ form_widget(form.age_min, { 'attr': { 'class': 'form-control', 'placeholder': 'Min'} }) }}
-                        {{ form_errors(form.age_min) }}
-                    </div>
-                    <div class="form-group input-group col-md-12">
-                      {{ form_widget(form.age_max, { 'attr': { 'class': 'form-control', 'placeholder': 'Max'} }) }}
-                      {{ form_errors(form.age_max) }}
-                    </div>
-                       {{ form_rest(form) }}
-                    <div>
-                            <input class="btn  btn-default" type="submit" value="{{ 'Valider' }}">
-                            <input class="btn  btn-default" type="reset" value="{{ 'Annuler' }}">          
-                    </div>                  
-                </div>
-                </form>
-               
-              </div><!-- /.box -->
-             </div><!--/.col (right) -->
-          </div>   <!-- /.row -->
-                        
-                        
+                            <p>{{ form_label(form.ville) }}</p>  
+                            <div class="form-group input-group col-md-12">
+                                {{ form_widget(form.ville, { 'attr': {'id':'ville', 'class': 'form-control select2', 'style':'width: 100%;', 'placeholder': 'Ville'} }) }}
+                                {{ form_errors(form.ville) }}
+                                <span class="input-group-btn">
+                                    <button id="plusville" class="btn btn-primary dropdown-toggle btn-sm" type="button" onclick="getNewValueSelect('ville');" ><i class="fa  fa-plus"></i></button>
+                                </span>
+                            </div>
+
+                            <div class="form-group input-group col-md-12">
+                                <label>Remarque</label>
+                                {{ form_widget(form.promotion, { 'attr': { 'class': 'form-control', 'placeholder': 'Remarque'} }) }}
+                                {{ form_errors(form.promotion) }}                   
+                            </div> 
+
+                            <!-- img start -->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="box box-success">
+
+                                        <div id="id-box-body" class="box-body"> 
+
+                                            {{ form_widget(form.images, { 'attr': {'placeholder': 'image'} }) }}
+                                            {{ form_errors(form.images) }}                      
+
+                                        </div><!-- /.box-body -->
+                                    </div><!-- /.box -->
+                                </div><!-- /.col -->
+                            </div><!-- /.row -->
+                            <!-- img end -->
+
+                            <div class="form-group input-group col-md-12">
+                                <label>Description</label>
+                                {{ form_widget(form.descrip, { 'attr': { 'class': 'form-control', 'placeholder': 'Description'} }) }}
+                                {{ form_errors(form.descrip) }}
+
+                            </div>
+
+                            <div class="form-group input-group col-md-12">
+                                <label>Détails</label>
+                                {{ form_widget(form.details, { 'attr': { 'class': 'form-control', 'placeholder': 'Détails'} }) }}
+                                {{ form_errors(form.details) }}
+
+                            </div>
+
+                            <div class="form-group input-group col-md-12">
+                                <label>Age enfant</label>
+                                {{ form_widget(form.age_min, { 'attr': { 'class': 'form-control', 'placeholder': 'Min'} }) }}
+                                {{ form_errors(form.age_min) }}
+                            </div>
+                            <div class="form-group input-group col-md-12">
+                                {{ form_widget(form.age_max, { 'attr': { 'class': 'form-control', 'placeholder': 'Max'} }) }}
+                                {{ form_errors(form.age_max) }}
+                            </div>
+                             <div class="form-group input-group col-md-12">
+                                  <label>Latitude</label>
+                                {{ form_widget(form.latitude, { 'attr': { 'class': 'form-control', 'placeholder': 'latitude'} }) }}
+                                {{ form_errors(form.latitude) }}
+                            </div>
+                             <div class="form-group input-group col-md-12">
+                                  <label>Longtitude</label>
+                                {{ form_widget(form.longtitude, { 'attr': { 'class': 'form-control', 'placeholder': 'longtitude'} }) }}
+                                {{ form_errors(form.longtitude) }}
+                            </div>
+
+                            {{ form_rest(form) }}
+                            <div>
+                                <input class="btn  btn-default" type="submit" value="{{ 'Valider' }}">
+                                <input class="btn  btn-default" type="reset" value="{{ 'Annuler' }}">          
+                            </div>                  
+                        </div>
+                    </form>
+
+                </div><!-- /.box -->
+            </div><!--/.col (right) -->
+        </div>   <!-- /.row -->
+
+
     </section> 
 
 {% endblock %}
 {% block javascript %}
     {{ parent()}}
-        <script src="{{asset('GNUASSETS/plugins/select2/select2.full.min.js')}}"></script>
-     <script>
-    
-          var newValueCat=null;
-          var newValueVille=null;
-          //cette methode est appelle dans le fichier select2.full.min.js 
-           function getAutoComplete() {
-        //    var value=$(".select2").select2('data')[0]['text'];
-            newValue = document.getElementById("autoComplete").value;
-        // document.getElementById("demo").innerHTML = x;
-        //alert("hmd"+x);
-           }
-           
-           function getNewValueSelect(value) {
-               newValueVille=null;
-               newValueCat=null; 
-               if(value==='categorie')
-               {
-                   newValueCat=newValue;  
-               }
-               else if(value==='ville')
-               {
-                   newValueVille=newValue;
-               }
-               alert('ville'+newValueVille);
-               alert('cat'+newValueCat);
-           }
-        </script>
-        
- <script type="text/javascript">
-     
+    <script src="{{asset('GNUASSETS/plugins/select2/select2.full.min.js')}}"></script>
+
+    <script>
+
+                                        var newValueCat = null;
+                                        var newValueVille = null;
+                                        //cette methode est appelle dans le fichier select2.full.min.js 
+                                        function getAutoComplete() {
+                                            //    var value=$(".select2").select2('data')[0]['text'];
+                                            newValue = document.getElementById("autoComplete").value;
+                                            // document.getElementById("demo").innerHTML = x;
+                                            //alert("hmd"+x);
+                                        }
+
+                                        function getNewValueSelect(value) {
+                                            newValueVille = null;
+                                            newValueCat = null;
+                                            if (value === 'categorie')
+                                            {
+                                                newValueCat = newValue;
+                                                //Début Requete ajax
+                                                $.ajax({
+                                                    type: 'POST',
+                                                    url: "http://localhost/GNUPROJECT/web/app_dev.php/Connected/Hotel/categorie",
+                                                    dataType: "json",
+                                                    data: {
+                                                        categorie: newValueCat
+                                                    },
+                                                    success: function (data)
+                                                    { 
+                                                       
+                                                         $("#hotel_categorie").append('<option value="'+data+'">'+data+'</option>');
+
+                                                    }
+                                                });
+                                                //Fin requete
+
+                                            }
+                                            else if (value === 'ville')
+                                            {
+                                                newValueVille = newValue;
+                                                //Début Requete ajax
+                                                $.ajax({
+                                                    type: 'POST',
+                                                    url: "http://localhost/GNUPROJECT/web/app_dev.php/Connected/Hotel/ville",
+                                                    dataType: "json",
+                                                    data: {
+                                                        ville:newValueVille
+                                                    },
+                                                    success: function (data)
+                                                    { 
+                                                       
+                                                         $("#hotel_ville").append('<option value="'+data+'">'+data+'</option>');
+
+                                                    }
+                                                });
+                                                //Fin requete
+
+                                            }
+
+                                        }
+    </script>
+
+    <script type="text/javascript">
+
         $(document).ready(function () {
-             $(".select2").select2();
-             //upload images
+            $(".select2").select2();
+            //upload images
             // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
             var $container = $('div#hotel_images');
             var $prototype = null;
@@ -159,10 +204,10 @@
             var $lienAjout = $('<a href="#" id="ajout_image" class="btn btn-success">Ajouter une image</a><br /><br />');
             $container.append($lienAjout);
             var $col1 = '';
-             var $col2 = '';
-             var $table = $('<table id="example2" class="table table-striped table-bordered table-hover table-responsive"><thead><tr><th>Images</th><th>Action</th></tr></thead><tbody><tr><td>'+$col1+'</td><td>'+$col2+'</td></tr>');
-             $container.append($table);
-             var $tableend = $('</tbody></table>');
+            var $col2 = '';
+            var $table = $('<table id="example2" class="table table-striped table-bordered table-hover table-responsive"><thead><tr><th>Images</th><th>Action</th></tr></thead><tbody><tr><td>' + $col1 + '</td><td>' + $col2 + '</td></tr>');
+            $container.append($table);
+            var $tableend = $('</tbody></table>');
 
             // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
             $lienAjout.click(function (e) {
@@ -186,7 +231,7 @@
                 // Dans le contenu de l'attribut « data-prototype », on remplace :
                 // - le texte "__name__label__" qu'il contient par le label du champ
                 // - le texte "__name__" qu'il contient par le numéro du champ
-                 $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Image n°'+ (index + 1) )
+                $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Image n°' + (index + 1))
                         .replace(/__name__/g, index));
                 $('#example2 tbody').append($("#example2 tbody tr:last").clone());
                 // On ajoute au prototype un lien pour pouvoir supprimer la image
@@ -208,13 +253,13 @@
 
                 // Ajout du listener sur le clic du lien
                 $lienSuppression.click(function (e) {
-                    $prototype.remove();                 
-                    $(this).parent().parent().remove(); 
+                    $prototype.remove();
+                    $(this).parent().parent().remove();
                     e.preventDefault(); // évite qu'un # apparaisse dans l'URL
                     return false;
                 });
             }
-            
+
         });
     </script>
 {% endblock%}

@@ -2,7 +2,10 @@
 
 namespace Etourisme\HotelBundle\Form;
 
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -24,13 +27,13 @@ class HotelType extends AbstractType
             ->add('nomHotel', TextType::class,array('label' => 'Nom d`hôtel (*)'))
             ->add('ville',EntityType::class, array('label' => 'Ville (*)', 'class' => 'HotelBundle:Ville', 'expanded' => false, 'required'=> true,
             'placeholder' => 'Choisir la ville...',))
-            ->add('descrip')
-            ->add('details')
+            ->add('descrip',CKEditorType::class)
+            ->add('details',CKEditorType::class)
             ->add('categorie',EntityType::class, array('label' => 'Catégorie (*)', 'class' => 'HotelBundle:Categorie', 'expanded' => false, 'required'=> true,
             'placeholder' => 'Choisir la catégorie...',))
             ->add('promotion')
-            ->add('age_min')
-            ->add('age_max')
+            ->add('age_min',IntegerType::class,array('attr'=>array('min'=>"1" ,'max'=>"20")))
+            ->add('age_max',  IntegerType::class,array('attr'=>array('min'=>"1" ,'max'=>"20")))
             ->add('images', CollectionType::class, array(
                   'entry_type' =>  ImageType::class,
                   'allow_add' => true,
@@ -38,6 +41,9 @@ class HotelType extends AbstractType
                   'by_reference' => false,
                   'required' => false
             ))
+            ->add('latitude')
+            ->add('longtitude')
+    
 
         ;
     }

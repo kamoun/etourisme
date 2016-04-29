@@ -3,7 +3,6 @@
 namespace Etourisme\HotelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Hotel
@@ -75,7 +74,7 @@ class Hotel
      * @var int
      * 
      * @ORM\Column(name="age_min", type="integer", nullable=true)
-     * @Assert\Range(min = 0,max = 200)
+     *
      */
     private $age_min;
 
@@ -90,6 +89,20 @@ class Hotel
      * @ORM\OneToMany(targetEntity="Etourisme\HotelBundle\Entity\Image",mappedBy="hotelimages",cascade={"All"})
      */
     private $images;
+    
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="latitude", type="string", length=50,nullable=true)
+     */
+    private $latitude;
+    
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="longtitude", type="string", length=50,nullable=true)
+     */
+    private $longtitude;
 
 
     /**
@@ -196,102 +209,6 @@ class Hotel
     public function getDetails()
     {
         return $this->details;
-    }
-
-    /**
-     * Set img1
-     *
-     * @param string $img1
-     *
-     * @return Hotel
-     */
-    public function setImg1($img1)
-    {
-        $this->img1 = $img1;
-
-        return $this;
-    }
-
-    /**
-     * Get img1
-     *
-     * @return string
-     */
-    public function getImg1()
-    {
-        return $this->img1;
-    }
-
-    /**
-     * Set img2
-     *
-     * @param string $img2
-     *
-     * @return Hotel
-     */
-    public function setImg2($img2)
-    {
-        $this->img2 = $img2;
-
-        return $this;
-    }
-
-    /**
-     * Get img2
-     *
-     * @return string
-     */
-    public function getImg2()
-    {
-        return $this->img2;
-    }
-
-    /**
-     * Set img3
-     *
-     * @param string $img3
-     *
-     * @return Hotel
-     */
-    public function setImg3($img3)
-    {
-        $this->img3 = $img3;
-
-        return $this;
-    }
-
-    /**
-     * Get img3
-     *
-     * @return string
-     */
-    public function getImg3()
-    {
-        return $this->img3;
-    }
-
-    /**
-     * Set img4
-     *
-     * @param string $img4
-     *
-     * @return Hotel
-     */
-    public function setImg4($img4)
-    {
-        $this->img4 = $img4;
-
-        return $this;
-    }
-
-    /**
-     * Get img4
-     *
-     * @return string
-     */
-    public function getImg4()
-    {
-        return $this->img4;
     }
 
     /**
@@ -454,5 +371,53 @@ class Hotel
     public function getImages()
     {
         return $this->images;
+    }
+
+    /**
+     * Set latitude
+     *
+     * @param string $latitude
+     *
+     * @return Hotel
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    /**
+     * Get latitude
+     *
+     * @return string
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * Set longtitude
+     *
+     * @param string $longtitude
+     *
+     * @return Hotel
+     */
+    public function setLongtitude($longtitude)
+    {
+        $this->longtitude = $longtitude;
+
+        return $this;
+    }
+
+    /**
+     * Get longtitude
+     *
+     * @return string
+     */
+    public function getLongtitude()
+    {
+        return $this->longtitude;
     }
 }
