@@ -31,19 +31,23 @@
 
                             <p>{{ form_label(form.categorie) }}</p>
                             <div class="form-group input-group col-md-12">                         
-                                {{ form_widget(form.categorie, { 'attr': {'id':'cat', 'class': 'form-control select2', 'style':'width: 100%;', 'placeholder': 'Catégorie'} }) }}
+                                {{ form_widget(form.categorie, { 'attr': {'id':'cat', 'class': 'form-control categorie select2','onChange':'selectedCategorie();', 'style':'width: 100%;', 'placeholder': 'Catégorie'} }) }}
                                 {{ form_errors(form.categorie) }}
                                 <span class="input-group-btn">
                                     <button id="pluscat" class="btn btn-primary dropdown-toggle btn-sm" type="button" onclick="getNewValueSelect('categorie');"><i class="fa  fa-plus"></i></button>
+                                    <button id="moinscat" class="btn btn-danger dropdown-toggle btn-sm" type="button"  onclick="deleteValueSelect('categorie');"><i class="fa  fa-trash"></i></button>
+                                    
                                 </span>
                             </div>
 
                             <p>{{ form_label(form.ville) }}</p>  
                             <div class="form-group input-group col-md-12">
-                                {{ form_widget(form.ville, { 'attr': {'id':'ville', 'class': 'form-control select2', 'style':'width: 100%;', 'placeholder': 'Ville'} }) }}
+                                {{ form_widget(form.ville, { 'attr': {'id':'ville', 'class': 'form-control villes select2', 'onChange':'selectedVille();','style':'width: 100%;', 'placeholder': 'Ville'} }) }}
                                 {{ form_errors(form.ville) }}
                                 <span class="input-group-btn">
                                     <button id="plusville" class="btn btn-primary dropdown-toggle btn-sm" type="button" onclick="getNewValueSelect('ville');" ><i class="fa  fa-plus"></i></button>
+                                      <button id="moinsville" class="btn btn-danger dropdown-toggle btn-sm" type="button"  onclick="deleteVilleSelect('ville');"><i class="fa  fa-trash"></i></button>
+                                    
                                 </span>
                             </div>
 
@@ -122,6 +126,8 @@
 {% block javascript %}
     {{ parent()}}
     <script src="{{asset('GNUASSETS/plugins/select2/select2.full.min.js')}}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 
     <script>
 
@@ -140,11 +146,13 @@
                                             newValueCat = null;
                                             if (value === 'categorie')
                                             {
+                                                
+
                                                 newValueCat = newValue;
                                                 //Début Requete ajax
                                                 $.ajax({
                                                     type: 'POST',
-                                                    url: "http://localhost/GNUPROJECT/web/app_dev.php/Connected/Hotel/categorie",
+                                                    url: Routing.generate('add_categorie'),
                                                     dataType: "json",
                                                     data: {
                                                         categorie: newValueCat
@@ -165,7 +173,7 @@
                                                 //Début Requete ajax
                                                 $.ajax({
                                                     type: 'POST',
-                                                    url: "http://localhost/GNUPROJECT/web/app_dev.php/Connected/Hotel/ville",
+                                                    url: Routing.generate('add_ville'),
                                                     dataType: "json",
                                                     data: {
                                                         ville:newValueVille
@@ -174,6 +182,7 @@
                                                     { 
                                                        
                                                          $("#hotel_ville").append('<option value="'+data+'">'+data+'</option>');
+                                                         $("#hotel_ville").append('<option value="'+data+'">'+data+'</option>');
 
                                                     }
                                                 });
@@ -181,6 +190,71 @@
 
                                             }
 
+                                        }
+                                        
+                                        
+                                        function selectedCategorie(){
+                                             var value=$(".categorie").select2('data')[0]['text'];
+                                             
+                                              /*$("#pluscat").hide();
+                                              //$("#moinscat").show();
+                                              $("#moinscat").css( "visibility","visible");
+                                              //document.getElementById(moinscat).style.visibility='visible';
+                                              */
+                                             
+                                            
+                                          
+                                            
+                                        }
+                                        function deleteValueSelect(){
+                                            var valueDeleted=$(".categorie").select2('val');
+                                            alert(valueDeleted);
+                                             
+                                              $.ajax({
+                                                    type: 'POST',
+                                                    url: Routing.generate('delete_categorie'),
+                                                    dataType: "json",
+                                                    data: {
+                                                        categorie:valueDeleted
+                                                    },
+                                                    success: function (data)
+                                                    { 
+                                                       
+                                                         //$("#hotel_ville").append('<option value="'+data+'">'+data+'</option>');
+                                                         $("#hotel_categorie option[value='"+data+"']").remove();
+                                                         $(".categorie").select2('val',null);
+                                                        
+                                                    }
+                                                });
+                                          
+                                        }
+                                         function selectedVille(){
+                                             var value=$(".villes").select2('data')[0]['text'];
+                                           
+                                           
+                                            
+                                        }
+                                         function deleteVilleSelect(){
+                                            var valueDeleted=$(".villes").select2('val');
+                                            alert(valueDeleted);
+                                             
+                                              $.ajax({
+                                                    type: 'POST',
+                                                    url: Routing.generate('delete_ville'),
+                                                    dataType: "json",
+                                                    data: {
+                                                       ville:valueDeleted
+                                                    },
+                                                    success: function (data)
+                                                    { 
+                                                       
+                                                         //$("#hotel_ville").append('<option value="'+data+'">'+data+'</option>');
+                                                         $("#hotel_ville option[value='"+data+"']").remove();
+                                                         $(".villes").select2('val',null);
+                                                        
+                                                    }
+                                                });
+                                          
                                         }
     </script>
 

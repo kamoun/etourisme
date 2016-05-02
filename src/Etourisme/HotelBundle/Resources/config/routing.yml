@@ -11,11 +11,17 @@ delete_hotel:
     path:     /Connected/Hotel/Delete
     defaults: { _controller: "HotelBundle:Default:deleteHotel" }    
 edit_hotel:
-    path:     /Connected/Hotel/Delete
+    path:     /Connected/Hotel/Edit
     defaults: { _controller: "HotelBundle:Default:editHotel" }  
 add_categorie:
     path:     /Connected/Hotel/categorie
     defaults: { _controller: "HotelBundle:Default:addCategorie" }
+delete_categorie:
+    path:     /Connected/Hotel/delete/categorie
+    defaults: { _controller: "HotelBundle:Default:deleteCategorie" }
 add_ville:
     path:     /Connected/Hotel/ville
     defaults: { _controller: "HotelBundle:Default:addVille" }  
+delete_ville:
+    path:     /Connected/Hotel/delete/ville
+    defaults: { _controller: "HotelBundle:Default:deleteVille" }

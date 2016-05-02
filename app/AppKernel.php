@@ -16,10 +16,14 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
+              new FOS\UserBundle\FOSUserBundle(),
+          
             new Etourisme\UsersBundle\UsersBundle(),
-            new FOS\UserBundle\FOSUserBundle(),
+          
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Etourisme\HotelBundle\HotelBundle(),
-             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+           
             
         ];
 

@@ -93,6 +93,17 @@ class DefaultController extends Controller
 
         return new JsonResponse($_POST['categorie'], 200);
     }
+    
+     public function deleteCategorieAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+        $categorie=  $this->getDoctrine()->getRepository('HotelBundle:Categorie')->find($_POST['categorie']);
+        $em->remove($categorie);
+        $em->flush();
+
+
+
+        return new JsonResponse($_POST['categorie'], 200);
+    }
 
     public function addVilleAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
@@ -106,4 +117,16 @@ class DefaultController extends Controller
 
         return new JsonResponse($_POST['ville'], 200);
     }
+    
+     public function deleteVilleAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+        $ville=  $this->getDoctrine()->getRepository('HotelBundle:Ville')->find($_POST['ville']);
+        $em->remove($ville);
+        $em->flush();
+
+
+
+        return new JsonResponse($_POST['ville'], 200);
+    }
+    
 }
