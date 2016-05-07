@@ -27,6 +27,12 @@ class Ville
      * @ORM\Column(name="libelle", type="string", length=50)
      */
     private $libelle;
+    
+     /**
+     * @ORM\OneToMany(targetEntity="Etourisme\HotelBundle\Entity\Hotel",mappedBy="ville",cascade={"All"})
+     */
+    private $hotelsville;
+
 
 
     /**
@@ -66,5 +72,61 @@ class Ville
     public function __toString() {
          return $this->getLibelle();
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->hotels = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add hotel
+     *
+     * @param \Etourisme\HotelBundle\Entity\Hotel $hotel
+     *
+     * @return Ville
+     */
+    public function addHotel(\Etourisme\HotelBundle\Entity\Hotel $hotel)
+    {
+        $this->hotels[] = $hotel;
+
+        return $this;
+    }
+
+   
+
+    /**
+     * Add hotelsville
+     *
+     * @param \Etourisme\HotelBundle\Entity\Hotel $hotelsville
+     *
+     * @return Ville
+     */
+    public function addHotelsville(\Etourisme\HotelBundle\Entity\Hotel $hotelsville)
+    {
+        $this->hotelsville[] = $hotelsville;
+
+        return $this;
+    }
+
+    /**
+     * Remove hotelsville
+     *
+     * @param \Etourisme\HotelBundle\Entity\Hotel $hotelsville
+     */
+    public function removeHotelsville(\Etourisme\HotelBundle\Entity\Hotel $hotelsville)
+    {
+        $this->hotelsville->removeElement($hotelsville);
+    }
+
+    /**
+     * Get hotelsville
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getHotelsville()
+    {
+        return $this->hotelsville;
+    }
+}

@@ -5,13 +5,13 @@ namespace Etourisme\HotelBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Arrangement
+ * Reduction
  *
- * @ORM\Table(name="arrangement")
- * @ORM\Entity(repositoryClass="Etourisme\HotelBundle\Repository\ArrangementRepository")
+ * @ORM\Table(name="reduction")
+ * @ORM\Entity(repositoryClass="Etourisme\HotelBundle\Repository\ReductionRepository")
  */
-class Arrangement
-{
+class Reduction {
+
     /**
      * @var int
      *
@@ -24,18 +24,16 @@ class Arrangement
     /**
      * @var string
      *
-     * @ORM\Column(name="libelle", type="string", length=30)
+     * @ORM\Column(name="libelle", type="string", length=255)
      */
     private $libelle;
-
 
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -44,10 +42,9 @@ class Arrangement
      *
      * @param string $libelle
      *
-     * @return Arrangement
+     * @return Reduction
      */
-    public function setLibelle($libelle)
-    {
+    public function setLibelle($libelle) {
         $this->libelle = $libelle;
 
         return $this;
@@ -58,13 +55,12 @@ class Arrangement
      *
      * @return string
      */
-    public function getLibelle()
-    {
+    public function getLibelle() {
         return $this->libelle;
     }
-      
+    
     public function __toString() {
         return $this->getLibelle();
     }
-}
 
+}

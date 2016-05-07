@@ -5,12 +5,12 @@ namespace Etourisme\HotelBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Arrangement
+ * Theme
  *
- * @ORM\Table(name="arrangement")
- * @ORM\Entity(repositoryClass="Etourisme\HotelBundle\Repository\ArrangementRepository")
+ * @ORM\Table(name="theme")
+ * @ORM\Entity(repositoryClass="Etourisme\HotelBundle\Repository\ThemeRepository")
  */
-class Arrangement
+class Theme
 {
     /**
      * @var int
@@ -24,7 +24,7 @@ class Arrangement
     /**
      * @var string
      *
-     * @ORM\Column(name="libelle", type="string", length=30)
+     * @ORM\Column(name="libelle", type="string", length=255)
      */
     private $libelle;
 
@@ -44,7 +44,7 @@ class Arrangement
      *
      * @param string $libelle
      *
-     * @return Arrangement
+     * @return Theme
      */
     public function setLibelle($libelle)
     {

@@ -8,11 +8,17 @@ list_hotels:
     path:     /Connected/Hotel/List
     defaults: { _controller: HotelBundle:Default:viewHotels}
 delete_hotel:
-    path:     /Connected/Hotel/Delete
+    path:     /Connected/Hotel/{id}/Delete
     defaults: { _controller: "HotelBundle:Default:deleteHotel" }    
 edit_hotel:
-    path:     /Connected/Hotel/Edit
-    defaults: { _controller: "HotelBundle:Default:editHotel" }  
+    path:     /Connected/Hotel/Edit/{id}
+    defaults: { _controller: "HotelBundle:Default:editHotel" }
+
+
+update_hotel:
+    path:     /Connected/Hotel/{id}/update
+    defaults: { _controller: "HotelBundle:Default:updateHotel" }
+    
 add_categorie:
     path:     /Connected/Hotel/categorie
     defaults: { _controller: "HotelBundle:Default:addCategorie" }
@@ -25,3 +31,12 @@ add_ville:
 delete_ville:
     path:     /Connected/Hotel/delete/ville
     defaults: { _controller: "HotelBundle:Default:deleteVille" }
+delete_picture:
+    path:     /Connected/Hotel/delete/picture
+    defaults: { _controller: "HotelBundle:Default:deletePicture" }
+add_details_hotel:
+    path:     /Connected/Hotel/addDetails
+    defaults: { _controller: "HotelBundle:Default:addDetailsHotel" }
+get_ville_hotel:
+    path:     /Connected/Hotel/getville
+    defaults: { _controller: "HotelBundle:Default:getVilleByHotel" }

@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="hotel")
  * @ORM\Entity(repositoryClass="Etourisme\HotelBundle\Repository\HotelRepository")
  */
-class Hotel
-{
+class Hotel {
+
     /**
      * @var int
      *
@@ -28,12 +28,7 @@ class Hotel
      */
     private $nomHotel;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="ville", type="string", length=50)
-     */
-    private $ville;
+  
 
     /**
      * @var string
@@ -49,27 +44,32 @@ class Hotel
      */
     private $details;
 
-     /**
-     * @var string
-     *
-     * @ORM\Column(name="categorie", type="string", length=20, nullable=true)
+    /**
+     * @ORM\ManyToOne(targetEntity="Etourisme\HotelBundle\Entity\Categorie",inversedBy="hotels")
+     *  @ORM\JoinColumn(name="categorie_id", referencedColumnName="id", nullable=true)
      */
     private $categorie;
     
      /**
+     * @ORM\ManyToOne(targetEntity="Etourisme\HotelBundle\Entity\Ville",inversedBy="hotelsVille")
+     *  @ORM\JoinColumn(name="ville_id", referencedColumnName="id", nullable=false)
+     */
+    private $ville;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="promotion", type="text", nullable=true)
      */
     private $promotion;
-    
-     /**
+
+    /**
      * @var string
      *
      * @ORM\Column(name="dispo", type="string", length=20, nullable=true)
      */
     private $dispo;
-    
+
     /**
      * @var int
      * 
@@ -78,40 +78,39 @@ class Hotel
      */
     private $age_min;
 
-     /**
+    /**
      * @var int
      * 
      * 
      * @ORM\Column(name="age_max", type="integer", nullable=true)
      */
     private $age_max;
+
     /**
      * @ORM\OneToMany(targetEntity="Etourisme\HotelBundle\Entity\Image",mappedBy="hotelimages",cascade={"All"})
      */
     private $images;
-    
-     /**
+
+    /**
      * @var string
      *
      * @ORM\Column(name="latitude", type="string", length=50,nullable=true)
      */
     private $latitude;
-    
-     /**
+
+    /**
      * @var string
      *
      * @ORM\Column(name="longtitude", type="string", length=50,nullable=true)
      */
     private $longtitude;
 
-
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -122,8 +121,7 @@ class Hotel
      *
      * @return Hotel
      */
-    public function setNomHotel($nomHotel)
-    {
+    public function setNomHotel($nomHotel) {
         $this->nomHotel = $nomHotel;
 
         return $this;
@@ -134,34 +132,11 @@ class Hotel
      *
      * @return string
      */
-    public function getNomHotel()
-    {
+    public function getNomHotel() {
         return $this->nomHotel;
     }
 
-    /**
-     * Set ville
-     *
-     * @param string $ville
-     *
-     * @return Hotel
-     */
-    public function setVille($ville)
-    {
-        $this->ville = $ville;
-
-        return $this;
-    }
-
-    /**
-     * Get ville
-     *
-     * @return string
-     */
-    public function getVille()
-    {
-        return $this->ville;
-    }
+   
 
     /**
      * Set descrip
@@ -170,8 +145,7 @@ class Hotel
      *
      * @return Hotel
      */
-    public function setDescrip($descrip)
-    {
+    public function setDescrip($descrip) {
         $this->descrip = $descrip;
 
         return $this;
@@ -182,8 +156,7 @@ class Hotel
      *
      * @return string
      */
-    public function getDescrip()
-    {
+    public function getDescrip() {
         return $this->descrip;
     }
 
@@ -194,8 +167,7 @@ class Hotel
      *
      * @return Hotel
      */
-    public function setDetails($details)
-    {
+    public function setDetails($details) {
         $this->details = $details;
 
         return $this;
@@ -206,33 +178,8 @@ class Hotel
      *
      * @return string
      */
-    public function getDetails()
-    {
+    public function getDetails() {
         return $this->details;
-    }
-
-    /**
-     * Set categorie
-     *
-     * @param string $categorie
-     *
-     * @return Hotel
-     */
-    public function setCategorie($categorie)
-    {
-        $this->categorie = $categorie;
-
-        return $this;
-    }
-
-    /**
-     * Get categorie
-     *
-     * @return string
-     */
-    public function getCategorie()
-    {
-        return $this->categorie;
     }
 
     /**
@@ -242,8 +189,7 @@ class Hotel
      *
      * @return Hotel
      */
-    public function setPromotion($promotion)
-    {
+    public function setPromotion($promotion) {
         $this->promotion = $promotion;
 
         return $this;
@@ -254,8 +200,7 @@ class Hotel
      *
      * @return string
      */
-    public function getPromotion()
-    {
+    public function getPromotion() {
         return $this->promotion;
     }
 
@@ -266,8 +211,7 @@ class Hotel
      *
      * @return Hotel
      */
-    public function setDispo($dispo)
-    {
+    public function setDispo($dispo) {
         $this->dispo = $dispo;
 
         return $this;
@@ -278,8 +222,7 @@ class Hotel
      *
      * @return string
      */
-    public function getDispo()
-    {
+    public function getDispo() {
         return $this->dispo;
     }
 
@@ -290,8 +233,7 @@ class Hotel
      *
      * @return Hotel
      */
-    public function setAgeMin($ageMin)
-    {
+    public function setAgeMin($ageMin) {
         $this->age_min = $ageMin;
 
         return $this;
@@ -302,8 +244,7 @@ class Hotel
      *
      * @return integer
      */
-    public function getAgeMin()
-    {
+    public function getAgeMin() {
         return $this->age_min;
     }
 
@@ -314,8 +255,7 @@ class Hotel
      *
      * @return Hotel
      */
-    public function setAgeMax($ageMax)
-    {
+    public function setAgeMax($ageMax) {
         $this->age_max = $ageMax;
 
         return $this;
@@ -326,15 +266,14 @@ class Hotel
      *
      * @return integer
      */
-    public function getAgeMax()
-    {
+    public function getAgeMax() {
         return $this->age_max;
     }
+
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->images = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -345,11 +284,10 @@ class Hotel
      *
      * @return Hotel
      */
-    public function addImage(\Etourisme\HotelBundle\Entity\Image $image)
-    {
+    public function addImage(\Etourisme\HotelBundle\Entity\Image $image) {
         $this->images[] = $image;
         $image->setHotelimages($this);
-       
+
         return $this;
     }
 
@@ -358,9 +296,9 @@ class Hotel
      *
      * @param \Etourisme\HotelBundle\Entity\Hotel $image
      */
-    public function removeImage(\Etourisme\HotelBundle\Entity\Image $image)
-    {
+    public function removeImage(\Etourisme\HotelBundle\Entity\Image $image) {
         $this->images->removeElement($image);
+        $image->setHotelimages(null);
     }
 
     /**
@@ -368,8 +306,7 @@ class Hotel
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getImages()
-    {
+    public function getImages() {
         return $this->images;
     }
 
@@ -380,8 +317,7 @@ class Hotel
      *
      * @return Hotel
      */
-    public function setLatitude($latitude)
-    {
+    public function setLatitude($latitude) {
         $this->latitude = $latitude;
 
         return $this;
@@ -392,8 +328,7 @@ class Hotel
      *
      * @return string
      */
-    public function getLatitude()
-    {
+    public function getLatitude() {
         return $this->latitude;
     }
 
@@ -404,8 +339,7 @@ class Hotel
      *
      * @return Hotel
      */
-    public function setLongtitude($longtitude)
-    {
+    public function setLongtitude($longtitude) {
         $this->longtitude = $longtitude;
 
         return $this;
@@ -416,8 +350,60 @@ class Hotel
      *
      * @return string
      */
-    public function getLongtitude()
-    {
+    public function getLongtitude() {
         return $this->longtitude;
+    }
+
+
+    /**
+     * Set categorie
+     *
+     * @param \Etourisme\HotelBundle\Entity\Categorie $categorie
+     *
+     * @return Hotel
+     */
+    public function setCategorie(\Etourisme\HotelBundle\Entity\Categorie $categorie = null)
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * Get categorie
+     *
+     * @return \Etourisme\HotelBundle\Entity\Categorie
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
+    }
+
+    /**
+     * Set ville
+     *
+     * @param \Etourisme\HotelBundle\Entity\Ville $ville
+     *
+     * @return Hotel
+     */
+    public function setVille(\Etourisme\HotelBundle\Entity\Ville $ville)
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    /**
+     * Get ville
+     *
+     * @return \Etourisme\HotelBundle\Entity\Ville
+     */
+    public function getVille()
+    {
+        return $this->ville;
+    }
+    
+    public function __toString() {
+        return $this->getNomHotel();
     }
 }

@@ -27,6 +27,11 @@ class Categorie
      * @ORM\Column(name="libelle", type="string", length=255)
      */
     private $libelle;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Etourisme\HotelBundle\Entity\Hotel",mappedBy="categorie",cascade={"All"})
+     */
+    private $hotels;
 
 
     /**
@@ -66,5 +71,45 @@ class Categorie
      public function __toString() {
          return $this->getLibelle();
  }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->hotels = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add hotel
+     *
+     * @param \Etourisme\HotelBundle\Entity\Hotel $hotel
+     *
+     * @return Categorie
+     */
+    public function addHotel(\Etourisme\HotelBundle\Entity\Hotel $hotel)
+    {
+        $this->hotels[] = $hotel;
+
+        return $this;
+    }
+
+    /**
+     * Remove hotel
+     *
+     * @param \Etourisme\HotelBundle\Entity\Hotel $hotel
+     */
+    public function removeHotel(\Etourisme\HotelBundle\Entity\Hotel $hotel)
+    {
+        $this->hotels->removeElement($hotel);
+    }
+
+    /**
+     * Get hotels
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getHotels()
+    {
+        return $this->hotels;
+    }
+}
