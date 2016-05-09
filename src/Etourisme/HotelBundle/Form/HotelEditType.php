@@ -32,18 +32,16 @@ class HotelEditType extends AbstractType
             ->add('categorie',EntityType::class, array('label' => 'Catégorie (*)', 'class' => 'HotelBundle:Categorie', 'expanded' => false, 'required'=> true,
             'placeholder' => 'Choisir la catégorie...',))
             ->add('promotion')
-            ->add('age_min',IntegerType::class,array('attr'=>array('min'=>"1" ,'max'=>"20")))
-            ->add('age_max',  IntegerType::class,array('attr'=>array('min'=>"1" ,'max'=>"20")))
-            
-             ->add('imagess', CollectionType::class, array(
-                    'entry_type' => ImageType::class,
-                    'allow_add' => true,
-                    'allow_delete' => true,
-                    'by_reference' => false,
-                    'required' => false,
-                 'mapped'=>false
-                ))
-       
+            ->add('age_min',IntegerType::class,array('attr'=>array('min'=>"1" ,'max'=>"20"), 'required'=> false))
+            ->add('age_max',  IntegerType::class,array('attr'=>array('min'=>"1" ,'max'=>"20"), 'required'=> false))
+            ->add('imagess', CollectionType::class, array(
+                  'entry_type' =>  ImageType::class,
+                  'allow_add' => true,
+                  'allow_delete' => true,
+                  'by_reference' => false,
+                  'required' => false,
+                  'mapped'=>false
+            ))
             ->add('latitude')
             ->add('longtitude')
     

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * DetailsTheme
  *
- * @ORM\Table(name="details_theme")
+ * @ORM\Table(name="detailstheme")
  * @ORM\Entity(repositoryClass="Etourisme\HotelBundle\Repository\DetailsThemeRepository")
  */
 class DetailsTheme {

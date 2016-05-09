@@ -98,16 +98,15 @@
                             </div>
                              <div class="form-group input-group col-md-12">
                                   <label>Latitude</label>
-                                {{ form_widget(form.latitude, { 'attr': { 'class': 'form-control', 'placeholder': 'latitude'} }) }}
+                                {{ form_widget(form.latitude, { 'attr': { 'class': 'form-control', 'placeholder': 'Latitude'} }) }}
                                 {{ form_errors(form.latitude) }}
                             </div>
                              <div class="form-group input-group col-md-12">
                                   <label>Longtitude</label>
-                                {{ form_widget(form.longtitude, { 'attr': { 'class': 'form-control', 'placeholder': 'longtitude'} }) }}
+                                {{ form_widget(form.longtitude, { 'attr': { 'class': 'form-control', 'placeholder': 'Longtitude'} }) }}
                                 {{ form_errors(form.longtitude) }}
                             </div>
-
-                            {{ form_rest(form) }}
+                              {{ form_rest(form) }}
                             <div>
                                 <input class="btn  btn-default" type="submit" value="{{ 'Valider' }}">
                                 <input class="btn  btn-default" type="reset" value="{{ 'Annuler' }}">          
@@ -126,142 +125,135 @@
 {% block javascript %}
     {{ parent()}}
     <script src="{{asset('GNUASSETS/plugins/select2/select2.full.min.js')}}"></script>
-    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-
+    <script src="{{asset('bundles/fosjsrouting/js/router.js')}}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+    <!-- delete confirmation -->
+    <script type="text/javascript" src="{{asset('GNUASSETS/plugins/bootstrap-confirmation/jquery.popconfirm.js')}}"></script>
     <script>
+        var newValueCat = null;
+        var newValueVille = null;
+        //cette methode est appelle dans le fichier select2.full.min.js 
+        function getAutoComplete() {
+            //    var value=$(".select2").select2('data')[0]['text'];
+            newValue = document.getElementById("autoComplete").value;
+            // document.getElementById("demo").innerHTML = x;
+            //alert("hmd"+x);
+        }
 
-                                        var newValueCat = null;
-                                        var newValueVille = null;
-                                        //cette methode est appelle dans le fichier select2.full.min.js 
-                                        function getAutoComplete() {
-                                            //    var value=$(".select2").select2('data')[0]['text'];
-                                            newValue = document.getElementById("autoComplete").value;
-                                            // document.getElementById("demo").innerHTML = x;
-                                            //alert("hmd"+x);
-                                        }
+        function getNewValueSelect(value) {
+            newValueVille = null;
+            newValueCat = null;
+            if (value === 'categorie')
+            {
 
-                                        function getNewValueSelect(value) {
-                                            newValueVille = null;
-                                            newValueCat = null;
-                                            if (value === 'categorie')
-                                            {
-                                                
 
-                                                newValueCat = newValue;
-                                                //Début Requete ajax
-                                                $.ajax({
-                                                    type: 'POST',
-                                                    url: Routing.generate('add_categorie'),
-                                                    dataType: "json",
-                                                    data: {
-                                                        categorie: newValueCat
-                                                    },
-                                                    success: function (data)
-                                                    { 
-                                                       
-                                                         $("#hotel_categorie").append('<option value="'+data+'">'+data+'</option>');
+                newValueCat = newValue;
+                //Début Requete ajax
+                $.ajax({
+                    type: 'POST',
+                    url: Routing.generate('add_categorie'),
+                    dataType: "json",
+                    data: {
+                        categorie: newValueCat
+                    },
+                    success: function (data)
+                    { 
 
-                                                    }
-                                                });
-                                                //Fin requete
+                         $("#hotel_categorie").append('<option value="'+data+'">'+data+'</option>');
 
-                                            }
-                                            else if (value === 'ville')
-                                            {
-                                                newValueVille = newValue;
-                                                //Début Requete ajax
-                                                $.ajax({
-                                                    type: 'POST',
-                                                    url: Routing.generate('add_ville'),
-                                                    dataType: "json",
-                                                    data: {
-                                                        ville:newValueVille
-                                                    },
-                                                    success: function (data)
-                                                    { 
-                                                       
-                                                         $("#hotel_ville").append('<option value="'+data+'">'+data+'</option>');
-                                                         $("#hotel_ville").append('<option value="'+data+'">'+data+'</option>');
+                    }
+                });
+                //Fin requete
 
-                                                    }
-                                                });
-                                                //Fin requete
+            }
+            else if (value === 'ville')
+            {
+                newValueVille = newValue;
+                //Début Requete ajax
+                $.ajax({
+                    type: 'POST',
+                    url: Routing.generate('add_ville'),
+                    dataType: "json",
+                    data: {
+                        ville:newValueVille
+                    },
+                    success: function (data)
+                    { 
 
-                                            }
+                         $("#hotel_ville").append('<option value="'+data+'">'+data+'</option>');
+                         $("#hotel_ville").append('<option value="'+data+'">'+data+'</option>');
 
-                                        }
-                                        
-                                        
-                                        function selectedCategorie(){
-                                             var value=$(".categorie").select2('data')[0]['text'];
-                                             
-                                              /*$("#pluscat").hide();
-                                              //$("#moinscat").show();
-                                              $("#moinscat").css( "visibility","visible");
-                                              //document.getElementById(moinscat).style.visibility='visible';
-                                              */
-                                             
-                                            
-                                          
-                                            
-                                        }
-                                        function deleteValueSelect(){
-                                            var valueDeleted=$(".categorie").select2('val');
-                                            alert(valueDeleted);
-                                             
-                                              $.ajax({
-                                                    type: 'POST',
-                                                    url: Routing.generate('delete_categorie'),
-                                                    dataType: "json",
-                                                    data: {
-                                                        categorie:valueDeleted
-                                                    },
-                                                    success: function (data)
-                                                    { 
-                                                       
-                                                         //$("#hotel_ville").append('<option value="'+data+'">'+data+'</option>');
-                                                         $("#hotel_categorie option[value='"+data+"']").remove();
-                                                         $(".categorie").select2('val',null);
-                                                        
-                                                    }
-                                                });
-                                          
-                                        }
-                                         function selectedVille(){
-                                             var value=$(".villes").select2('data')[0]['text'];
-                                           
-                                           
-                                            
-                                        }
-                                         function deleteVilleSelect(){
-                                            var valueDeleted=$(".villes").select2('val');
-                                            alert(valueDeleted);
-                                             
-                                              $.ajax({
-                                                    type: 'POST',
-                                                    url: Routing.generate('delete_ville'),
-                                                    dataType: "json",
-                                                    data: {
-                                                       ville:valueDeleted
-                                                    },
-                                                    success: function (data)
-                                                    { 
-                                                       
-                                                         //$("#hotel_ville").append('<option value="'+data+'">'+data+'</option>');
-                                                         $("#hotel_ville option[value='"+data+"']").remove();
-                                                         $(".villes").select2('val',null);
-                                                        
-                                                    }
-                                                });
-                                          
-                                        }
+                    }
+                });
+                //Fin requete
+
+            }
+
+        }
+
+
+        function selectedCategorie(){
+             var value=$(".categorie").select2('data')[0]['text'];
+        }
+        
+        function deleteValueSelect(){
+            var valueDeleted=$(".categorie").select2('val');
+            alert(valueDeleted);
+
+              $.ajax({
+                    type: 'POST',
+                    url: Routing.generate('delete_categorie'),
+                    dataType: "json",
+                    data: {
+                        categorie:valueDeleted
+                    },
+                    success: function (data)
+                    { 
+
+                         //$("#hotel_ville").append('<option value="'+data+'">'+data+'</option>');
+                         $("#hotel_categorie option[value='"+data+"']").remove();
+                         $(".categorie").select2('val',null);
+
+                    }
+                });
+
+        }
+         function selectedVille(){
+             var value=$(".villes").select2('data')[0]['text'];
+
+
+
+        }
+         function deleteVilleSelect(){
+            var valueDeleted=$(".villes").select2('val');
+            alert(valueDeleted);
+
+              $.ajax({
+                    type: 'POST',
+                    url: Routing.generate('delete_ville'),
+                    dataType: "json",
+                    data: {
+                       ville:valueDeleted
+                    },
+                    success: function (data)
+                    { 
+
+                         //$("#hotel_ville").append('<option value="'+data+'">'+data+'</option>');
+                         $("#hotel_ville option[value='"+data+"']").remove();
+                         $(".villes").select2('val',null);
+
+                    }
+                });
+
+        }
     </script>
 
     <script type="text/javascript">
 
         $(document).ready(function () {
             $(".select2").select2();
+            
+           
             //upload images
             // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
             var $container = $('div#hotel_images');
@@ -333,6 +325,22 @@
                     return false;
                 });
             }
+
+        // delete confirmation
+        $("#moinscat").popConfirm({
+                title: "Etes-vous vraiment sûr?",
+                content: "",
+                placement: "bottom",
+                yesBtn:   'Oui',
+                noBtn:    'Non'
+        });    
+        $("#moinsville").popConfirm({
+                title: "Etes-vous vraiment sûr?",
+                content: "",
+                placement: "bottom",
+                yesBtn:   'Oui',
+                noBtn:    'Non'
+        }); 
 
         });
     </script>

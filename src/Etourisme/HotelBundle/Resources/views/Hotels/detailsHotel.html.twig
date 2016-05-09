@@ -9,8 +9,6 @@
             border-radius: 0px !important;
         }
     </style>    
-    <!-- iCheck for checkboxes and radio inputs -->
-    <link rel="stylesheet" href="{{asset('GNUASSETS/plugins/iCheck/all.css')}}">
 {% endblock%}
 {% block content %}
     <section class="content">        
@@ -25,55 +23,57 @@
                     <!-- form start -->
 
                     <form method="post" action="{{path('add_details_hotel')}}" role="form">
-                               <div class="box-body">
-                                   
-                                    <div class="form-group input-group col-md-12">
-                                        <label>Nom d`hôtel</label>
-                                       {{ form_widget(form.hotel, { 'attr': {'id':'hotel', 'class': 'form-control hotel select2', 'style':'width: 100%;', 'placeholder': 'Catégorie'} }) }}
-                                {{ form_errors(form.hotel) }}
-                                    </div><!-- /.form-group -->
-                                    
+                    <div class="box-body">                                  
+                         <div class="form-group input-group col-md-12">
+                             <label>{{ form_label(form.hotel) }}</label>
+                            {{ form_widget(form.hotel, { 'attr': {'id':'hotel', 'class': 'form-control hotel select2', 'style':'width: 100%;', 'placeholder': 'Catégorie'} }) }}
+                            {{ form_errors(form.hotel) }}
+                         </div><!-- /.form-group -->
 
-                                    <div class="form-group">
-                                        <label>Ville</label>
-                                        {{ form_widget(form.ville, { 'attr': {'class': 'form-control ville'} }) }}
-                                {{ form_errors(form.ville) }}
-                                    </div>
 
-                                    <div class="box-header">
-                                      <h3 class="box-title">Chambre</h3>
-                                      {{ form_widget(form.chambre, { 'attr': {'class': 'form-control chambre  minimal'} }) }}
-                                {{ form_errors(form.chambre) }}
-                                    </div>
-                                       <div class="box-header">
-                                      <h3 class="box-title">Réduction</h3>
-                                      {{ form_widget(form.reduction, { 'attr': {'class': 'form-control reduction  minimal'} }) }}
-                                {{ form_errors(form.reduction) }}
-                                    </div>
-                                    
-                                    <div class="box-header">
-                                      <h3 class="box-title">Arrangement</h3>
-                                      {{ form_widget(form.arrangement, { 'attr': {'class': 'form-control arrangement  minimal'} }) }}
-                                {{ form_errors(form.arrangement) }}
-                                    </div>
-                                    
-                                    <div class="box-header">
-                                      <h3 class="box-title">Thèmes</h3>
-                                      {{ form_widget(form.themes, { 'attr': {'class': 'form-control theme  minimal'} }) }}
-                                {{ form_errors(form.themes) }}
-                                    </div>
-                                    <div class="box-body">
+                         <div class="form-group">
+                             <label>{{ form_label(form.ville) }}</label>
+                             {{ form_widget(form.ville, { 'attr': {'class': 'form-control ville'} }) }}
+                             {{ form_errors(form.ville) }}
+                         </div>
 
-                                      {{ form_rest(form) }}
-                            <div>
-                                <input class="btn  btn-default" type="submit" value="{{ 'Valider' }}">
-                                <input class="btn  btn-default" type="reset" value="{{ 'Annuler' }}">          
-                            </div>   
+                         <div class="box-header">
+                           <h3 class="box-title">{{ form_label(form.chambre) }}</h3>
+                           {{ form_widget(form.chambre, {'attr': {'class': 'form-control chambre minimal'}}) }}                      
+                           
+                           {{ form_errors(form.chambre) }}
+                         </div> 
+                         
+                         <div class="box-header">
+                           <h3 class="box-title">{{ form_label(form.reduction) }}</h3>
+                           {{ form_widget(form.reduction, { 'attr': {'class': 'form-control reduction  minimal'} }) }}
+                           {{ form_errors(form.reduction) }}
+                         </div>
+
+                         <div class="box-header">
+                           <h3 class="box-title">{{ form_label(form.arrangement) }}</h3>
+                           {{ form_widget(form.arrangement, { 'attr': {'class': 'form-control arrangement  minimal'} }) }}
+                           {{ form_errors(form.arrangement) }}
+                         </div>
+
+                         <div class="box-header">
+                           <h3 class="box-title">{{ form_label(form.themes) }}</h3>
+                          
+                           {{ form_widget(form.themes, { 'attr': {'class': 'form-control theme  minimal'} }) }}
+                           {{ form_errors(form.themes) }}
+                         </div>
+                         <div class="box-body">
+
+                           {{ form_rest(form) }}
+                        <div>
+                            <input class="btn  btn-default" type="submit" value="{{ 'Valider' }}">
+                            <input class="btn  btn-default" type="reset" value="{{ 'Annuler' }}">          
+                        </div>   
 
                     </form>
 
-                                    </div><!-- /.box -->
-                                </div><!--/.col (right) -->
+                </div><!-- /.box -->
+            </div><!--/.col (right) -->
         </div>   <!-- /.row -->
 
 
@@ -85,139 +85,10 @@
     <script src="{{asset('GNUASSETS/plugins/select2/select2.full.min.js')}}"></script>
     <script src="{{asset('GNUASSETS/plugins/iCheck/icheck.min.js')}}"></script>
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <!-- iCheck 1.0.1 -->
+    <script src="{{ asset('GNUASSETS/plugins/iCheck/icheck.min.js') }}"></script>
 <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-
-    <script>
-
-                                        var newValueCat = null;
-                                        var newValueVille = null;
-                                        //cette methode est appelle dans le fichier select2.full.min.js 
-                                        function getAutoComplete() {
-                                            //    var value=$(".select2").select2('data')[0]['text'];
-                                            newValue = document.getElementById("autoComplete").value;
-                                            // document.getElementById("demo").innerHTML = x;
-                                            //alert("hmd"+x);
-                                        }
-
-                                        function getNewValueSelect(value) {
-                                            newValueVille = null;
-                                            newValueCat = null;
-                                            if (value === 'categorie')
-                                            {
-                                                
-
-                                                newValueCat = newValue;
-                                                //Début Requete ajax
-                                                $.ajax({
-                                                    type: 'POST',
-                                                    url: Routing.generate('add_categorie'),
-                                                    dataType: "json",
-                                                    data: {
-                                                        categorie: newValueCat
-                                                    },
-                                                    success: function (data)
-                                                    { 
-                                                       
-                                                         $("#hotel_categorie").append('<option value="'+data+'">'+data+'</option>');
-
-                                                    }
-                                                });
-                                                //Fin requete
-
-                                            }
-                                            else if (value === 'ville')
-                                            {
-                                                newValueVille = newValue;
-                                                //Début Requete ajax
-                                                $.ajax({
-                                                    type: 'POST',
-                                                    url: Routing.generate('add_ville'),
-                                                    dataType: "json",
-                                                    data: {
-                                                        ville:newValueVille
-                                                    },
-                                                    success: function (data)
-                                                    { 
-                                                       
-                                                         $("#hotel_ville").append('<option value="'+data+'">'+data+'</option>');
-                                                         $("#hotel_ville").append('<option value="'+data+'">'+data+'</option>');
-
-                                                    }
-                                                });
-                                                //Fin requete
-
-                                            }
-
-                                        }
-                                        
-                                        
-                                        function selectedCategorie(){
-                                             var value=$(".categorie").select2('data')[0]['text'];
-                                             
-                                              /*$("#pluscat").hide();
-                                              //$("#moinscat").show();
-                                              $("#moinscat").css( "visibility","visible");
-                                              //document.getElementById(moinscat).style.visibility='visible';
-                                              */
-                                             
-                                            
-                                          
-                                            
-                                        }
-                                        function deleteValueSelect(){
-                                            var valueDeleted=$(".categorie").select2('val');
-                                            alert(valueDeleted);
-                                             
-                                              $.ajax({
-                                                    type: 'POST',
-                                                    url: Routing.generate('delete_categorie'),
-                                                    dataType: "json",
-                                                    data: {
-                                                        categorie:valueDeleted
-                                                    },
-                                                    success: function (data)
-                                                    { 
-                                                       
-                                                         //$("#hotel_ville").append('<option value="'+data+'">'+data+'</option>');
-                                                         $("#hotel_categorie option[value='"+data+"']").remove();
-                                                         $(".categorie").select2('val',null);
-                                                        
-                                                    }
-                                                });
-                                          
-                                        }
-                                         function selectedVille(){
-                                             var value=$(".villes").select2('data')[0]['text'];
-                                           
-                                           
-                                            
-                                        }
-                                         function deleteVilleSelect(){
-                                            var valueDeleted=$(".villes").select2('val');
-                                            alert(valueDeleted);
-                                             
-                                              $.ajax({
-                                                    type: 'POST',
-                                                    url: Routing.generate('delete_ville'),
-                                                    dataType: "json",
-                                                    data: {
-                                                       ville:valueDeleted
-                                                    },
-                                                    success: function (data)
-                                                    { 
-                                                       
-                                                         //$("#hotel_ville").append('<option value="'+data+'">'+data+'</option>');
-                                                         $("#hotel_ville option[value='"+data+"']").remove();
-                                                         $(".villes").select2('val',null);
-                                                        
-                                                    }
-                                                });
-                                          
-                                        }
-    </script>
-
     <script type="text/javascript">
-
         $(document).ready(function () {
             $(".select2").select2();
             
@@ -226,27 +97,21 @@
           checkboxClass: 'icheckbox_minimal-blue',
           radioClass: 'iradio_minimal-blue'
         });
-            $("#form_hotel").change(function (){
-               
-                
-                 $.ajax({
-                                                    type: 'POST',
-                                                    url: Routing.generate('get_ville_hotel'),
-                                                    dataType: "json",
-                                                    data: {
-                                                       hotel:$("#form_hotel").val()
-                                                    },
-                                                    success: function (data)
-                                                    { 
-                                                       
-                                                        
-                                                         $("#form_ville").val(data);
-                                                        
-                                                    }
-                                                });
-            });
-           
-
+        $("#form_hotel").change(function (){
+        $.ajax({
+                   type: 'POST',
+                   url: Routing.generate('get_ville_hotel'),
+                   dataType: "json",
+                   data: {
+                      hotel:$("#form_hotel").val()
+                   },
+                   success: function (data)
+                   { 
+                   $("#form_ville").val(data);
+                   }
+               });
+        });
+          
         });
     </script>
 {% endblock%}

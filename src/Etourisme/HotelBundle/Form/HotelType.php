@@ -32,8 +32,8 @@ class HotelType extends AbstractType
             ->add('categorie',EntityType::class, array('label' => 'Catégorie (*)', 'class' => 'HotelBundle:Categorie', 'expanded' => false, 'required'=> true,
             'placeholder' => 'Choisir la catégorie...',))
             ->add('promotion')
-            ->add('age_min',IntegerType::class,array('attr'=>array('min'=>"1" ,'max'=>"20")))
-            ->add('age_max',  IntegerType::class,array('attr'=>array('min'=>"1" ,'max'=>"20")))
+            ->add('age_min',IntegerType::class,array('attr'=>array('min'=>"1" ,'max'=>"20"), 'required'=> false))
+            ->add('age_max',  IntegerType::class,array('attr'=>array('min'=>"1" ,'max'=>"20"), 'required'=> false))
             ->add('images', CollectionType::class, array(
                   'entry_type' =>  ImageType::class,
                   'allow_add' => true,

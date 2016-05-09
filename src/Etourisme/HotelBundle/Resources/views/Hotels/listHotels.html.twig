@@ -29,9 +29,8 @@
                         <th>Nom</th>                              
                         <th>Ville</th>
                         <th>Promotion</th>
-                        <th>Description</th>
-                        <th>Détails</th>
                         <th>Catégorie</th>
+                        <th>Image</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -41,14 +40,19 @@
                                 <td>{{ hotel.nomHotel }}</td>
                                 <td>{{ hotel.ville }}</td>
                                 <td>{{ hotel.promotion }}</td>
-                                <td>{{ hotel.descrip|raw }}</td>
-                                <td>{{ hotel.details|raw }}</td>
                                 <td>{{ hotel.categorie }}</td>
-                              
+                                {% for image in hotel.images %}
+                                    {% if loop.first %}
+                                    <td><img src="{{ asset(image.webPath) }}" alt=""style="max-height: 60px;"></td>
+                                    {% endif %}
+                                {% endfor %}
                               
                             <td>
-                                <a  class="confirmModal"   href="{{ path('delete_hotel',{id:hotel.id})}}"   title="Supprimer l'hôtel"><i class="fa fa-trash"></i></a>
-                                <a  class="confirmModal"   href="{{ path('edit_hotel',{id:hotel.id})}}"  title="Modifier l'hôtel"><i class="fa fa-edit"></i></a>                                                                             
+                                <a  class="confirmModal"   href="{{ path('edit_hotel',{id:hotel.id})}}"  title="Modifier l'hôtel"><i class="fa fa-edit"></i></a>
+                                <a id="link" class="confirmModal" href="{{ path('delete_hotel',{id:hotel.id})}}"
+                                   data-confirm-title="Supprimer l'hôtel" data-confirm-content="Etes-vous vraiment sûr?" data-confirm-yesBtn="Oui" data-confirm-noBtn="Non" >
+                                <i class="fa fa-trash"></i>
+                                </a>                                                                                                           
                             </td>
                                 </tr>
                             {% endfor %}
@@ -70,6 +74,8 @@
     {{ parent()}}   
     <script src="{{asset('GNUASSETS/plugins/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('GNUASSETS/plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
+    <!-- delete confirmation -->
+    <script type="text/javascript" src="{{asset('GNUASSETS/plugins/bootstrap-confirmation/jquery.popconfirm.js')}}"></script>
      <script>
         $(function () {
 
@@ -92,6 +98,10 @@
                     }
                 }
             });
+            
+         // delete confirmation
+        $("#link").popConfirm();  
+   
         });
     </script>
 {% endblock%}

@@ -113,9 +113,6 @@ class DefaultController extends Controller {
         $categorie->setLibelle($_POST['categorie']);
         $em->persist($categorie);
         $em->flush();
-
-
-
         return new JsonResponse($_POST['categorie'], 200);
     }
 
@@ -123,10 +120,7 @@ class DefaultController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $categorie = $this->getDoctrine()->getRepository('HotelBundle:Categorie')->find($_POST['categorie']);
         $em->remove($categorie);
-        $em->flush();
-
-
-
+        $em->flush();       
         return new JsonResponse($_POST['categorie'], 200);
     }
 
@@ -137,9 +131,6 @@ class DefaultController extends Controller {
 
         $em->persist($ville);
         $em->flush();
-
-
-
         return new JsonResponse($_POST['ville'], 200);
     }
 
@@ -148,9 +139,6 @@ class DefaultController extends Controller {
         $ville = $this->getDoctrine()->getRepository('HotelBundle:Ville')->find($_POST['ville']);
         $em->remove($ville);
         $em->flush();
-
-
-
         return new JsonResponse($_POST['ville'], 200);
     }
 
@@ -195,7 +183,7 @@ class DefaultController extends Controller {
 
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find User entity.');
+            throw $this->createNotFoundException('Unable to find Hotel entity.');
         }
         $editForm = $this->createForm(HotelEditType::class, $entity);
         $editForm->handleRequest($request);
@@ -242,16 +230,16 @@ class DefaultController extends Controller {
     public function addDetailsHotelAction(Request $request) {
 
         $form = $this->createFormBuilder()
-                ->add('hotel', EntityType::class, array('label' => 'Ville (*)', 'class' => 'HotelBundle:Hotel', 'expanded' => false, 'required' => true, 'mapped' => false,
+                ->add('hotel', EntityType::class, array('label' => 'Nom d`hôtel (*)', 'class' => 'HotelBundle:Hotel', 'expanded' => false, 'required' => false, 'mapped' => false,
                     'placeholder' => 'Sélectionner l hotel...',))
-                ->add('ville', null, array('mapped' => false))
-                ->add('chambre', EntityType::class, array('label' => 'Chambre (*)', 'class' => 'HotelBundle:Chambre', 'expanded' => true, 'multiple' => true, 'required' => true, 'mapped' => false, 'attr' => array('class' => 'minimal')
+                ->add('ville', null, array('label' => 'Ville (*)','mapped' => false, 'disabled' => true))
+                ->add('chambre', EntityType::class, array('label' => 'Chambre (*)', 'class' => 'HotelBundle:Chambre', 'expanded' => true, 'multiple' => true, 'required' => false, 'mapped' => false, 'attr' => array('class' => 'minimal')
                 ))
-                ->add('reduction', EntityType::class, array('label' => 'Reduction (*)', 'class' => 'HotelBundle:Reduction', 'expanded' => true, 'multiple' => true, 'required' => true, 'mapped' => false, 'attr' => array('class' => 'minimal')
+                ->add('reduction', EntityType::class, array('label' => 'Reduction (*)', 'class' => 'HotelBundle:Reduction', 'expanded' => true, 'multiple' => true, 'required' => false, 'mapped' => false, 'attr' => array('class' => 'minimal')
                 ))
-                ->add('arrangement', EntityType::class, array('label' => 'Arrangement(*)', 'class' => 'HotelBundle:Arrangement', 'expanded' => false, 'multiple' => true, 'required' => true, 'mapped' => false, 'attr' => array('class' => 'minimal')
+                ->add('arrangement', EntityType::class, array('label' => 'Arrangement(*)', 'class' => 'HotelBundle:Arrangement', 'expanded' => false, 'multiple' => true, 'required' => false, 'mapped' => false, 'attr' => array('class' => 'minimal')
                 ))
-                ->add('themes', EntityType::class, array('label' => 'Theme(*)', 'class' => 'HotelBundle:Theme', 'expanded' => false, 'multiple' => true, 'required' => true, 'mapped' => false, 'attr' => array('class' => 'minimal')
+                ->add('themes', EntityType::class, array('label' => 'Theme(*)', 'class' => 'HotelBundle:Theme', 'expanded' => false, 'multiple' => true, 'required' => false, 'mapped' => false, 'attr' => array('class' => 'minimal')
                 ))
                 ->getForm();
 
