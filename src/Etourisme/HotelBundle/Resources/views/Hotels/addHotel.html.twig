@@ -158,8 +158,9 @@
                     },
                     success: function (data)
                     { 
-
-                         $("#hotel_categorie").append('<option value="'+data+'">'+data+'</option>');
+                       
+                       
+                         $("#hotel_categorie").append('<option value="'+data[0]+'">'+data[1]+'</option>');
 
                     }
                 });
@@ -180,8 +181,8 @@
                     success: function (data)
                     { 
 
-                         $("#hotel_ville").append('<option value="'+data+'">'+data+'</option>');
-                         $("#hotel_ville").append('<option value="'+data+'">'+data+'</option>');
+                         //$("#hotel_ville").append('<option value="'+data+'">'+data+'</option>');
+                         $("#hotel_ville").append('<option value="'+data[0]+'">'+data[1]+'</option>');
 
                     }
                 });

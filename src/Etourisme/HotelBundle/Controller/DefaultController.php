@@ -92,12 +92,12 @@ class DefaultController extends Controller {
     public function deleteHotelAction($id) {
         $em = $this->getDoctrine()->getManager();
         $hotel = $this->getDoctrine()->getRepository('HotelBundle:Hotel')->find($id);
-
-        $em->remove($hotel);
-        $em->flush();
         if (is_dir('images/hotel_tun/' . $hotel->getId())) {
             $this->rmdir_recursive('images/hotel_tun/' . $hotel->getId());
         }
+        $em->remove($hotel);
+        $em->flush();
+        
         $this->get('session')->getFlashBag()->add(
                 'info', 'Hotêl supprimé!!.'
         );
@@ -113,7 +113,7 @@ class DefaultController extends Controller {
         $categorie->setLibelle($_POST['categorie']);
         $em->persist($categorie);
         $em->flush();
-        return new JsonResponse($_POST['categorie'], 200);
+        return new JsonResponse(array($categorie->getId(),$_POST['categorie']), 200);
     }
 
     public function deleteCategorieAction(Request $request) {
@@ -131,7 +131,8 @@ class DefaultController extends Controller {
 
         $em->persist($ville);
         $em->flush();
-        return new JsonResponse($_POST['ville'], 200);
+        return new JsonResponse(array($ville->getId(),$_POST['ville']), 200);
+        
     }
 
     public function deleteVilleAction(Request $request) {
