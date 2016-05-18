@@ -5,12 +5,12 @@ namespace Etourisme\HotelBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * chambre
+ * Newsletter
  *
- * @ORM\Table(name="chambre")
- * @ORM\Entity(repositoryClass="Etourisme\HotelBundle\Repository\chambreRepository")
+ * @ORM\Table(name="newsletter")
+ * @ORM\Entity(repositoryClass="Etourisme\HotelBundle\Repository\NewsletterRepository")
  */
-class Chambre
+class Newsletter
 {
     /**
      * @var int
@@ -24,9 +24,9 @@ class Chambre
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="string", length=20)
+     * @ORM\Column(name="email", type="string", length=60)
      */
-    private $type;
+    private $email;
 
 
     /**
@@ -40,30 +40,27 @@ class Chambre
     }
 
     /**
-     * Set type
+     * Set email
      *
-     * @param string $type
+     * @param string $email
      *
-     * @return chambre
+     * @return Newsletter
      */
-    public function setType($type)
+    public function setEmail($email)
     {
-        $this->type = $type;
+        $this->email = $email;
 
         return $this;
     }
 
     /**
-     * Get type
+     * Get email
      *
      * @return string
      */
-    public function getType()
+    public function getEmail()
     {
-        return $this->type;
-    }
-    public function __toString() {
-       return $this->getType();
+        return $this->email;
     }
 }
 

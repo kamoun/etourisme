@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Etourisme\HotelBundle\Entity\Hotel;
 use Etourisme\HotelBundle\Entity\Ville;
+use Etourisme\HotelBundle\Entity\DetailsHotel;
 use Etourisme\HotelBundle\Entity\Categorie;
 use Etourisme\HotelBundle\Form\HotelType;
 use Etourisme\HotelBundle\Form\HotelEditType;
@@ -20,6 +21,7 @@ use Etourisme\HotelBundle\Entity\Theme;
 use Etourisme\HotelBundle\Entity\DetailsReduction;
 use Etourisme\HotelBundle\Entity\DetailsTheme;
 use Etourisme\HotelBundle\Entity\DetailsArrangement;
+use Etourisme\HotelBundle\Form\DetailsHotelType;
 
 class DefaultController extends Controller {
 
@@ -35,9 +37,10 @@ class DefaultController extends Controller {
         if ($form->isValid()) {
 
             $em->persist($entity);
-            $em->flush();
+            $em->flush();     
             return $this->redirect($this->generateUrl('create_hotel'));
         }
+       
         return $this->render('HotelBundle:Hotels:addHotel.html.twig', array(
                     'entity' => $entity,
                     'form' => $form->createView(),
@@ -97,7 +100,7 @@ class DefaultController extends Controller {
         }
         $em->remove($hotel);
         $em->flush();
-        
+
         $this->get('session')->getFlashBag()->add(
                 'info', 'Hotêl supprimé!!.'
         );
@@ -113,14 +116,14 @@ class DefaultController extends Controller {
         $categorie->setLibelle($_POST['categorie']);
         $em->persist($categorie);
         $em->flush();
-        return new JsonResponse(array($categorie->getId(),$_POST['categorie']), 200);
+        return new JsonResponse(array($categorie->getId(), $_POST['categorie']), 200);
     }
 
     public function deleteCategorieAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
         $categorie = $this->getDoctrine()->getRepository('HotelBundle:Categorie')->find($_POST['categorie']);
         $em->remove($categorie);
-        $em->flush();       
+        $em->flush();
         return new JsonResponse($_POST['categorie'], 200);
     }
 
@@ -131,8 +134,7 @@ class DefaultController extends Controller {
 
         $em->persist($ville);
         $em->flush();
-        return new JsonResponse(array($ville->getId(),$_POST['ville']), 200);
-        
+        return new JsonResponse(array($ville->getId(), $_POST['ville']), 200);
     }
 
     public function deleteVilleAction(Request $request) {
@@ -190,15 +192,8 @@ class DefaultController extends Controller {
         $editForm->handleRequest($request);
         if ($editForm->isValid()) {
             //$file = $editForm['images'];
-            //var_dump($file->getData());
-            //die("here");
-
             foreach ($editForm['imagess']->getData() as $file) {
-                //$file->setHotelimages($entity);
                 $entity->addImage($file);
-                //$file->Commandeforfichier($commande);
-                //$entity->addImage($file)
-                //$em->flush();
             }
             $em->flush();
             $this->get('session')->getFlashBag()->add(
@@ -231,29 +226,51 @@ class DefaultController extends Controller {
     public function addDetailsHotelAction(Request $request) {
 
         $form = $this->createFormBuilder()
-                ->add('hotel', EntityType::class, array('label' => 'Nom d`hôtel (*)', 'class' => 'HotelBundle:Hotel', 'expanded' => false, 'required' => false, 'mapped' => false,
-                    'placeholder' => 'Sélectionner l hotel...',))
-                ->add('ville', null, array('label' => 'Ville (*)','mapped' => false, 'disabled' => true))
-                ->add('chambre', EntityType::class, array('label' => 'Chambre (*)', 'class' => 'HotelBundle:Chambre', 'expanded' => true, 'multiple' => true, 'required' => false, 'mapped' => false, 'attr' => array('class' => 'minimal')
+                ->add('hotel', EntityType::class, array('label' => 'Nom d`hôtel (*)', 'class' => 'HotelBundle:Hotel', 'expanded' => false, 'required' => true, 'mapped' => false,
+                    'placeholder' => 'Sélectionner l`hôtel...',))
+                ->add('ville', null, array('label' => 'Ville (*)', 'mapped' => false, 'disabled' => true))
+                ->add('chambre', EntityType::class, array('label' => 'Chambre', 'class' => 'HotelBundle:Chambre', 'expanded' => true, 'multiple' => true, 'required' => false, 'mapped' => false, 'attr' => array('class' => 'minimal')
                 ))
-                ->add('reduction', EntityType::class, array('label' => 'Reduction (*)', 'class' => 'HotelBundle:Reduction', 'expanded' => true, 'multiple' => true, 'required' => false, 'mapped' => false, 'attr' => array('class' => 'minimal')
+                ->add('reduction', EntityType::class, array('label' => 'Reduction', 'class' => 'HotelBundle:Reduction', 'expanded' => true, 'multiple' => true, 'required' => false, 'mapped' => false, 'attr' => array('class' => 'minimal')
                 ))
-                ->add('arrangement', EntityType::class, array('label' => 'Arrangement(*)', 'class' => 'HotelBundle:Arrangement', 'expanded' => false, 'multiple' => true, 'required' => false, 'mapped' => false, 'attr' => array('class' => 'minimal')
+                ->add('arrangement', EntityType::class, array('label' => 'Arrangement', 'class' => 'HotelBundle:Arrangement', 'expanded' => false, 'multiple' => true, 'required' => false, 'mapped' => false, 'attr' => array('class' => 'minimal')
                 ))
-                ->add('themes', EntityType::class, array('label' => 'Theme(*)', 'class' => 'HotelBundle:Theme', 'expanded' => false, 'multiple' => true, 'required' => false, 'mapped' => false, 'attr' => array('class' => 'minimal')
+                ->add('themes', EntityType::class, array('label' => 'Theme', 'class' => 'HotelBundle:Theme', 'expanded' => false, 'multiple' => true, 'required' => false, 'mapped' => false, 'attr' => array('class' => 'minimal')
                 ))
                 ->getForm();
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            // data is an array with "name", "email", and "message" keys
+
+
             $em = $this->getDoctrine()->getManager();
             $hotel = $this->getDoctrine()->getRepository('HotelBundle:Hotel')->find($form['hotel']->getData());
 
-
+            $detailschambre = $this->getDoctrine()->getRepository('HotelBundle:DetailsChambre')->findByHotel($hotel->getId());
+            foreach ($detailschambre as $detailchambre) {
+                $em->remove($detailchambre);
+                $em->flush();
+            }
+            $detailsreduction = $this->getDoctrine()->getRepository('HotelBundle:DetailsReduction')->findByHotel($hotel->getId());
+            foreach ($detailsreduction as $detailreduction) {
+                $em->remove($detailreduction);
+                $em->flush();
+            }
+            $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findByHotel($hotel->getId());
+            foreach ($detailsarrangement as $detailarrangement) {
+                $em->remove($detailarrangement);
+                $em->flush();
+            }
+            $detailstheme = $this->getDoctrine()->getRepository('HotelBundle:DetailsTheme')->findByHotel($hotel->getId());
+            foreach ($detailstheme as $detailtheme) {
+                $em->remove($detailtheme);
+                $em->flush();
+            }
             foreach ($form['chambre']->getData() as $id) {
                 $chambre = $this->getDoctrine()->getRepository('HotelBundle:Chambre')->find($id);
+
+
                 $detailschambre = new DetailsChambre();
                 $detailschambre->setChambre($chambre);
                 $detailschambre->setHotel($hotel);
@@ -270,7 +287,7 @@ class DefaultController extends Controller {
                 $em->flush();
             }
             foreach ($form['themes']->getData() as $id) {
-               $theme = $this->getDoctrine()->getRepository('HotelBundle:Theme')->find($id);
+                $theme = $this->getDoctrine()->getRepository('HotelBundle:Theme')->find($id);
                 $detailstheme = new DetailsTheme();
                 $detailstheme->setHotel($hotel);
                 $detailstheme->setTheme($theme);
@@ -278,33 +295,49 @@ class DefaultController extends Controller {
                 $em->flush();
             }
 
-             foreach ($form['arrangement']->getData() as $id) {
-                $arrangement= $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find($id);
-                $detailsarrangement= new DetailsArrangement();
+            foreach ($form['arrangement']->getData() as $id) {
+                $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find($id);
+                $detailsarrangement = new DetailsArrangement();
                 $detailsarrangement->setHotel($hotel);
                 $detailsarrangement->setArrangement($arrangement);
                 $em->persist($detailsarrangement);
                 $em->flush();
             }
 
-
-            //$data = $form['reduction']->getData();
-            //var_dump($data);
-            die("here");
         }
-
-
         return $this->render('HotelBundle:Hotels:detailsHotel.html.twig', array('form' => $form->createView()));
     }
 
     public function getVilleByHotelAction() {
+
         $em = $this->getDoctrine()->getManager();
         $hotel = $this->getDoctrine()->getRepository('HotelBundle:Hotel')->find($_POST['hotel']);
+        $chambres = $this->getDoctrine()->getRepository('HotelBundle:DetailsChambre')->findByHotel($_POST['hotel']);
+        $reductions = $this->getDoctrine()->getRepository('HotelBundle:DetailsReduction')->findByHotel($_POST['hotel']);
+        $arrangements = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findByHotel($_POST['hotel']);
+        $themes = $this->getDoctrine()->getRepository('HotelBundle:DetailsTheme')->findByHotel($_POST['hotel']);
+
+
+        $idChambre = array();
+        foreach ($chambres as $chambre) {
+            array_push($idChambre, $chambre->getChambre()->getId());
+        }
+        $idReduction = array();
+        foreach ($reductions as $reduction) {
+            array_push($idReduction, $reduction->getReduction()->getId());
+        }
+        $idArrangement = array();
+        foreach ($arrangements as $arrangement) {
+            array_push($idArrangement, $arrangement->getArrangement()->getId());
+        }
+        $idTheme = array();
+        foreach ($themes as $theme) {
+            array_push($idTheme, $theme->getTheme()->getId());
+        }
 
 
 
-
-        return new JsonResponse($hotel->getVille()->getLibelle(), 200);
+        return new JsonResponse(array($hotel->getVille()->getLibelle(), $idChambre, $idReduction, $idArrangement, $idTheme), 200);
     }
 
 }

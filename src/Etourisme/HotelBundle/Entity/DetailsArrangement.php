@@ -31,8 +31,34 @@ class DetailsArrangement
      * @ORM\JoinColumn(nullable=false)
      */
     private $arrangement;
+    
+     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="etat", type="boolean")
+     */
+    private $etat;
+    
+     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="tempsd", type="datetime",nullable=true)
+     */
+    private $tempsd;
+    
+     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="tempsf", type="datetime",nullable=true)
+     */
+    private $tempsf;
+    
+    public function __construct() {
+        $this->setEtat(1);
+       
+    }
 
-
+    
     /**
      * Get id
      *
@@ -89,5 +115,77 @@ class DetailsArrangement
     public function getArrangement()
     {
         return $this->arrangement;
+    }
+
+    /**
+     * Set etat
+     *
+     * @param boolean $etat
+     *
+     * @return DetailsArrangement
+     */
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    /**
+     * Get etat
+     *
+     * @return boolean
+     */
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+    /**
+     * Set tempsd
+     *
+     * @param \DateTime $tempsd
+     *
+     * @return DetailsArrangement
+     */
+    public function setTempsd($tempsd)
+    {
+        $this->tempsd = $tempsd;
+
+        return $this;
+    }
+
+    /**
+     * Get tempsd
+     *
+     * @return \DateTime
+     */
+    public function getTempsd()
+    {
+        return $this->tempsd;
+    }
+
+    /**
+     * Set tempsf
+     *
+     * @param \DateTime $tempsf
+     *
+     * @return DetailsArrangement
+     */
+    public function setTempsf($tempsf)
+    {
+        $this->tempsf = $tempsf;
+
+        return $this;
+    }
+
+    /**
+     * Get tempsf
+     *
+     * @return \DateTime
+     */
+    public function getTempsf()
+    {
+        return $this->tempsf;
     }
 }

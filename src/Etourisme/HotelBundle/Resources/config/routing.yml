@@ -40,3 +40,12 @@ add_details_hotel:
 get_ville_hotel:
     path:     /Connected/Hotel/getville
     defaults: { _controller: "HotelBundle:Default:getVilleByHotel" }
+add_tarif_hotel:
+    path:     /Connected/Hotel/addTarif
+    defaults: { _controller: "HotelBundle:Tarif:addTarifHotel" }
+get_villetarif_hotel:
+    path:     /Connected/Hotel/tarif/getville
+    defaults: { _controller: "HotelBundle:Tarif:getVilleByHotelTarif" }
+add_tarifperiode_hotel:
+    path:     /Connected/Hotel/TarifPeriode
+    defaults: { _controller: "HotelBundle:Tarif:addTarifPeriodeHotel" }

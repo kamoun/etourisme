@@ -11,6 +11,7 @@
     </style>    
 {% endblock%}
 {% block content %}
+    {{ parent() }}
     <section class="content">        
         <div class="row">
             <!-- left column -->
@@ -18,11 +19,11 @@
                 <!-- general form elements -->
                 <div class="panel panel-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Détails hôtel</h3>
+                        <h3 class="box-title">Tarif</h3>
                     </div><!-- /.box-header -->
                     <!-- form start -->
 
-                    <form id="formDetails" method="post" action="{{path('add_details_hotel')}}" role="form">
+                    <form id="formDetails" method="post" action="{{path('add_tarif_hotel')}}" role="form">
                     <div class="box-body">                                  
                          <div class="form-group input-group col-md-12">
                              <label>{{ form_label(form.hotel) }}</label>
@@ -37,31 +38,7 @@
                              {{ form_errors(form.ville) }}
                          </div>
 
-                         <div class="box-header">
-                           <h3 class="box-title">{{ form_label(form.chambre) }}</h3>
-                           {{ form_widget(form.chambre, {'attr': {'class': 'form-control chambre minimal'}}) }}                      
-                           
-                           {{ form_errors(form.chambre) }}
-                         </div> 
-                         
-                         <div class="box-header">
-                           <h3 class="box-title">{{ form_label(form.reduction) }}</h3>
-                           {{ form_widget(form.reduction, { 'attr': {'class': 'form-control reduction  minimal'} }) }}
-                           {{ form_errors(form.reduction) }}
-                         </div>
-
-                         <div class="box-header">
-                           <h3 class="box-title">{{ form_label(form.arrangement) }}</h3>
-                           {{ form_widget(form.arrangement, { 'attr': {'class': 'form-control arrangement  minimal'} }) }}
-                           {{ form_errors(form.arrangement) }}
-                         </div>
-
-                         <div class="box-header">
-                           <h3 class="box-title">{{ form_label(form.themes) }}</h3>
-                          
-                           {{ form_widget(form.themes, { 'attr': {'class': 'form-control theme  minimal'} }) }}
-                           {{ form_errors(form.themes) }}
-                         </div>
+                       
                          <div class="box-body">
 
                            {{ form_rest(form) }}
@@ -102,43 +79,24 @@
             if($("#form_hotel").val().length !==null){
                  $.ajax({
                    type: 'POST',
-                   url: Routing.generate('get_ville_hotel'),
+                   url: Routing.generate('get_villetarif_hotel'),
                    dataType: "json",
                    data: {
                       hotel:$("#form_hotel").val()
                    },
                    success: function (data)
                    { 
-                    //$("#formDetails")[0].reset();
-                     $('input:checkbox').removeAttr('checked');
-                     $("#form_arrangement").val("");
-                     $( '#form_themes' ).val("");
+                    
                    $("#form_ville").val(data[0]);
-                   var chambres=data[1];
-                   for (i = 0; i < chambres.length; ++i) {
-                        
-                        $( '#form_chambre_'+chambres[i] ).prop( "checked", true );
-                    }
-                    
-                     var reductions=data[2];
-                   for (i = 0; i < reductions.length; ++i) {
-                        
-                        $( '#form_reduction_'+reductions[i] ).prop( "checked", true );
-                    }
-                    
-                    var arrangements=data[3];
-                    $( '#form_arrangement' ).val(arrangements);
-                   
-                    var themes=data[4];
-                    $( '#form_themes' ).val(themes);
-                   
                    }
+                  
                });
                 
             }
        
-        });
+       
           
         });
+    });
     </script>
 {% endblock%}

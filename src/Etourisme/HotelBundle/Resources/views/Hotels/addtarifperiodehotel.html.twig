@@ -1,0 +1,293 @@
+{% extends 'base.html.twig' %}
+{% block stylesheet %}
+    {{ parent()}}
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{asset('GNUASSETS/plugins/select2/select2.css')}}">
+    <link rel="stylesheet" href="{{asset('GNUASSETS/plugins/iCheck/all.css')}}">
+    <style type="text/css">
+        [class^='select2'] {
+            border-radius: 0px !important;
+        }
+    </style>    
+{% endblock%}
+{% block content %}
+    <section class="content">        
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="panel panel-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Tarif</h3>
+                    </div><!-- /.box-header -->
+                    <!-- form start -->
+
+                    <form id="formDetails" method="post" action="{{path('add_tarifperiode_hotel')}}" role="form" onsubmit="validate();">
+                    <div class="box-body">     
+                        <div class="form-group">
+                                {{ form_label(form.tempsd) }}   
+                                {{ form_widget(form.tempsd, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                {{ form_errors(form.tempsd) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.tempsf) }}   
+                                {{ form_widget(form.tempsf, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                {{ form_errors(form.tempsf) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.tarifBase) }}   
+                                {{ form_widget(form.tarifBase, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                {{ form_errors(form.tarifBase) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.delaiRetro) }}   
+                                {{ form_widget(form.delaiRetro, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                {{ form_errors(form.delaiRetro) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.allot) }}   
+                                {{ form_widget(form.allot, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                {{ form_errors(form.allot) }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="row">
+                                    {% for c in detailschambre %}
+                                        {% if c.chambre.id=='1'%}
+                                    <div class="col-md-2">
+                                        <label>Chambre Single</label> 
+                                {{ form_widget(form.nbChambs, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                {{ form_errors(form.nbChambs) }}
+                                    </div>
+                                    
+                                     {% elseif c.chambre.id=='2'%}
+                                     <div class="col-md-2">
+                                         <label>Chambre Double</label>  
+                                {{ form_widget(form.nbChambd, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                {{ form_errors(form.nbChambd) }}
+                                    </div>
+                                    {% elseif c.chambre.id=='3'%}
+                                     <div class="col-md-2">
+                                         <label>Chambre Triple</label> 
+                                {{ form_widget(form.nbChambt, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                {{ form_errors(form.nbChambt) }}
+                                    </div>
+                                    {% elseif c.chambre.id=='4'%}
+                                     <div class="col-md-2">
+                                         <label>Chambre Quadri</label> 
+                                {{ form_widget(form.nbChambq, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                {{ form_errors(form.nbChambq) }}
+                                    </div>
+                                  {% endif %}
+                                    {% endfor %}
+                                  
+                                </div>
+                                    
+                            <div class="form-group">
+                                <div class="row">
+                                    {% for r in detailsreduction %}
+                                        {% if r.reduction.id=='1'%}
+                                    <div class="col-md-2">
+                                        <label>Réduction1</label>  
+                                {{ form_widget(form.reduc1, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                {{ form_errors(form.reduc1) }}
+                                    </div>
+                                   {% elseif r.reduction.id=='2'%}
+                                     <div class="col-md-2">
+                               <label>Réduction2</label>    
+                                {{ form_widget(form.reduc2, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                {{ form_errors(form.reduc2) }}
+                                    </div>
+                                    {% elseif r.reduction.id=='3'%}
+                                     <div class="col-md-2">
+                               <label>Réduction3</label>  
+                                {{ form_widget(form.reduc3, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                {{ form_errors(form.reduc3) }}
+                                    </div>
+                                   {% elseif r.reduction.id=='4'%}
+                                     <div class="col-md-2">
+                              <label>Réduction4</label>  
+                                {{ form_widget(form.reduc4, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                {{ form_errors(form.reduc4) }}
+                                    </div>
+                                    {% elseif r.reduction.id=='5'%}
+                                     <div class="col-md-2">
+                               <label>Réduction5</label>   
+                                {{ form_widget(form.reduc5, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                {{ form_errors(form.reduc5) }}
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                  
+                                </div>
+                            </div>
+                                    
+                                     <div class="form-group">
+                                         <table class="table table-striped table-bordered table-hover table-responsive">
+                                             {% for ar in detailsarrangement%}
+                                                 {% if ar.arrangement.id=='1'%}
+                                             <tr>
+                                                 <td>
+                                                      {{ form_widget(form.suppLpd, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                                      {{ form_errors(form.suppLpd) }}
+                                                 </td>
+                                             <td>{{ ar.arrangement.libelle}}</td>
+                                             <td><input id="1" name="1"  type="checkbox" value="1"/></td>
+                                             </tr>
+                                              {% elseif  ar.arrangement.id=='2'%}
+                                             <tr>
+                                                 <td>
+                                                      {{ form_widget(form.suppDp, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                                      {{ form_errors(form.suppDp) }}
+                                                 </td>
+                                             <td>{{ ar.arrangement.libelle}}</td>
+                                             <td><input id="2" name="2"  type="checkbox" value="2"/></td>
+                                             </tr>
+                                             
+                                              {% elseif ar.arrangement.id=='3'%}
+                                             <tr>
+                                                 <td>
+                                                      {{ form_widget(form.suppPc, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                                      {{ form_errors(form.suppPc) }}
+                                                 </td>
+                                             <td>{{ ar.arrangement.libelle}}</td>
+                                             <td><input id="3" name="3"  type="checkbox" value="3"/></td>
+                                             </tr>
+                                             {% elseif ar.arrangement.id=='4'%}
+                                             <tr>
+                                                 <td>
+                                                      {{ form_widget(form.suppAll, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                                      {{ form_errors(form.suppAll) }}
+                                                 </td>
+                                             <td>{{ ar.arrangement.libelle}}</td>
+                                             <td><input id="4" name="4"  type="checkbox" value="4"/></td>
+                                             </tr>
+                                           
+                                             {% elseif ar.arrangement.id=='5'%}
+                                             <tr>
+                                                 <td>
+                                                      {{ form_widget(form.suppLs, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                                      {{ form_errors(form.suppLs) }}
+                                                 </td>
+                                             <td>{{ ar.arrangement.libelle}}</td>
+                                             <td><input id="5" name="5"   type="checkbox" value="5"/></td>
+                                             </tr>
+                                            
+                                             {% elseif ar.arrangement.id=='6'%}
+                                             <tr>
+                                                 <td>
+                                                      {{ form_widget(form.suppAllSoft, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                                      {{ form_errors(form.suppAllSoft) }}
+                                                 </td>
+                                             <td>{{ ar.arrangement.libelle}}</td>
+                                             <td><input id="6" name="6"  type="checkbox" value="6"/></td>
+                                             </tr>
+                                             {% elseif ar.arrangement.id=='7'%}
+                                             <tr>
+                                                 <td>
+                                                      {{ form_widget(form.suppUltraAll, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                                      {{ form_errors(form.suppUltraAll) }}
+                                                 </td>
+                                             <td>{{ ar.arrangement.libelle}}</td>
+                                             <td><input id="7" name="7"  type="checkbox" value="7"/></td>
+                                             </tr>
+                                            {% elseif ar.arrangement.id=='8'%}
+                                             <tr>
+                                                 <td>
+                                                      {{ form_widget(form.suppDpp, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                                      {{ form_errors(form.suppDpp) }}
+                                                 </td>
+                                             <td>{{ ar.arrangement.libelle}}</td>
+                                             <td><input id="8" name="8"  type="checkbox" value="8"/></td>
+                                             </tr>
+                                             {% elseif ar.arrangement.id=='9'%}
+                                             <tr>
+                                                 <td>
+                                                      {{ form_widget(form.suppPcp, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                                      {{ form_errors(form.suppPcp) }}
+                                                 </td>
+                                             <td>{{ ar.arrangement.libelle}}</td>
+                                             <td><input id="9" name="9" type="checkbox" value="9"/></td>
+                                             </tr>
+                                             {% endif %}
+                                            
+                                             {% endfor %}
+                                             
+                                         </table>
+                                {{ form_label(form.suppSingle) }}   
+                                {{ form_widget(form.suppSingle, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                {{ form_errors(form.suppSingle) }}
+                                    </div>
+                                    
+                                     <div class="form-group">
+                                {{ form_label(form.marge) }}   
+                                {{ form_widget(form.marge, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                {{ form_errors(form.marge) }}
+                                    </div>
+                                   
+                                  
+                                <input id="tarif_submit" class="btn  btn-default" type="submit" value="{{ 'Valider' }}">
+                            <input class="btn  btn-default" type="reset" value="{{ 'Annuler' }}">          
+                        </div>   
+
+                    </form>
+
+                </div><!-- /.box -->
+            </div><!--/.col (right) -->
+        </div>   <!-- /.row -->
+
+
+    </section> 
+
+{% endblock %}
+{% block javascript %}
+    {{ parent()}}
+    <script src="{{asset('GNUASSETS/plugins/select2/select2.full.min.js')}}"></script>
+    <script src="{{asset('GNUASSETS/plugins/iCheck/icheck.min.js')}}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <!-- iCheck 1.0.1 -->
+    <script src="{{ asset('GNUASSETS/plugins/iCheck/icheck.min.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2").select2();
+            
+        //iCheck for checkbox and radio inputs
+        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+          checkboxClass: 'icheckbox_minimal-blue',
+          radioClass: 'iradio_minimal-blue'
+        });
+        $("#form_hotel").change(function (){
+            
+            if($("#form_hotel").val().length !==null){
+                 $.ajax({
+                   type: 'POST',
+                   url: Routing.generate('get_villetarif_hotel'),
+                   dataType: "json",
+                   data: {
+                      hotel:$("#form_hotel").val()
+                   },
+                   success: function (data)
+                   { 
+                    
+                   $("#form_ville").val(data[0]);
+                   }
+                  
+               });
+                
+            }
+       
+       
+          
+        });
+        
+        
+       /*$("#tarif_submit").click(function(event){
+           var sc=0;
+           sc=($("#details_hotel_nbChambs").val())+$("#details_hotel_nbChambd").val();
+          alert(sc);
+          
+});*/
+    });
+    </script>
+{% endblock%}
