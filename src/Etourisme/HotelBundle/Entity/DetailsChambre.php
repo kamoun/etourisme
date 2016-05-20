@@ -24,7 +24,7 @@ class DetailsChambre
    */
   private $id;
     /**
-   * @ORM\ManyToOne(targetEntity="Etourisme\HotelBundle\Entity\Hotel")
+   * @ORM\ManyToOne(targetEntity="Etourisme\HotelBundle\Entity\Hotel",inversedBy="detailschambre")
    * @ORM\JoinColumn(nullable=false)
    */
   private $hotel;

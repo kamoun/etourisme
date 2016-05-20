@@ -58,13 +58,12 @@ class TarifController extends Controller {
     public function addTarifPeriodeHotelAction(Request $request) {
         $session = $request->getSession();
         $data = $session->get('id');
+        
         $hotel = $this->getDoctrine()->getRepository('HotelBundle:Hotel')->find($data);
         $detailschambre = $this->getDoctrine()->getRepository('HotelBundle:DetailsChambre')->findByHotel($hotel->getId());
         $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findByHotel($hotel->getId());
         $detailsreduction = $this->getDoctrine()->getRepository('HotelBundle:DetailsReduction')->findByHotel($hotel->getId());
-        //var_dump($detailschambre);
-        //die("here");
-
+       
 
         $detailshotel = new DetailsHotel();
         $detailshotel->setHotel($hotel);
@@ -77,26 +76,45 @@ class TarifController extends Controller {
            
            
             $em = $this->getDoctrine()->getManager();
+            $detailshotel->setHotel($hotel);
             $em->persist($detailshotel);
             $em->flush();
-              if(isset($_POST["1"])){
-                 $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>1));
-                 $detailsarrangement->setEtat(true);
-                  $em->merge($detailsarrangement);
-                  $em->flush();
+           
+                 if(isset($_POST["1"])){
+                 $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(1);
+                     $detailsarr1=new DetailsArrangement();
+                     $detailsarr1->setArrangement($arrangement);
+                     $detailsarr1->setHotel($hotel);
+                     $detailsarr1->setEtat(1);
+                     $detailsarr1->setTempsd($detailshotel->getTempsd());
+                     $detailsarr1->setTempsf($detailshotel->getTempsf());
+                     $em->persist($detailsarr1);
+                     $em->flush();
                  
                  
                 
             }
             else{
-                 $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>1));
-                 $detailsarrangement->setEtat(false);
-                  $em->merge($detailsarrangement);
-                  $em->flush();
+                 $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(1);
+                 //$detailsarrangement->setEtat(true);
+                     $detailsarr1=new DetailsArrangement();
+                     $detailsarr1->setArrangement($arrangement);
+                     $detailsarr1->setHotel($hotel);
+                     $detailsarr1->setEtat(0);
+                     $detailsarr1->setTempsd($detailshotel->getTempsd());
+                     $detailsarr1->setTempsf($detailshotel->getTempsf());
+                     $em->persist($detailsarr1);
+                     $em->flush();
+                 
+                
             }
-            if(isset($_POST["2"])){
+            
+            
+            
+            
+                 if(isset($_POST["2"])){
                  $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>2));
-                 $detailsarrangement->setEtat(true);
+                 $detailsarrangement->setEtat(1);
                   $em->merge($detailsarrangement);
                   $em->flush();
                  
@@ -105,13 +123,20 @@ class TarifController extends Controller {
             }
             else{
                  $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>2));
-                 $detailsarrangement->setEtat(false);
+                 if($detailsarrangement!=null){
+                      $detailsarrangement->setEtat(0);
                   $em->merge($detailsarrangement);
                   $em->flush();
+                     
+                 }
+                
             }
-              if(isset($_POST["3"])){
+            
+            
+             
+                 if(isset($_POST["3"])){
                  $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>3));
-                 $detailsarrangement->setEtat(true);
+                 $detailsarrangement->setEtat(1);
                   $em->merge($detailsarrangement);
                   $em->flush();
                  
@@ -120,13 +145,19 @@ class TarifController extends Controller {
             }
             else{
                  $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>3));
-                 $detailsarrangement->setEtat(false);
+                if($detailsarrangement!=null){
+                    $detailsarrangement->setEtat(0);
                   $em->merge($detailsarrangement);
                   $em->flush();
+                    
+                }
+                
             }
+            
+           
              if(isset($_POST["4"])){
                  $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>4));
-                 $detailsarrangement->setEtat(true);
+                 $detailsarrangement->setEtat(1);
                   $em->merge($detailsarrangement);
                   $em->flush();
                  
@@ -135,13 +166,19 @@ class TarifController extends Controller {
             }
             else{
                  $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>4));
-                 $detailsarrangement->setEtat(false);
+                if($detailsarrangement!=null){
+                    $detailsarrangement->setEtat(0);
                   $em->merge($detailsarrangement);
                   $em->flush();
+                    
+                }
+                
             }
-             if(isset($_POST["5"])){
+            
+            
+            if(isset($_POST["5"])){
                  $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>5));
-                 $detailsarrangement->setEtat(true);
+                 $detailsarrangement->setEtat(1);
                   $em->merge($detailsarrangement);
                   $em->flush();
                  
@@ -150,13 +187,18 @@ class TarifController extends Controller {
             }
             else{
                  $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>5));
-                 $detailsarrangement->setEtat(false);
+                if($detailsarrangement!=null){
+                    $detailsarrangement->setEtat(0);
                   $em->merge($detailsarrangement);
                   $em->flush();
+                    
+                }
+                
             }
-             if(isset($_POST["6"])){
+            
+            if(isset($_POST["6"])){
                  $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>6));
-                 $detailsarrangement->setEtat(true);
+                 $detailsarrangement->setEtat(1);
                   $em->merge($detailsarrangement);
                   $em->flush();
                  
@@ -165,13 +207,18 @@ class TarifController extends Controller {
             }
             else{
                  $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>6));
-                 $detailsarrangement->setEtat(false);
+                if($detailsarrangement!=null){
+                    $detailsarrangement->setEtat(0);
                   $em->merge($detailsarrangement);
                   $em->flush();
+                    
+                }
+                
             }
+            
              if(isset($_POST["7"])){
                  $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>7));
-                 $detailsarrangement->setEtat(true);
+                 $detailsarrangement->setEtat(1);
                   $em->merge($detailsarrangement);
                   $em->flush();
                  
@@ -180,13 +227,18 @@ class TarifController extends Controller {
             }
             else{
                  $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>7));
-                 $detailsarrangement->setEtat(false);
+                if($detailsarrangement!=null){
+                    $detailsarrangement->setEtat(0);
                   $em->merge($detailsarrangement);
                   $em->flush();
+                    
+                }
+                
             }
+            
              if(isset($_POST["8"])){
                  $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>8));
-                 $detailsarrangement->setEtat(true);
+                 $detailsarrangement->setEtat(1);
                   $em->merge($detailsarrangement);
                   $em->flush();
                  
@@ -195,13 +247,18 @@ class TarifController extends Controller {
             }
             else{
                  $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>8));
-                 $detailsarrangement->setEtat(false);
+                if($detailsarrangement!=null){
+                    $detailsarrangement->setEtat(0);
                   $em->merge($detailsarrangement);
                   $em->flush();
+                    
+                }
+                
             }
+            
              if(isset($_POST["9"])){
                  $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>9));
-                 $detailsarrangement->setEtat(true);
+                 $detailsarrangement->setEtat(1);
                   $em->merge($detailsarrangement);
                   $em->flush();
                  
@@ -210,10 +267,15 @@ class TarifController extends Controller {
             }
             else{
                  $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>9));
-                 $detailsarrangement->setEtat(false);
+                if($detailsarrangement!=null){
+                    $detailsarrangement->setEtat(0);
                   $em->merge($detailsarrangement);
                   $em->flush();
+                    
+                }
+                
             }
+            
                 $this->get('session')->getFlashBag()->add(
                 'info', 'Tarif Bien ajouté'
                 );

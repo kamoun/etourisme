@@ -21,7 +21,7 @@ class DetailsTheme {
      */
     private $id;
 
-    /** @ORM\ManyToOne(targetEntity="Etourisme\HotelBundle\Entity\Hotel")
+    /** @ORM\ManyToOne(targetEntity="Etourisme\HotelBundle\Entity\Hotel",inversedBy="detailstheme")
      * @ORM\JoinColumn(nullable=false)
      */
     private $hotel;

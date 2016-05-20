@@ -101,14 +101,17 @@ class Banniere
         return $this->etat;
     } 
     
+   
+
     /**
-     * Add image
+     * Set image
      *
-     * @param \CMSBundle\Entity\Banniere $image
+     * @param \Etourisme\HotelBundle\Entity\Image $image
      *
      * @return Banniere
      */
-    public function addImage(\Etourisme\HotelBundle\Entity\Image $image) {
+    public function setImage(\Etourisme\HotelBundle\Entity\Image $image = null)
+    {
         $this->image = $image;
         $image->setBanimage($this);
 
@@ -116,26 +119,12 @@ class Banniere
     }
 
     /**
-     * Remove image
-     *
-     * @param \CMSBundle\Entity\Banniere $image
-     */
-    public function removeImage(\Etourisme\HotelBundle\Entity\Image $image) {
-        $this->image->removeElement($image);
-        $image->setBanimage(null);
-    }
-
-    /**
      * Get image
      *
-     * @return string
+     * @return \Etourisme\HotelBundle\Entity\Image
      */
-    public function getImage() {
+    public function getImage()
+    {
         return $this->image;
     }
-    
-     public function __toString() {
-        return $this->getTitre();
-    }
 }
-

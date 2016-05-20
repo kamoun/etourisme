@@ -45,7 +45,7 @@ class Hotel {
     private $details;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Etourisme\HotelBundle\Entity\Categorie",inversedBy="hotels")
+     * @ORM\ManyToOne(targetEntity="Etourisme\HotelBundle\Entity\Categorie",inversedBy="hotels" , cascade={"All"})
      *  @ORM\JoinColumn(name="categorie_id", referencedColumnName="id", nullable=true)
      */
     private $categorie;
@@ -55,6 +55,26 @@ class Hotel {
      *  @ORM\JoinColumn(name="ville_id", referencedColumnName="id", nullable=false)
      */
     private $ville;
+    
+    /** @ORM\OneToMany(targetEntity="Etourisme\HotelBundle\Entity\DetailsTheme",mappedBy="hotel", cascade={"All"})
+     *
+     */
+    private $detailstheme;
+    
+    /** @ORM\OneToMany(targetEntity="Etourisme\HotelBundle\Entity\DetailsChambre",mappedBy="hotel", cascade={"All"})
+     * 
+     */
+    private $detailschambre;
+     /** @ORM\OneToMany(targetEntity="Etourisme\HotelBundle\Entity\DetailsArrangement",mappedBy="hotel", cascade={"All"})
+     * 
+     */
+    private $detailsarrangement;
+
+     /** @ORM\OneToMany(targetEntity="Etourisme\HotelBundle\Entity\DetailsReduction",mappedBy="hotel", cascade={"All"})
+     * 
+     */
+    private $detailsreduction;
+
 
     /**
      * @var string
@@ -405,5 +425,73 @@ class Hotel {
     
     public function __toString() {
         return $this->getNomHotel();
+    }
+
+    /**
+     * Add detailstheme
+     *
+     * @param \Etourisme\HotelBundle\Entity\DetailsTheme $detailstheme
+     *
+     * @return Hotel
+     */
+    public function addDetailstheme(\Etourisme\HotelBundle\Entity\DetailsTheme $detailstheme)
+    {
+        $this->detailstheme[] = $detailstheme;
+
+        return $this;
+    }
+
+    /**
+     * Remove detailstheme
+     *
+     * @param \Etourisme\HotelBundle\Entity\DetailsTheme $detailstheme
+     */
+    public function removeDetailstheme(\Etourisme\HotelBundle\Entity\DetailsTheme $detailstheme)
+    {
+        $this->detailstheme->removeElement($detailstheme);
+    }
+
+    /**
+     * Get detailstheme
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDetailstheme()
+    {
+        return $this->detailstheme;
+    }
+
+    /**
+     * Add detailschambre
+     *
+     * @param \Etourisme\HotelBundle\Entity\DetailsChambre $detailschambre
+     *
+     * @return Hotel
+     */
+    public function addDetailschambre(\Etourisme\HotelBundle\Entity\DetailsChambre $detailschambre)
+    {
+        $this->detailschambre[] = $detailschambre;
+
+        return $this;
+    }
+
+    /**
+     * Remove detailschambre
+     *
+     * @param \Etourisme\HotelBundle\Entity\DetailsChambre $detailschambre
+     */
+    public function removeDetailschambre(\Etourisme\HotelBundle\Entity\DetailsChambre $detailschambre)
+    {
+        $this->detailschambre->removeElement($detailschambre);
+    }
+
+    /**
+     * Get detailschambre
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDetailschambre()
+    {
+        return $this->detailschambre;
     }
 }

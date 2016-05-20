@@ -2,12 +2,15 @@
 
 namespace Etourisme\HotelBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
+// DON'T forget this use statement!!!
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * DetailsArrangement
  *
- * @ORM\Table(name="detailsarrangement")
+ * @ORM\Table(name="detailsarrangement",uniqueConstraints={@ORM\UniqueConstraint(name="details_unique", columns={"hotel_id","arrangement_id","tempsd","tempsf"})})
  * @ORM\Entity(repositoryClass="Etourisme\HotelBundle\Repository\DetailsArrangementRepository")
  */
 class DetailsArrangement
@@ -21,7 +24,7 @@ class DetailsArrangement
      */
     private $id;
     
-     /** @ORM\ManyToOne(targetEntity="Etourisme\HotelBundle\Entity\Hotel")
+     /** @ORM\ManyToOne(targetEntity="Etourisme\HotelBundle\Entity\Hotel",inversedBy="detailsarrangement")
      * @ORM\JoinColumn(nullable=false)
      */
     private $hotel;
@@ -54,7 +57,7 @@ class DetailsArrangement
     private $tempsf;
     
     public function __construct() {
-        $this->setEtat(1);
+        $this->setEtat(0);
        
     }
 

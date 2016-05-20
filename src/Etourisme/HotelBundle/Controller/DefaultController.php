@@ -102,7 +102,7 @@ class DefaultController extends Controller {
         $em->flush();
 
         $this->get('session')->getFlashBag()->add(
-                'info', 'Hotêl supprimé'
+                'error', 'Hotêl supprimé'
         );
         //$dir = 'images/hotel_tun/' . $hotel->getId();
         //rmdir('images/hotel_tun/'.$hotel->getId());
@@ -307,6 +307,8 @@ class DefaultController extends Controller {
                 'info', 'Détails Hotêl modifié'
             );
             return $this->redirect($this->generateUrl('add_details_hotel'));
+            
+             
         }
         return $this->render('HotelBundle:Hotels:detailsHotel.html.twig', array('form' => $form->createView()));
     }

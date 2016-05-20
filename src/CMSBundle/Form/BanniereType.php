@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Etourisme\HotelBundle\Entity\Image;
+use Etourisme\HotelBundle\Form\ImageType;
 
 class BanniereType extends AbstractType
 {
@@ -18,13 +20,7 @@ class BanniereType extends AbstractType
         $builder
             ->add('titre', TextType::class,array('label' => 'Titre'))
             ->add('etat')
-            ->add('image', CollectionType::class, array(
-                  'entry_type' =>  ImageType::class,
-                  'allow_add' => true,
-                  'allow_delete' => true,
-                  'by_reference' => false,
-                  'required' => false
-            ))
+            ->add('image',ImageType::class)
         ;
     }
     

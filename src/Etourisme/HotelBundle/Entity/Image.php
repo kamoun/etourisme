@@ -76,8 +76,8 @@ class Image {
         if (null === $this->file) {
             return;
         }
-
-        // Si on avait un ancien fichier, on le supprime
+        if($this->getHotelimages()!==null){
+             // Si on avait un ancien fichier, on le supprime
         if (null !== $this->tempFilename) {
             $oldFile = $this->getUploadRootDir() . '/' . $this->id . '.' . $this->tempFilename;
             if (file_exists($oldFile)) {
@@ -90,6 +90,25 @@ class Image {
                 $this->getUploadRootDir(), // Le répertoire de destination
                 $this->id . '.' . $this->url   // Le nom du fichier à créer, ici "id.extension"
         );
+            
+        }elseif($this->getBanimage()!==null){
+             // Si on avait un ancien fichier, on le supprime
+        if (null !== $this->tempFilename) {
+            $oldFile = $this->getUploadRootDirBanniere() . '/' . $this->id . '.' . $this->tempFilename;
+            if (file_exists($oldFile)) {
+                unlink($oldFile);
+            }
+        }
+
+        // On déplace le fichier envoyé dans le répertoire de notre choix
+        $this->file->move(
+                $this->getUploadRootDirBanniere(), // Le répertoire de destination
+                $this->id . '.' . $this->url   // Le nom du fichier à créer, ici "id.extension"
+        );
+            
+        }
+         
+       
     }
 
     /**
@@ -115,10 +134,20 @@ class Image {
         // On retourne le chemin relatif vers l'image pour un navigateur
         return 'images/hotel_tun/'.$this->getHotelimages()->getId() ;
     }
+    
+    public function getUploadDir2() {
+        // On retourne le chemin relatif vers l'image pour un navigateur
+        return 'images/banniere/'.$this->getBanimage()->getId() ;
+    }
 
     protected function getUploadRootDir() {
         // On retourne le chemin absolu vers l'image pour notre code PHP
         return __DIR__ . '/../../../../web/' . $this->getUploadDir();
+    }
+
+     protected function getUploadRootDirBanniere() {
+        // On retourne le chemin absolu vers l'image pour notre code PHP
+        return __DIR__ . '/../../../../web/' . $this->getUploadDir2();
     }
 
     public function getWebPath() {
