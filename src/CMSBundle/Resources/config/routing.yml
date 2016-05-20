@@ -1,0 +1,7 @@
+list_contacts:
+    path:     /Connected/Contacts/List
+    defaults: { _controller: "CMSBundle:Contact:listContacts" }
+delete_contact:
+    path:     /Connected/Contacts/{id}/Delete
+    defaults: { _controller: "CMSBundle:Contact:deleteContact" }
+    

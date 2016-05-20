@@ -102,7 +102,7 @@ class DefaultController extends Controller {
         $em->flush();
 
         $this->get('session')->getFlashBag()->add(
-                'info', 'Hotêl supprimé!!.'
+                'info', 'Hotêl supprimé'
         );
         //$dir = 'images/hotel_tun/' . $hotel->getId();
         //rmdir('images/hotel_tun/'.$hotel->getId());
@@ -197,7 +197,7 @@ class DefaultController extends Controller {
             }
             $em->flush();
             $this->get('session')->getFlashBag()->add(
-                    'success', 'Hôtel modifié!!.'
+                    'success', 'Hôtel modifié'
             );
             return $this->redirect($this->generateUrl('list_hotels'));
         }
@@ -303,7 +303,10 @@ class DefaultController extends Controller {
                 $em->persist($detailsarrangement);
                 $em->flush();
             }
-
+            $this->get('session')->getFlashBag()->add(
+                'info', 'Détails Hotêl modifié'
+            );
+            return $this->redirect($this->generateUrl('add_details_hotel'));
         }
         return $this->render('HotelBundle:Hotels:detailsHotel.html.twig', array('form' => $form->createView()));
     }

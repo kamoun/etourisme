@@ -214,9 +214,9 @@ class TarifController extends Controller {
                   $em->merge($detailsarrangement);
                   $em->flush();
             }
-                     $this->get('session')->getFlashBag()->add(
-                'info', 'Tarif Bien ajouté!!.'
-        );
+                $this->get('session')->getFlashBag()->add(
+                'info', 'Tarif Bien ajouté'
+                );
                      return $this->redirect($this->generateUrl('add_tarif_hotel'));
             
         }

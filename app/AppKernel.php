@@ -23,8 +23,7 @@ class AppKernel extends Kernel
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Etourisme\HotelBundle\HotelBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
-           
-            
+            new CMSBundle\CMSBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

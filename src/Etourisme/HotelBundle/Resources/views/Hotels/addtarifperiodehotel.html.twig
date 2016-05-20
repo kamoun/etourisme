@@ -82,37 +82,37 @@
                                     {% endfor %}
                                   
                                 </div>
-                                    
+                                    </br>  
                             <div class="form-group">
                                 <div class="row">
                                     {% for r in detailsreduction %}
                                         {% if r.reduction.id=='1'%}
-                                    <div class="col-md-2">
-                                        <label>Réduction1</label>  
+                                    <div class="col-md-3">
+                                <label>Réduction enfant plus 2 adultes</label> <em>(%)</em>  
                                 {{ form_widget(form.reduc1, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
                                 {{ form_errors(form.reduc1) }}
                                     </div>
                                    {% elseif r.reduction.id=='2'%}
-                                     <div class="col-md-2">
-                               <label>Réduction2</label>    
+                                     <div class="col-md-3">
+                               <label>Réduction enfant plus 1 adulte</label> <em>(%)</em>    
                                 {{ form_widget(form.reduc2, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
                                 {{ form_errors(form.reduc2) }}
                                     </div>
                                     {% elseif r.reduction.id=='3'%}
-                                     <div class="col-md-2">
-                               <label>Réduction3</label>  
+                                     <div class="col-md-3">
+                               <label>Réduction enfant chambre séparer</label>  <em>(%)</em> 
                                 {{ form_widget(form.reduc3, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
                                 {{ form_errors(form.reduc3) }}
                                     </div>
                                    {% elseif r.reduction.id=='4'%}
                                      <div class="col-md-2">
-                              <label>Réduction4</label>  
+                              <label>Réduction 3 éme lit</label> <em>(%)</em>  
                                 {{ form_widget(form.reduc4, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
                                 {{ form_errors(form.reduc4) }}
                                     </div>
                                     {% elseif r.reduction.id=='5'%}
                                      <div class="col-md-2">
-                               <label>Réduction5</label>   
+                               <label>Réduction 4 éme lit</label> <em>(%)</em>   
                                 {{ form_widget(form.reduc5, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
                                 {{ form_errors(form.reduc5) }}
                                     </div>
@@ -220,7 +220,7 @@
                                     </div>
                                     
                                      <div class="form-group">
-                                {{ form_label(form.marge) }}   
+                                {{ form_label(form.marge) }}  <em>(%)</em> 
                                 {{ form_widget(form.marge, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
                                 {{ form_errors(form.marge) }}
                                     </div>
