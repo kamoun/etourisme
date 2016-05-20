@@ -43,6 +43,12 @@ class Image {
      * @ORM\ManyToOne(targetEntity="Etourisme\HotelBundle\Entity\Hotel",inversedBy="images",cascade={"All"})
      */
     private $hotelimages;
+    
+    /**
+     * @ORM\OneToOne(targetEntity="CMSBundle\Entity\Banniere", inversedBy="image",cascade={"All"})
+     * 
+     */
+    private $banimage;
 
     /**
      * @ORM\PrePersist()
@@ -201,5 +207,28 @@ class Image {
     public function getHotelimages()
     {
         return $this->hotelimages;
+    }
+    
+     /**
+     * Set banimage
+     *
+     * @param \CMSBundle\Entity\Banniere $banimage
+     *
+     * @return Image
+     */
+    public function setBanimage(\CMSBundle\Entity\Banniere $banimage = null)
+    {
+        $this->banimage = $banimage;
+        return $this;
+    }
+
+    /**
+    * Get banimage
+    *
+    * @return \CMSBundle\Entity\Banniere
+    */
+    public function getBanimage()
+    {
+        return $this->banimage;
     }
 }

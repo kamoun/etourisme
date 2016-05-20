@@ -4,4 +4,10 @@ list_contacts:
 delete_contact:
     path:     /Connected/Contacts/{id}/Delete
     defaults: { _controller: "CMSBundle:Contact:deleteContact" }
+list_bannieres:
+    path:     /Connected/Bannieres/List
+    defaults: { _controller: "CMSBundle:Accueil:listBannieres" }
+delete_banniere:
+    path:     /Connected/Banniere/{id}/Delete
+    defaults: { _controller: "CMSBundle:Accueil:deleteBanniere" }
     
