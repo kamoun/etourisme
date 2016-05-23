@@ -21,14 +21,12 @@ class DetailsHotelType extends AbstractType
     {
         $builder
             ->add('tempsd',  DateType::class, array(
-                    'label' => 'Date du',
-                    'input' => 'datetime',
+                    'label' => 'Date du',                   
                     'widget' => 'single_text',
                 ))
             ->add('tempsf',  DateType::class, array(
                     'label' => 'au',
-                    'input' => 'datetime',
-                    'widget' => 'single_text',
+                    'widget' => 'single_text',      
                 ))
             ->add('tarifBase',IntegerType::class,array('label' => 'Tarif de base','attr'=>array('min'=>"0" )))
             ->add('delaiRetro',TextType::class,array('label' => 'Délai de Rétrocession'))

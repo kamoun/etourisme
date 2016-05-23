@@ -80,209 +80,224 @@ class TarifController extends Controller {
             $em->persist($detailshotel);
             $em->flush();
            
-                 if(isset($_POST["1"])){
-                 $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(1);
-                     $detailsarr1=new DetailsArrangement();
-                     $detailsarr1->setArrangement($arrangement);
-                     $detailsarr1->setHotel($hotel);
-                     $detailsarr1->setEtat(1);
-                     $detailsarr1->setTempsd($detailshotel->getTempsd());
-                     $detailsarr1->setTempsf($detailshotel->getTempsf());
-                     $em->persist($detailsarr1);
-                     $em->flush();
-                 
-                 
-                
+            if(isset($_POST["1"])){ 
+                $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(1);
+                $detailsarr1=new DetailsArrangement();
+                $detailsarr1->setArrangement($arrangement);
+                $detailsarr1->setHotel($hotel);
+                $detailsarr1->setEtat(1);
+                $detailsarr1->setTempsd($detailshotel->getTempsd());
+                $detailsarr1->setTempsf($detailshotel->getTempsf());
+                $em->persist($detailsarr1);
+                $em->flush();         
+            }
+            else{    
+                $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(1);
+                $detailsarr1=new DetailsArrangement();
+                $detailsarr1->setArrangement($arrangement);
+                $detailsarr1->setHotel($hotel);
+                $detailsarr1->setEtat(0);
+                $detailsarr1->setTempsd($detailshotel->getTempsd());
+                $detailsarr1->setTempsf($detailshotel->getTempsf());
+                $em->persist($detailsarr1);
+                $em->flush();
+            }         
+            
+            if(isset($_POST["2"])){
+                $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(2);
+                $detailsarr2=new DetailsArrangement();
+                $detailsarr2->setArrangement($arrangement);
+                $detailsarr2->setHotel($hotel);
+                $detailsarr2->setEtat(1);
+                $detailsarr2->setTempsd($detailshotel->getTempsd());
+                $detailsarr2->setTempsf($detailshotel->getTempsf());
+                $em->persist($detailsarr2);
+                $em->flush();         
+            }
+            else{         
+                $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(2);
+                $detailsarr2=new DetailsArrangement();
+                $detailsarr2->setArrangement($arrangement);
+                $detailsarr2->setHotel($hotel);
+                $detailsarr2->setEtat(0);
+                $detailsarr2->setTempsd($detailshotel->getTempsd());
+                $detailsarr2->setTempsf($detailshotel->getTempsf());
+                $em->persist($detailsarr2);
+                $em->flush();
+            } 
+            
+            
+            if(isset($_POST["3"])){
+                $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(3);
+                $detailsarr3=new DetailsArrangement();
+                $detailsarr3->setArrangement($arrangement);
+                $detailsarr3->setHotel($hotel);
+                $detailsarr3->setEtat(1);
+                $detailsarr3->setTempsd($detailshotel->getTempsd());
+                $detailsarr3->setTempsf($detailshotel->getTempsf());
+                $em->persist($detailsarr3);
+                $em->flush();         
             }
             else{
-                 $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(1);
-                 //$detailsarrangement->setEtat(true);
-                     $detailsarr1=new DetailsArrangement();
-                     $detailsarr1->setArrangement($arrangement);
-                     $detailsarr1->setHotel($hotel);
-                     $detailsarr1->setEtat(0);
-                     $detailsarr1->setTempsd($detailshotel->getTempsd());
-                     $detailsarr1->setTempsf($detailshotel->getTempsf());
-                     $em->persist($detailsarr1);
-                     $em->flush();
-                 
-                
-            }
+                $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(3);
+                $detailsarr3=new DetailsArrangement();
+                $detailsarr3->setArrangement($arrangement);
+                $detailsarr3->setHotel($hotel);
+                $detailsarr3->setEtat(0);
+                $detailsarr3->setTempsd($detailshotel->getTempsd());
+                $detailsarr3->setTempsf($detailshotel->getTempsf());
+                $em->persist($detailsarr3);
+                $em->flush();
+            }  
             
-            
-            
-            
-                 if(isset($_POST["2"])){
-                 $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>2));
-                 $detailsarrangement->setEtat(1);
-                  $em->merge($detailsarrangement);
-                  $em->flush();
-                 
-                 
-                
-            }
-            else{
-                 $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>2));
-                 if($detailsarrangement!=null){
-                      $detailsarrangement->setEtat(0);
-                  $em->merge($detailsarrangement);
-                  $em->flush();
-                     
-                 }
-                
-            }
-            
-            
-             
-                 if(isset($_POST["3"])){
-                 $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>3));
-                 $detailsarrangement->setEtat(1);
-                  $em->merge($detailsarrangement);
-                  $em->flush();
-                 
-                 
-                
-            }
-            else{
-                 $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>3));
-                if($detailsarrangement!=null){
-                    $detailsarrangement->setEtat(0);
-                  $em->merge($detailsarrangement);
-                  $em->flush();
-                    
-                }
-                
-            }
             
            
-             if(isset($_POST["4"])){
-                 $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>4));
-                 $detailsarrangement->setEtat(1);
-                  $em->merge($detailsarrangement);
-                  $em->flush();
-                 
-                 
-                
+            if(isset($_POST["4"])){
+                $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(4);
+                $detailsarr4=new DetailsArrangement();
+                $detailsarr4->setArrangement($arrangement);
+                $detailsarr4->setHotel($hotel);
+                $detailsarr4->setEtat(1);
+                $detailsarr4->setTempsd($detailshotel->getTempsd());
+                $detailsarr4->setTempsf($detailshotel->getTempsf());
+                $em->persist($detailsarr4);
+                $em->flush();         
             }
             else{
-                 $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>4));
-                if($detailsarrangement!=null){
-                    $detailsarrangement->setEtat(0);
-                  $em->merge($detailsarrangement);
-                  $em->flush();
-                    
-                }
-                
+                $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(4);
+                $detailsarr4=new DetailsArrangement();
+                $detailsarr4->setArrangement($arrangement);
+                $detailsarr4->setHotel($hotel);
+                $detailsarr4->setEtat(0);
+                $detailsarr4->setTempsd($detailshotel->getTempsd());
+                $detailsarr4->setTempsf($detailshotel->getTempsf());
+                $em->persist($detailsarr4);
+                $em->flush();
             }
             
             
             if(isset($_POST["5"])){
-                 $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>5));
-                 $detailsarrangement->setEtat(1);
-                  $em->merge($detailsarrangement);
-                  $em->flush();
-                 
-                 
-                
+                $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(5);
+                $detailsarr5=new DetailsArrangement();
+                $detailsarr5->setArrangement($arrangement);
+                $detailsarr5->setHotel($hotel);
+                $detailsarr5->setEtat(1);
+                $detailsarr5->setTempsd($detailshotel->getTempsd());
+                $detailsarr5->setTempsf($detailshotel->getTempsf());
+                $em->persist($detailsarr5);
+                $em->flush();         
             }
             else{
-                 $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>5));
-                if($detailsarrangement!=null){
-                    $detailsarrangement->setEtat(0);
-                  $em->merge($detailsarrangement);
-                  $em->flush();
-                    
-                }
-                
+                $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(5);
+                $detailsarr5=new DetailsArrangement();
+                $detailsarr5->setArrangement($arrangement);
+                $detailsarr5->setHotel($hotel);
+                $detailsarr5->setEtat(0);
+                $detailsarr5->setTempsd($detailshotel->getTempsd());
+                $detailsarr5->setTempsf($detailshotel->getTempsf());
+                $em->persist($detailsarr5);
+                $em->flush();
             }
             
             if(isset($_POST["6"])){
-                 $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>6));
-                 $detailsarrangement->setEtat(1);
-                  $em->merge($detailsarrangement);
-                  $em->flush();
-                 
-                 
-                
+                $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(6);
+                $detailsarr6=new DetailsArrangement();
+                $detailsarr6->setArrangement($arrangement);
+                $detailsarr6->setHotel($hotel);
+                $detailsarr6->setEtat(1);
+                $detailsarr6->setTempsd($detailshotel->getTempsd());
+                $detailsarr6->setTempsf($detailshotel->getTempsf());
+                $em->persist($detailsarr6);
+                $em->flush();         
             }
             else{
-                 $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>6));
-                if($detailsarrangement!=null){
-                    $detailsarrangement->setEtat(0);
-                  $em->merge($detailsarrangement);
-                  $em->flush();
-                    
-                }
-                
+                $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(6);
+                $detailsarr6=new DetailsArrangement();
+                $detailsarr6->setArrangement($arrangement);
+                $detailsarr6->setHotel($hotel);
+                $detailsarr6->setEtat(0);
+                $detailsarr6->setTempsd($detailshotel->getTempsd());
+                $detailsarr6->setTempsf($detailshotel->getTempsf());
+                $em->persist($detailsarr6);
+                $em->flush();
             }
             
-             if(isset($_POST["7"])){
-                 $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>7));
-                 $detailsarrangement->setEtat(1);
-                  $em->merge($detailsarrangement);
-                  $em->flush();
-                 
-                 
-                
+            if(isset($_POST["7"])){
+                $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(7);
+                $detailsarr7=new DetailsArrangement();
+                $detailsarr7->setArrangement($arrangement);
+                $detailsarr7->setHotel($hotel);
+                $detailsarr7->setEtat(1);
+                $detailsarr7->setTempsd($detailshotel->getTempsd());
+                $detailsarr7->setTempsf($detailshotel->getTempsf());
+                $em->persist($detailsarr7);
+                $em->flush();         
             }
             else{
-                 $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>7));
-                if($detailsarrangement!=null){
-                    $detailsarrangement->setEtat(0);
-                  $em->merge($detailsarrangement);
-                  $em->flush();
-                    
-                }
-                
+                $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(7);
+                $detailsarr7=new DetailsArrangement();
+                $detailsarr7->setArrangement($arrangement);
+                $detailsarr7->setHotel($hotel);
+                $detailsarr7->setEtat(0);
+                $detailsarr7->setTempsd($detailshotel->getTempsd());
+                $detailsarr7->setTempsf($detailshotel->getTempsf());
+                $em->persist($detailsarr7);
+                $em->flush();
             }
             
-             if(isset($_POST["8"])){
-                 $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>8));
-                 $detailsarrangement->setEtat(1);
-                  $em->merge($detailsarrangement);
-                  $em->flush();
-                 
-                 
-                
+            if(isset($_POST["8"])){
+                $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(8);
+                $detailsarr8=new DetailsArrangement();
+                $detailsarr8->setArrangement($arrangement);
+                $detailsarr8->setHotel($hotel);
+                $detailsarr8->setEtat(1);
+                $detailsarr8->setTempsd($detailshotel->getTempsd());
+                $detailsarr8->setTempsf($detailshotel->getTempsf());
+                $em->persist($detailsarr8);
+                $em->flush();         
             }
             else{
-                 $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>8));
-                if($detailsarrangement!=null){
-                    $detailsarrangement->setEtat(0);
-                  $em->merge($detailsarrangement);
-                  $em->flush();
-                    
-                }
-                
+                $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(8);
+                $detailsarr8=new DetailsArrangement();
+                $detailsarr8->setArrangement($arrangement);
+                $detailsarr8->setHotel($hotel);
+                $detailsarr8->setEtat(0);
+                $detailsarr8->setTempsd($detailshotel->getTempsd());
+                $detailsarr8->setTempsf($detailshotel->getTempsf());
+                $em->persist($detailsarr8);
+                $em->flush();
             }
             
-             if(isset($_POST["9"])){
-                 $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>9));
-                 $detailsarrangement->setEtat(1);
-                  $em->merge($detailsarrangement);
-                  $em->flush();
-                 
-                 
-                
+            if(isset($_POST["9"])){
+                $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(9);
+                $detailsarr9=new DetailsArrangement();
+                $detailsarr9->setArrangement($arrangement);
+                $detailsarr9->setHotel($hotel);
+                $detailsarr9->setEtat(1);
+                $detailsarr9->setTempsd($detailshotel->getTempsd());
+                $detailsarr9->setTempsf($detailshotel->getTempsf());
+                $em->persist($detailsarr9);
+                $em->flush();         
             }
             else{
-                 $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array('hotel'=>$data,'arrangement'=>9));
-                if($detailsarrangement!=null){
-                    $detailsarrangement->setEtat(0);
-                  $em->merge($detailsarrangement);
-                  $em->flush();
-                    
-                }
-                
+                $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(9);
+                $detailsarr9=new DetailsArrangement();
+                $detailsarr9->setArrangement($arrangement);
+                $detailsarr9->setHotel($hotel);
+                $detailsarr9->setEtat(0);
+                $detailsarr9->setTempsd($detailshotel->getTempsd());
+                $detailsarr9->setTempsf($detailshotel->getTempsf());
+                $em->persist($detailsarr9);
+                $em->flush();
             }
             
                 $this->get('session')->getFlashBag()->add(
                 'info', 'Tarif Bien ajouté'
                 );
-                     return $this->redirect($this->generateUrl('add_tarif_hotel'));
+                    return $this->redirect($this->generateUrl('add_tarif_hotel'));
             
         }
-
+         
         return $this->render('HotelBundle:Hotels:addtarifperiodehotel.html.twig', array('form' => $form->createView(), 'detailschambre' => $detailschambre, 'detailsarrangement' => $detailsarrangement, 'detailsreduction' => $detailsreduction));
     }
 

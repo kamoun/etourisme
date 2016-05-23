@@ -1,14 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block stylesheet %}
-    {{ parent()}}
-    <!-- Select2 -->
-    <link rel="stylesheet" href="{{asset('GNUASSETS/plugins/select2/select2.css')}}">
-    <link rel="stylesheet" href="{{asset('GNUASSETS/plugins/iCheck/all.css')}}">
-    <style type="text/css">
-        [class^='select2'] {
-            border-radius: 0px !important;
-        }
-    </style>    
+    {{ parent()}}  
 {% endblock%}
 {% block content %}
     <section class="content">        
@@ -22,16 +14,16 @@
                     </div><!-- /.box-header -->
                     <!-- form start -->
 
-                    <form id="formDetails" method="post" action="{{path('add_tarifperiode_hotel')}}" role="form" onsubmit="validate();">
+                    <form id="formDetails" method="post" action="{{path('add_tarifperiode_hotel')}}" role="form">
                     <div class="box-body">     
                         <div class="form-group">
                                 {{ form_label(form.tempsd) }}   
-                                {{ form_widget(form.tempsd,{ 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} })}}
+                                {{ form_widget(form.tempsd,{'attr': {'type': 'text', 'class': 'form-control tempsd', 'placeholder': ''} })}}
                                 {{ form_errors(form.tempsd) }}
                             </div>
                             <div class="form-group">
                                 {{ form_label(form.tempsf) }}   
-                                {{ form_widget(form.tempsf, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                {{ form_widget(form.tempsf, { 'attr': {'type': 'text', 'class': 'form-control tempsf', 'placeholder': ''} }) }}
                                 {{ form_errors(form.tempsf) }}
                             </div>
                             <div class="form-group">
@@ -122,114 +114,130 @@
                                 </div>
                             </div>
                                     
-                                     <div class="form-group">
-                                         <table class="table table-striped table-bordered table-hover table-responsive">
-                                             {% for ar in detailsarrangement%}
-                                                 {% if loop.first %}
-                                                 {% if ar.arrangement.id=='1'%}
-                                             <tr>
-                                                 <td>
-                                                      {{ form_widget(form.suppLpd, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
-                                                      {{ form_errors(form.suppLpd) }}
-                                                 </td>
-                                             <td>{{ ar.arrangement.libelle}}</td>
-                                             <td><input id="1" name="1"  type="checkbox" value="1"/></td>
-                                             </tr>
-                                                  {% endif %}
-                                              {% elseif  ar.arrangement.id=='2'%}
-                                             <tr>
-                                                 <td>
-                                                      {{ form_widget(form.suppDp, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
-                                                      {{ form_errors(form.suppDp) }}
-                                                 </td>
-                                             <td>{{ ar.arrangement.libelle}}</td>
-                                             <td><input id="2" name="2"  type="checkbox" value="2"/></td>
-                                             </tr>
-                                             
-                                              {% elseif ar.arrangement.id=='3'%}
-                                             <tr>
-                                                 <td>
-                                                      {{ form_widget(form.suppPc, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
-                                                      {{ form_errors(form.suppPc) }}
-                                                 </td>
-                                             <td>{{ ar.arrangement.libelle}}</td>
-                                             <td><input id="3" name="3"  type="checkbox" value="3"/></td>
-                                             </tr>
-                                             {% elseif ar.arrangement.id=='4'%}
-                                             <tr>
-                                                 <td>
-                                                      {{ form_widget(form.suppAll, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
-                                                      {{ form_errors(form.suppAll) }}
-                                                 </td>
-                                             <td>{{ ar.arrangement.libelle}}</td>
-                                             <td><input id="4" name="4"  type="checkbox" value="4"/></td>
-                                             </tr>
-                                           
-                                             {% elseif ar.arrangement.id=='5'%}
-                                             <tr>
-                                                 <td>
-                                                      {{ form_widget(form.suppLs, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
-                                                      {{ form_errors(form.suppLs) }}
-                                                 </td>
-                                             <td>{{ ar.arrangement.libelle}}</td>
-                                             <td><input id="5" name="5"   type="checkbox" value="5"/></td>
-                                             </tr>
-                                            
-                                             {% elseif ar.arrangement.id=='6'%}
-                                             <tr>
-                                                 <td>
-                                                      {{ form_widget(form.suppAllSoft, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
-                                                      {{ form_errors(form.suppAllSoft) }}
-                                                 </td>
-                                             <td>{{ ar.arrangement.libelle}}</td>
-                                             <td><input id="6" name="6"  type="checkbox" value="6"/></td>
-                                             </tr>
-                                             {% elseif ar.arrangement.id=='7'%}
-                                             <tr>
-                                                 <td>
-                                                      {{ form_widget(form.suppUltraAll, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
-                                                      {{ form_errors(form.suppUltraAll) }}
-                                                 </td>
-                                             <td>{{ ar.arrangement.libelle}}</td>
-                                             <td><input id="7" name="7"  type="checkbox" value="7"/></td>
-                                             </tr>
-                                            {% elseif ar.arrangement.id=='8'%}
-                                             <tr>
-                                                 <td>
-                                                      {{ form_widget(form.suppDpp, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
-                                                      {{ form_errors(form.suppDpp) }}
-                                                 </td>
-                                             <td>{{ ar.arrangement.libelle}}</td>
-                                             <td><input id="8" name="8"  type="checkbox" value="8"/></td>
-                                             </tr>
-                                             {% elseif ar.arrangement.id=='9'%}
-                                             <tr>
-                                                 <td>
-                                                      {{ form_widget(form.suppPcp, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
-                                                      {{ form_errors(form.suppPcp) }}
-                                                 </td>
-                                             <td>{{ ar.arrangement.libelle}}</td>
-                                             <td><input id="9" name="9" type="checkbox" value="9"/></td>
-                                             </tr>
-                                             {% endif %}
-                                            
-                                             {% endfor %}
-                                             
-                                         </table>
-                                {{ form_label(form.suppSingle) }}   
-                                {{ form_widget(form.suppSingle, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
-                                {{ form_errors(form.suppSingle) }}
-                                    </div>
-                                    
-                                     <div class="form-group">
-                                {{ form_label(form.marge) }}  <em>(%)</em> 
-                                {{ form_widget(form.marge, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
-                                {{ form_errors(form.marge) }}
-                                    </div>
+                            <div class="form-group">
+                            <table class="table table-striped table-bordered table-hover table-responsive">
+                                 {% set ar1 = '0' %}
+                                 {% set ar2 = '0' %}
+                                 {% set ar3 = '0' %}
+                                 {% set ar4 = '0' %}
+                                 {% set ar5 = '0' %}
+                                 {% set ar6 = '0' %}
+                                 {% set ar7 = '0' %}
+                                 {% set ar8 = '0' %}
+                                 {% set ar9 = '0' %}
+                            {% for ar in detailsarrangement%}
+                                {% if ar.arrangement.id=='1' and ar1!='1' %}
+                                    {% set ar1 = '1' %}
+                            <tr>
+                                <td>
+                                     {{ form_widget(form.suppLpd, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                     {{ form_errors(form.suppLpd) }}
+                                </td>
+                            <td>{{ ar.arrangement.libelle}}</td>
+                            <td><input id="1" name="1"  type="checkbox" value="1"/></td>
+                            </tr>
+                                 {{ ar.arrangement.id }}
+                                 {{ ar2 }}
+                             {% elseif  (ar.arrangement.id=='2' and ar2!='1') %}                                
+                                    {% set ar2 = '1' %}
+                            <tr>
+                                <td>
+                                     {{ form_widget(form.suppDp, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                     {{ form_errors(form.suppDp) }}
+                                </td>
+                            <td>{{ ar.arrangement.libelle}}</td>
+                            <td><input id="2" name="2"  type="checkbox" value="2"/></td>
+                            </tr>
+                            
+                             {% elseif ar.arrangement.id=='3' and ar3!='1' %}
+                                    {% set ar3 = '1' %}
+                            <tr>
+                                <td>
+                                     {{ form_widget(form.suppPc, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                     {{ form_errors(form.suppPc) }}
+                                </td>
+                            <td>{{ ar.arrangement.libelle}}</td>
+                            <td><input id="3" name="3"  type="checkbox" value="3"/></td>
+                            </tr>
+                            {% elseif ar.arrangement.id=='4' and ar4!='1' %}
+                                    {% set ar4 = '1' %}
+                            <tr>
+                                <td>
+                                     {{ form_widget(form.suppAll, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                     {{ form_errors(form.suppAll) }}
+                                </td>
+                            <td>{{ ar.arrangement.libelle}}</td>
+                            <td><input id="4" name="4"  type="checkbox" value="4"/></td>
+                            </tr>
+                            {% elseif ar.arrangement.id=='5' and ar5!='1' %}
+                                    {% set ar5 = '1' %}
+                            <tr>
+                                <td>
+                                     {{ form_widget(form.suppLs, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                     {{ form_errors(form.suppLs) }}
+                                </td>
+                            <td>{{ ar.arrangement.libelle}}</td>
+                            <td><input id="5" name="5"   type="checkbox" value="5"/></td>
+                            </tr>
+                            {% elseif ar.arrangement.id=='6' and ar6!='1' %}
+                                    {% set ar6 = '1' %}
+                            <tr>
+                                <td>
+                                     {{ form_widget(form.suppAllSoft, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                     {{ form_errors(form.suppAllSoft) }}
+                                </td>
+                            <td>{{ ar.arrangement.libelle}}</td>
+                            <td><input id="6" name="6"  type="checkbox" value="6"/></td>
+                            </tr>   
+                            {% elseif ar.arrangement.id=='7' and ar7!='1' %}
+                                    {% set ar7 = '1' %}
+                            <tr>
+                                <td>
+                                     {{ form_widget(form.suppUltraAll, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                     {{ form_errors(form.suppUltraAll) }}
+                                </td>
+                            <td>{{ ar.arrangement.libelle}}</td>
+                            <td><input id="7" name="7"  type="checkbox" value="7"/></td>
+                            </tr>
+                           {% elseif ar.arrangement.id=='8' and ar8!='1' %}
+                                    {% set ar8 = '1' %}
+                            <tr>
+                                <td>
+                                     {{ form_widget(form.suppDpp, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                     {{ form_errors(form.suppDpp) }}
+                                </td>
+                            <td>{{ ar.arrangement.libelle}}</td>
+                            <td><input id="8" name="8"  type="checkbox" value="8"/></td>
+                            </tr>
+                            {% elseif ar.arrangement.id=='9' and ar9!='1' %}
+                                    {% set ar9 = '1' %}
+                            <tr>
+                                <td>
+                                     {{ form_widget(form.suppPcp, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                     {{ form_errors(form.suppPcp) }}
+                                </td>
+                            <td>{{ ar.arrangement.libelle}}</td>
+                            <td><input id="9" name="9" type="checkbox" value="9"/></td>
+                            </tr>
+                            {% endif %}
+
+                            {% endfor %}
+
+                            </table>
+                       {{ form_label(form.suppSingle) }}   
+                       {{ form_widget(form.suppSingle, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                       {{ form_errors(form.suppSingle) }}
+                           </div>
+
+                        <div class="form-group">
+                       {{ form_label(form.marge) }}  <em>(%)</em> 
+                       {{ form_widget(form.marge, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                       {{ form_errors(form.marge) }}
+                        </div>
                                    
                                   
-                                <input id="tarif_submit" class="btn  btn-default" type="submit" value="{{ 'Valider' }}">
-                            <input class="btn  btn-default" type="reset" value="{{ 'Annuler' }}">          
+                        <input id="tarif_submit" class="btn  btn-default" type="submit" value="{{ 'Valider' }}">
+                        <input class="btn  btn-default" type="reset" value="{{ 'Annuler' }}">          
                         </div>   
 
                     </form>
@@ -253,48 +261,54 @@
   webshims.setOptions('forms-ext', {types: 'date'});
   webshims.polyfill('forms forms-ext');
 </script>
-
-    <script src="{{asset('GNUASSETS/plugins/select2/select2.full.min.js')}}"></script>
-    <script src="{{asset('GNUASSETS/plugins/iCheck/icheck.min.js')}}"></script>
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-    <!-- iCheck 1.0.1 -->
-    <script src="{{ asset('GNUASSETS/plugins/iCheck/icheck.min.js') }}"></script>
 <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $(".select2").select2();
-            
-        //iCheck for checkbox and radio inputs
-        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-          checkboxClass: 'icheckbox_minimal-blue',
-          radioClass: 'iradio_minimal-blue'
-        });
-        $("#form_hotel").change(function (){
-            
-            if($("#form_hotel").val().length !==null){
-                 $.ajax({
-                   type: 'POST',
-                   url: Routing.generate('get_villetarif_hotel'),
-                   dataType: "json",
-                   data: {
-                      hotel:$("#form_hotel").val()
-                   },
-                   success: function (data)
-                   { 
-                    
-                   $("#form_ville").val(data[0]);
-                   }
-                  
-               });
-                
-            }
-       
-       
-          
-        });
-        
-        
-       $("#tarif_submit").click(function(event){
+        function convertDate(inputFormat) {
+            function pad(s) { return (s < 10) ? '0' + s : s; }
+            var d = new Date(inputFormat);
+            return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('-');
+          }
+        function validateDate()
+        {
+        var date1 = convertDate($("#details_hotel_tempsd").val());
+        var date2 = convertDate($("#details_hotel_tempsf").val());
+         var retour = 'debut test';
+         if ((typeof date1 != "undefined" && date1 != "") && (typeof date2 != "undefined" && date2 != "")) {
+           // OK, ce test est pas fou.
+           if (date1.length == 10 && date2.length == 10) {
+             var date1Explode = [date1.substring(0,2), date1.substring(3,5), date1.substring(6,10)]; // J'aurais pu utiliser explose()...
+             var date2Explode = [date2.substring(0,2), date2.substring(3,5), date2.substring(6,10)];
+             var maVraieDate1 = new Date(date1Explode[2], date1Explode[1] - 1, date1Explode[0]);
+             var maVraieDate2 = new Date(date2Explode[2], date2Explode[1] - 1, date2Explode[0]);
+             //alert('Dates: '+maVraieDate1+' '+maVraieDate2);
+             var nbNuits = (maVraieDate2.getTime() - maVraieDate1.getTime())/86400000;
+
+             retour = nbNuits+" nuit";
+             if (nbNuits >= 1) {
+               retour += "s";
+             }
+             if (nbNuits < 0) {
+               retour = 'La date début doit être antérieure à la date de fin !';
+               alert (retour);
+               return false;
+             }
+           }
+           else {
+             retour = 'Vous n\'avez pas saisi les dates dans un format correct : jj-mm-aaaa.';
+             alert (retour);
+             return false;
+           }
+         } else {
+           retour = 'Format de(s) date(s) invalide(s)';
+           alert (retour);
+           return false;
+         }
+           return true;
+        }
+        $(document).ready(function () {    
+        $("#tarif_submit").click(function(event){
+ 
            var sc=0;
            if($('#details_hotel_nbChambs').length){
                sc=parseInt($('#details_hotel_nbChambs').val());
@@ -307,19 +321,18 @@
            }
            if($('#details_hotel_nbChambq').length){
                sc=sc+parseInt($('#details_hotel_nbChambq').val());
-           }
-           //sc=($("#details_hotel_nbChambs").val())+$("#details_hotel_nbChambd").val();
-           if(parseInt($('#details_hotel_allot').val())===parseInt(sc)){
+           }           
+           if((parseInt($('#details_hotel_allot').val())===parseInt(sc))&&(validateDate()))
+           {
                 return true;
-              
-               
-           }else{
-               alert("mochklaa");
+           }else if(!(validateDate())){
+                return false;    
+           }else if(parseInt($('#details_hotel_allot').val())!=parseInt(sc)){
+               alert("Vérifier le nombre des chambres");
                 return false;
            }
-          return true;
-          
-});
+           return true;     
+    });
     });
     </script>
 {% endblock%}

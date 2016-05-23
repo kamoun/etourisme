@@ -38,6 +38,9 @@ class DefaultController extends Controller {
 
             $em->persist($entity);
             $em->flush();     
+            $this->get('session')->getFlashBag()->add(
+                    'info', 'Hôtel ajouté'
+            );
             return $this->redirect($this->generateUrl('create_hotel'));
         }
        
@@ -102,7 +105,7 @@ class DefaultController extends Controller {
         $em->flush();
 
         $this->get('session')->getFlashBag()->add(
-                'error', 'Hotêl supprimé'
+                'info', 'Hotêl supprimé'
         );
         //$dir = 'images/hotel_tun/' . $hotel->getId();
         //rmdir('images/hotel_tun/'.$hotel->getId());
@@ -197,7 +200,7 @@ class DefaultController extends Controller {
             }
             $em->flush();
             $this->get('session')->getFlashBag()->add(
-                    'success', 'Hôtel modifié'
+                    'info', 'Hôtel modifié'
             );
             return $this->redirect($this->generateUrl('list_hotels'));
         }
