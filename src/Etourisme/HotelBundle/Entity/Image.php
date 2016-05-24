@@ -116,7 +116,10 @@ class Image {
      */
     public function preRemoveUpload() {
         // On sauvegarde temporairement le nom du fichier car il dépend de l'id
-        $this->tempFilename = $this->getUploadRootDir() . '/' . $this->id . '.' . $this->url;
+       if($this->getBanimage()!=null){
+            $this->tempFilename = $this->getUploadRootDirBanniere() . '/' . $this->id . '.' . $this->url;  
+        }
+       
     }
 
     /**

@@ -45,7 +45,7 @@ class Hotel {
     private $details;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Etourisme\HotelBundle\Entity\Categorie",inversedBy="hotels" , cascade={"All"})
+     * @ORM\ManyToOne(targetEntity="Etourisme\HotelBundle\Entity\Categorie",inversedBy="hotels")
      *  @ORM\JoinColumn(name="categorie_id", referencedColumnName="id", nullable=true)
      */
     private $categorie;
@@ -124,6 +124,12 @@ class Hotel {
      * @ORM\Column(name="longtitude", type="string", length=50,nullable=true)
      */
     private $longtitude;
+    
+     /**
+     * @ORM\OneToMany(targetEntity="Etourisme\HotelBundle\Entity\DetailsHotel",mappedBy="hotel",cascade={"All"})
+     * 
+     */
+    private $detailshotel;
 
     /**
      * Get id
@@ -493,5 +499,107 @@ class Hotel {
     public function getDetailschambre()
     {
         return $this->detailschambre;
+    }
+
+    /**
+     * Add detailsarrangement
+     *
+     * @param \Etourisme\HotelBundle\Entity\DetailsArrangement $detailsarrangement
+     *
+     * @return Hotel
+     */
+    public function addDetailsarrangement(\Etourisme\HotelBundle\Entity\DetailsArrangement $detailsarrangement)
+    {
+        $this->detailsarrangement[] = $detailsarrangement;
+
+        return $this;
+    }
+
+    /**
+     * Remove detailsarrangement
+     *
+     * @param \Etourisme\HotelBundle\Entity\DetailsArrangement $detailsarrangement
+     */
+    public function removeDetailsarrangement(\Etourisme\HotelBundle\Entity\DetailsArrangement $detailsarrangement)
+    {
+        $this->detailsarrangement->removeElement($detailsarrangement);
+    }
+
+    /**
+     * Get detailsarrangement
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDetailsarrangement()
+    {
+        return $this->detailsarrangement;
+    }
+
+    /**
+     * Add detailsreduction
+     *
+     * @param \Etourisme\HotelBundle\Entity\DetailsReduction $detailsreduction
+     *
+     * @return Hotel
+     */
+    public function addDetailsreduction(\Etourisme\HotelBundle\Entity\DetailsReduction $detailsreduction)
+    {
+        $this->detailsreduction[] = $detailsreduction;
+
+        return $this;
+    }
+
+    /**
+     * Remove detailsreduction
+     *
+     * @param \Etourisme\HotelBundle\Entity\DetailsReduction $detailsreduction
+     */
+    public function removeDetailsreduction(\Etourisme\HotelBundle\Entity\DetailsReduction $detailsreduction)
+    {
+        $this->detailsreduction->removeElement($detailsreduction);
+    }
+
+    /**
+     * Get detailsreduction
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDetailsreduction()
+    {
+        return $this->detailsreduction;
+    }
+
+    /**
+     * Add detailshotel
+     *
+     * @param \Etourisme\HotelBundle\Entity\DetailsHotel $detailshotel
+     *
+     * @return Hotel
+     */
+    public function addDetailshotel(\Etourisme\HotelBundle\Entity\DetailsHotel $detailshotel)
+    {
+        $this->detailshotel[] = $detailshotel;
+
+        return $this;
+    }
+
+    /**
+     * Remove detailshotel
+     *
+     * @param \Etourisme\HotelBundle\Entity\DetailsHotel $detailshotel
+     */
+    public function removeDetailshotel(\Etourisme\HotelBundle\Entity\DetailsHotel $detailshotel)
+    {
+        $this->detailshotel->removeElement($detailshotel);
+    }
+
+    /**
+     * Get detailshotel
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDetailshotel()
+    {
+        return $this->detailshotel;
     }
 }

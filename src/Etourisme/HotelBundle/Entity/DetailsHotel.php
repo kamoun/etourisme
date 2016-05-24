@@ -30,7 +30,7 @@ class DetailsHotel
     private $id;
     
      /**
-     * @ORM\ManyToOne(targetEntity="Etourisme\HotelBundle\Entity\Hotel")
+     * @ORM\ManyToOne(targetEntity="Etourisme\HotelBundle\Entity\Hotel",inversedBy="detailshotel")
      * 
      */
     private $hotel;

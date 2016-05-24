@@ -80,6 +80,8 @@ class TarifController extends Controller {
             $em->persist($detailshotel);
             $em->flush();
            
+            $ar1 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findBy(array("hotel"=>$hotel->getId(),"arrangement"=>1));
+            if($ar1!=null){
             if(isset($_POST["1"])){ 
                 $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(1);
                 $detailsarr1=new DetailsArrangement();
@@ -102,7 +104,9 @@ class TarifController extends Controller {
                 $em->persist($detailsarr1);
                 $em->flush();
             }         
-            
+            }
+            $ar2 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findBy(array("hotel"=>$hotel->getId(),"arrangement"=>2));
+            if($ar2!=null){
             if(isset($_POST["2"])){
                 $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(2);
                 $detailsarr2=new DetailsArrangement();
@@ -125,8 +129,9 @@ class TarifController extends Controller {
                 $em->persist($detailsarr2);
                 $em->flush();
             } 
-            
-            
+            }
+            $ar3 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findBy(array("hotel"=>$hotel->getId(),"arrangement"=>3));
+            if($ar3!=null){
             if(isset($_POST["3"])){
                 $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(3);
                 $detailsarr3=new DetailsArrangement();
@@ -149,9 +154,9 @@ class TarifController extends Controller {
                 $em->persist($detailsarr3);
                 $em->flush();
             }  
-            
-            
-           
+            }           
+            $ar4 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findBy(array("hotel"=>$hotel->getId(),"arrangement"=>4));
+            if($ar4!=null){
             if(isset($_POST["4"])){
                 $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(4);
                 $detailsarr4=new DetailsArrangement();
@@ -174,8 +179,9 @@ class TarifController extends Controller {
                 $em->persist($detailsarr4);
                 $em->flush();
             }
-            
-            
+            }
+            $ar5 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findBy(array("hotel"=>$hotel->getId(),"arrangement"=>5));
+            if($ar5!=null){
             if(isset($_POST["5"])){
                 $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(5);
                 $detailsarr5=new DetailsArrangement();
@@ -198,7 +204,9 @@ class TarifController extends Controller {
                 $em->persist($detailsarr5);
                 $em->flush();
             }
-            
+            }
+            $ar6 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findBy(array("hotel"=>$hotel->getId(),"arrangement"=>6));
+            if($ar6!=null){
             if(isset($_POST["6"])){
                 $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(6);
                 $detailsarr6=new DetailsArrangement();
@@ -221,7 +229,9 @@ class TarifController extends Controller {
                 $em->persist($detailsarr6);
                 $em->flush();
             }
-            
+            }
+            $ar7 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findBy(array("hotel"=>$hotel->getId(),"arrangement"=>7));
+            if($ar7!=null){
             if(isset($_POST["7"])){
                 $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(7);
                 $detailsarr7=new DetailsArrangement();
@@ -244,7 +254,9 @@ class TarifController extends Controller {
                 $em->persist($detailsarr7);
                 $em->flush();
             }
-            
+            }
+            $ar8 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findBy(array("hotel"=>$hotel->getId(),"arrangement"=>8));
+            if($ar8!=null){
             if(isset($_POST["8"])){
                 $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(8);
                 $detailsarr8=new DetailsArrangement();
@@ -267,7 +279,9 @@ class TarifController extends Controller {
                 $em->persist($detailsarr8);
                 $em->flush();
             }
-            
+            }
+            $ar9 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findBy(array("hotel"=>$hotel->getId(),"arrangement"=>9));
+            if($ar9!=null){
             if(isset($_POST["9"])){
                 $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(9);
                 $detailsarr9=new DetailsArrangement();
@@ -290,7 +304,7 @@ class TarifController extends Controller {
                 $em->persist($detailsarr9);
                 $em->flush();
             }
-            
+            }
                 $this->get('session')->getFlashBag()->add(
                 'info', 'Tarif Bien ajouté'
                 );

@@ -19,7 +19,7 @@ class BanniereType extends AbstractType
     {
         $builder
             ->add('titre', TextType::class,array('label' => 'Titre'))
-            ->add('etat')
+           // ->add('etat')
             ->add('image',ImageType::class)
         ;
     }

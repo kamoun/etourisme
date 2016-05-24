@@ -213,14 +213,16 @@ class DefaultController extends Controller {
     public function deletePictureAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
         $picture = $this->getDoctrine()->getRepository('HotelBundle:Image')->find($_POST['id']);
+        $id=$picture->getId();
+        $url=$picture->getUrl();
         $entity = $picture->getHotelimages();
         $entity->removeImage($picture);
-
+        $em->remove($picture);
 
         $em->flush();
 
-        if (file_exists('images/hotel_tun/' . $entity->getId() . '/' . $picture->getId() . '.' . $picture->getUrl())) {
-            unlink('images/hotel_tun/' . $entity->getId() . '/' . $picture->getId() . '.' . $picture->getUrl());
+        if (file_exists('images/hotel_tun/' . $entity->getId() . '/' . $id . '.' .$url)) {
+            unlink('images/hotel_tun/' . $entity->getId() . '/' . $id . '.' . $url);
         }
 
         return new JsonResponse($_POST['id'], 200);

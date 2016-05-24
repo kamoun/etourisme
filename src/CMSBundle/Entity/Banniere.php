@@ -42,6 +42,10 @@ class Banniere
     */
     private $image;
     
+    public function __construct() {
+        $this->setEtat(0);       
+    }
+    
 
     /**
      * Get id
