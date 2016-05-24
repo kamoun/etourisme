@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+{% block stylesheet %}
+    {{ parent()}}
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{asset('GNUASSETS/plugins/select2/select2.css')}}">
+    <link rel="stylesheet" href="{{asset('GNUASSETS/plugins/iCheck/all.css')}}">
+    <style type="text/css">
+        [class^='select2'] {
+            border-radius: 0px !important;
+        }
+    </style>    
+{% endblock%}
+{% block content %}
+    {{ parent() }}
+    <section class="content">        
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="panel panel-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Tarif</h3>
+                    </div><!-- /.box-header -->
+                    <!-- form start -->
+
+                    <form id="formDetails" method="post" action="{{path('pre_listtarif_hotel')}}" role="form">
+                    <div class="box-body">                                  
+                         <div class="form-group input-group col-md-12">
+                             <label>{{ form_label(form.hotel) }}</label>
+                            {{ form_widget(form.hotel, { 'attr': {'class': 'form-control hotel select2', 'style':'width: 100%;', 'placeholder': 'Catégorie'} }) }}
+                            {{ form_errors(form.hotel) }}
+                         </div><!-- /.form-group -->
+
+
+                         <div class="form-group">
+                             <label>{{ form_label(form.ville) }}</label>
+                             {{ form_widget(form.ville, { 'attr': {'class': 'form-control ville'} }) }}
+                             {{ form_errors(form.ville) }}
+                         </div>
+
+                       
+                         <div class="box-body">
+
+                           {{ form_rest(form) }}
+                        <div>
+                            <input class="btn  btn-default" type="submit" value="{{ 'Valider' }}">
+                            <input class="btn  btn-default" type="reset" value="{{ 'Annuler' }}">          
+                        </div>   
+
+                    </form>
+
+                </div><!-- /.box -->
+            </div><!--/.col (right) -->
+        </div>   <!-- /.row -->
+
+
+    </section> 
+
+{% endblock %}
+{% block javascript %}
+    {{ parent()}}
+    <script src="{{asset('GNUASSETS/plugins/select2/select2.full.min.js')}}"></script>
+    <script src="{{asset('GNUASSETS/plugins/iCheck/icheck.min.js')}}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <!-- iCheck 1.0.1 -->
+    <script src="{{ asset('GNUASSETS/plugins/iCheck/icheck.min.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select2").select2();
+            
+        //iCheck for checkbox and radio inputs
+        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+          checkboxClass: 'icheckbox_minimal-blue',
+          radioClass: 'iradio_minimal-blue'
+        });
+        $("#form_hotel").change(function (){
+            
+            if($("#form_hotel").val().length !==null){
+                 $.ajax({
+                   type: 'POST',
+                   url: Routing.generate('get_villetarif_hotel'),
+                   dataType: "json",
+                   data: {
+                      hotel:$("#form_hotel").val()
+                   },
+                   success: function (data)
+                   { 
+                    
+                   $("#form_ville").val(data[0]);
+                   }
+                  
+               });
+                
+            }
+       
+       
+          
+        });
+    });
+    </script>
+{% endblock%}

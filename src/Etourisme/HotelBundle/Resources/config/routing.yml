@@ -49,3 +49,16 @@ get_villetarif_hotel:
 add_tarifperiode_hotel:
     path:     /Connected/Hotel/TarifPeriode
     defaults: { _controller: "HotelBundle:Tarif:addTarifPeriodeHotel" }
+pre_listtarif_hotel:
+    path:     /Connected/Hotel/displayTarifs1
+    defaults: { _controller: "HotelBundle:Tarif:preDisplayTarif" }
+list_tarif_hotel:
+    path:     /Connected/Hotel/list/Tarifs
+    defaults: { _controller: "HotelBundle:Tarif:listTarifsHotel" }
+edit_tarif:
+    path:     /Connected/Hotel/EditTarif/{id}
+    defaults: { _controller: "HotelBundle:Tarif:editTarif" }
+update_tarif:
+    path:     /Connected/Hotel/tarif/{id}/update
+    defaults: { _controller: "HotelBundle:Tarif:updateTarifPeriodeHotel" }
+    
