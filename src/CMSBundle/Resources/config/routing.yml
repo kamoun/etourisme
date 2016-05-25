@@ -13,4 +13,6 @@ list_bannieres:
 delete_banniere:
     path:     /Connected/Banniere/{id}/Delete
     defaults: { _controller: "CMSBundle:Accueil:deleteBanniere" }
-    
+etat_banniere:
+    path:     /Connected/Banniere/Etat
+    defaults: { _controller: "CMSBundle:Accueil:etatBanniere" }    

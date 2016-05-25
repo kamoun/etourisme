@@ -303,22 +303,24 @@
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
 <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
     <script type="text/javascript">
-        $(document).ready(function () {    
-       $("#tarif_submit").click(function(event){
-          //start validate  date 
-         var date1 = $("#details_hotel_tempsd").val();
-         var date2 = $("#details_hotel_tempsf").val();
-         //var test =$("#details_hotel_tempsd").val();
-         alert(date1);alert(date2);
+        function convertDate(inputFormat) {
+            function pad(s) { return (s < 10) ? '0' + s : s; }
+            var d = new Date(inputFormat);
+            return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('-');
+          }
+        function validateDate()
+        {
+        var date1 = convertDate($("#details_hotel_tempsd").val());
+        var date2 = convertDate($("#details_hotel_tempsf").val());
          var retour = 'debut test';
          if ((typeof date1 != "undefined" && date1 != "") && (typeof date2 != "undefined" && date2 != "")) {
            // OK, ce test est pas fou.
            if (date1.length == 10 && date2.length == 10) {
-             var date1Explode = [date1.substring(6,10), date1.substring(3,5),date1.substring(0,2) ]; // J'aurais pu utiliser explose()...
-             var date2Explode = [date2.substring(6,10), date2.substring(3,5), date2.substring(0,2)];
+             var date1Explode = [date1.substring(0,2), date1.substring(3,5), date1.substring(6,10)]; // J'aurais pu utiliser explose()...
+             var date2Explode = [date2.substring(0,2), date2.substring(3,5), date2.substring(6,10)];
              var maVraieDate1 = new Date(date1Explode[2], date1Explode[1] - 1, date1Explode[0]);
              var maVraieDate2 = new Date(date2Explode[2], date2Explode[1] - 1, date2Explode[0]);
-             alert('Dates: '+maVraieDate1+' '+maVraieDate2);
+             //alert('Dates: '+maVraieDate1+' '+maVraieDate2);
              var nbNuits = (maVraieDate2.getTime() - maVraieDate1.getTime())/86400000;
 
              retour = nbNuits+" nuit";
@@ -326,21 +328,26 @@
                retour += "s";
              }
              if (nbNuits < 0) {
-               retour = 'La date d\'arrivée doit être antérieure à la date de retour !';
+               retour = 'La date début doit être antérieure à la date de fin !';
                alert (retour);
-             }alert (retour);
+               return false;
+             }
            }
            else {
              retour = 'Vous n\'avez pas saisi les dates dans un format correct : jj-mm-aaaa.';
              alert (retour);
+             return false;
            }
          } else {
            retour = 'Format de(s) date(s) invalide(s)';
            alert (retour);
+           return false;
          }
-           //end validate date
-           
-           
+           return true;
+        }
+        
+        $(document).ready(function () {    
+       $("#tarif_submit").click(function(event){
            var sc=0;
            if($('#details_hotel_nbChambs').length){
                sc=parseInt($('#details_hotel_nbChambs').val());
@@ -353,13 +360,13 @@
            }
            if($('#details_hotel_nbChambq').length){
                sc=sc+parseInt($('#details_hotel_nbChambq').val());
-           }
-           //sc=($("#details_hotel_nbChambs").val())+$("#details_hotel_nbChambd").val();
-           if(parseInt($('#details_hotel_allot').val())===parseInt(sc)){
+           }           
+           if((parseInt($('#details_hotel_allot').val())===parseInt(sc))&&(validateDate()))
+           {
                 return true;
-              
-               
-           }else{
+           }else if(!(validateDate())){
+                return false;    
+           }else if(parseInt($('#details_hotel_allot').val())!=parseInt(sc)){
                alert("Vérifier le nombre des chambres");
                 return false;
            }

@@ -154,7 +154,12 @@ class Image {
     }
 
     public function getWebPath() {
-        return $this->getUploadDir() . '/' . $this->getId() . '.' . $this->getUrl();
+        if($this->getHotelimages()!==null){
+             return $this->getUploadDir() . '/' . $this->getId() . '.' . $this->getUrl();
+        }
+        else if($this->getBanimage()!==null){
+             return $this->getUploadDir2() . '/' . $this->getId() . '.' . $this->getUrl();
+        }
     }
 
     /**

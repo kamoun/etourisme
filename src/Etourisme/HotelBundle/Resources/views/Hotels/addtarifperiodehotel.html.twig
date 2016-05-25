@@ -136,8 +136,6 @@
                             <td>{{ ar.arrangement.libelle}}</td>
                             <td><input id="1" name="1"  type="checkbox" value="1"/></td>
                             </tr>
-                                 {{ ar.arrangement.id }}
-                                 {{ ar2 }}
                              {% elseif  (ar.arrangement.id=='2' and ar2!='1') %}                                
                                     {% set ar2 = '1' %}
                             <tr>
@@ -306,6 +304,8 @@
          }
            return true;
         }
+        
+        
         $(document).ready(function () {    
         $("#tarif_submit").click(function(event){
  

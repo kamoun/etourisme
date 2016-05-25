@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use CMSBundle\Form\BanniereType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\Length;
 
 
 class AccueilController extends Controller
@@ -97,6 +98,33 @@ class AccueilController extends Controller
         );
 
         return $this->redirect($this->generateUrl('list_bannieres'));
+    }
+    
+    public function etatBanniereAction(Request $request) { 
+       //$editForm = $this->createEditTarifForm($detailshotel);
+        if(count(@$_POST["etat"])>=0){
+        $em = $this->getDoctrine()->getManager();
+        $banns = $em->getRepository('CMSBundle:Banniere')->findAll(); 
+       
+            foreach ($banns as $bann) {
+                //$bann = new Banniere();
+                $bann->setEtat(0);
+                $em->merge($bann);
+                $em->flush();
+                //array_merge($idBann, $bann->getChambre()->getId());
+            }
+        }    
+        if(count(@$_POST["etat"])>0){
+            foreach ($_POST["etat"] as $key=>$b)
+            {
+                $bannChecked =$this->getDoctrine()->getRepository('CMSBundle:Banniere')->find($_POST["etat"][$key]);
+                $bannChecked->setEtat(1);
+                $em->merge($bann);
+                $em->flush();
+            }		
+        }
+        return $this->redirect($this->generateUrl('list_bannieres'));
+        
     }
     
    

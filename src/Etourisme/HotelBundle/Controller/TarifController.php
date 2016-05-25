@@ -650,7 +650,7 @@ class TarifController extends Controller {
                 $this->get('session')->getFlashBag()->add(
                 'info', 'Tarif Bien modifiée'
                 );
-                     return $this->redirect($this->generateUrl('add_tarif_hotel'));
+                     return $this->redirect($this->generateUrl('pre_listtarif_hotel'));
             
         }
 
