@@ -35,6 +35,12 @@ class DetailsArrangement
      */
     private $arrangement;
     
+    /**
+     * @ORM\ManyToOne(targetEntity="Etourisme\HotelBundle\Entity\DetailsHotel",inversedBy="detailsarrangement")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $detailsHotel;
+    
      /**
      * @var boolean
      *
@@ -190,5 +196,29 @@ class DetailsArrangement
     public function getTempsf()
     {
         return $this->tempsf;
+    }
+
+    /**
+     * Set detailsHotel
+     *
+     * @param \Etourisme\HotelBundle\Entity\DetailsHotel $detailsHotel
+     *
+     * @return DetailsArrangement
+     */
+    public function setDetailsHotel(\Etourisme\HotelBundle\Entity\DetailsHotel $detailsHotel)
+    {
+        $this->detailsHotel = $detailsHotel;
+
+        return $this;
+    }
+
+    /**
+     * Get detailsHotel
+     *
+     * @return \Etourisme\HotelBundle\Entity\DetailsHotel
+     */
+    public function getDetailsHotel()
+    {
+        return $this->detailsHotel;
     }
 }

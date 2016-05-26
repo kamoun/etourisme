@@ -5,11 +5,13 @@ namespace CMSBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use CMSBundle\Entity\Banniere;
+use CMSBundle\Entity\HotelAcc;
 
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use CMSBundle\Form\BanniereType;
+use CMSBundle\Form\HotelAccType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Length;
 
@@ -125,6 +127,19 @@ class AccueilController extends Controller
         }
         return $this->redirect($this->generateUrl('list_bannieres'));
         
+    }
+    
+    
+    public function listHotelAccAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = new HotelAcc();
+        $form = $this->createForm(HotelAccType::class, $entity);
+        $form->handleRequest($request);
+        $hotelsacc = $this->getDoctrine()->getRepository('CMSBundle:HotelAcc')->findAll();
+       
+        return $this->render('CMSBundle:Accueil:listHotelAcc.html.twig', array('hotelsacc' => $hotelsacc,'entity' => $entity,
+                    'form' => $form->createView()));
     }
     
    

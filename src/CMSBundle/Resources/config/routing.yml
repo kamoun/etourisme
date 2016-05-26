@@ -16,3 +16,6 @@ delete_banniere:
 etat_banniere:
     path:     /Connected/Banniere/Etat
     defaults: { _controller: "CMSBundle:Accueil:etatBanniere" }    
+list_hotelacc:
+    path:     /Connected/HotelAcc/List
+    defaults: { _controller: "CMSBundle:Accueil:listHotelAcc" }

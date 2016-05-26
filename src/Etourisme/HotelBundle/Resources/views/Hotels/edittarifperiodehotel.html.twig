@@ -18,12 +18,12 @@
                     <div class="box-body">     
                         <div class="form-group">
                                 {{ form_label(form.tempsd) }}   
-                                {{ form_widget(form.tempsd,{'attr': {'type': 'text', 'class': 'form-control tempsd', 'placeholder': ''} })}}
+                                {{ form_widget(form.tempsd,{'attr': {'type': 'text', 'class': 'form-control tempsd', 'readonly':'readonly','placeholder': ''} })}}
                                 {{ form_errors(form.tempsd) }}
                             </div>
                             <div class="form-group">
                                 {{ form_label(form.tempsf) }}   
-                                {{ form_widget(form.tempsf, { 'attr': {'type': 'text', 'class': 'form-control tempsf', 'placeholder': ''} }) }}
+                                {{ form_widget(form.tempsf, { 'attr': {'type': 'text', 'class': 'form-control tempsf', 'readonly':'readonly', 'placeholder': ''} }) }}
                                 {{ form_errors(form.tempsf) }}
                             </div>
                             <div class="form-group">

@@ -40,13 +40,13 @@
                             <tr>
                                 <td>{{ tarif.hotel.nomHotel }}</td>
                                 <td>{{ tarif.hotel.ville }}</td>
-                                <td>{{ tarif.tempsd|date("m/d/Y")  }}</td>
-                                <td>{{ tarif.tempsf|date("m/d/Y")  }}</td> 
+                                <td>{{ tarif.tempsd|date("d/m/Y")  }}</td>
+                                <td>{{ tarif.tempsf|date("d/m/Y")  }}</td> 
                                 
                               
                             <td>
                                 <a  class="confirmModalModif" href="{{ path('edit_tarif',{id:tarif.id})}}"  title="Modifier l'hôtel"><i class="fa fa-edit"></i></a>
-                                <a id="link" class="confirmModal" href="" data-confirm-title="Supprimer l'hôtel" data-confirm-content="Etes-vous vraiment sûr?" data-confirm-yesBtn="Oui" data-confirm-noBtn="Non" >
+                                <a id="link" class="confirmModal" href="{{ path('delete_tarif',{id:tarif.id})}}" data-confirm-title="Supprimer tarif" data-confirm-content="Etes-vous vraiment sûr?" data-confirm-yesBtn="Oui" data-confirm-noBtn="Non" >
                                 <i class="fa fa-trash"></i>
                                 </a>                                                                                                           
                             </td>
@@ -82,7 +82,7 @@
                 "oLanguage": {
                     "sSearch": "Rechercher",
                     "sLengthMenu": "Afficher _MENU_ Par Page",
-                    "sZeroRecords": "<center style=\"color:blue;\">Pas de tarifs</center>",
+                    "sZeroRecords": "<center style=\"color:blue;\">Aucun tarif</center>",
                     "sInfo": "afficher _START_ à _END_ de _TOTAL_",
                     "sInfoEmpty": " ",
                     "sInfoFiltered": "(filtered from _MAX_ total )",

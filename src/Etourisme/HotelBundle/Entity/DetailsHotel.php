@@ -216,6 +216,11 @@ class DetailsHotel
      * @ORM\Column(name="suppPcp", type="integer",nullable=true)
      */
     private $suppPcp;
+    
+    /** @ORM\OneToMany(targetEntity="Etourisme\HotelBundle\Entity\DetailsArrangement",mappedBy="detailsHotel", cascade={"All"})
+     * 
+     */
+    private $detailsarrangement;
 
 
     /**
@@ -874,5 +879,46 @@ class DetailsHotel
     public function getHotel()
     {
         return $this->hotel;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->detailsarrangement = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add detailsarrangement
+     *
+     * @param \Etourisme\HotelBundle\Entity\DetailsArrangement $detailsarrangement
+     *
+     * @return DetailsHotel
+     */
+    public function addDetailsarrangement(\Etourisme\HotelBundle\Entity\DetailsArrangement $detailsarrangement)
+    {
+        $this->detailsarrangement[] = $detailsarrangement;
+
+        return $this;
+    }
+
+    /**
+     * Remove detailsarrangement
+     *
+     * @param \Etourisme\HotelBundle\Entity\DetailsArrangement $detailsarrangement
+     */
+    public function removeDetailsarrangement(\Etourisme\HotelBundle\Entity\DetailsArrangement $detailsarrangement)
+    {
+        $this->detailsarrangement->removeElement($detailsarrangement);
+    }
+
+    /**
+     * Get detailsarrangement
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDetailsarrangement()
+    {
+        return $this->detailsarrangement;
     }
 }

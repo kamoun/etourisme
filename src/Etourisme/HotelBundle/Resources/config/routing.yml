@@ -61,4 +61,7 @@ edit_tarif:
 update_tarif:
     path:     /Connected/Hotel/tarif/{id}/update
     defaults: { _controller: "HotelBundle:Tarif:updateTarifPeriodeHotel" }
+delete_tarif:
+    path:     /Connected/Hotel/tarif/{id}/Delete
+    defaults: { _controller: "HotelBundle:Tarif:deleteTarif" }
     

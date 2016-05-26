@@ -16,6 +16,9 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Etourisme\HotelBundle\Entity\DetailsChambre;
 use Etourisme\HotelBundle\Entity\Reduction;
+use Etourisme\HotelBundle\Entity\Tarif;
+use Etourisme\HotelBundle\Entity\Occupant;
+
 use Etourisme\HotelBundle\Entity\Arrangement;
 use Etourisme\HotelBundle\Entity\Theme;
 use Etourisme\HotelBundle\Entity\DetailsReduction;
@@ -73,8 +76,6 @@ class TarifController extends Controller {
         ));
         $form->handleRequest($request);
         if ($form->isValid()) {
-           
-           
             $em = $this->getDoctrine()->getManager();
             $detailshotel->setHotel($hotel);
             $em->persist($detailshotel);
@@ -83,7 +84,6 @@ class TarifController extends Controller {
              $ar1 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findBy(array("hotel"=>$hotel->getId(),"arrangement"=>1));
             if($ar1!=null){
              if(isset($_POST["1"])){
-               
                 $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(1);
                 $detailsarr1=new DetailsArrangement();
                 $detailsarr1->setArrangement($arrangement);
@@ -91,11 +91,12 @@ class TarifController extends Controller {
                 $detailsarr1->setEtat(1);
                 $detailsarr1->setTempsd($detailshotel->getTempsd());
                 $detailsarr1->setTempsf($detailshotel->getTempsf());
+                $detailsarr1->setDetailsHotel($detailshotel);
                 $em->persist($detailsarr1);
                 $em->flush();         
             }
             else{
-                
+                var_dump($detailshotel->getId());
                 $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(1);
                 $detailsarr1=new DetailsArrangement();
                 $detailsarr1->setArrangement($arrangement);
@@ -103,6 +104,7 @@ class TarifController extends Controller {
                 $detailsarr1->setEtat(0);
                 $detailsarr1->setTempsd($detailshotel->getTempsd());
                 $detailsarr1->setTempsf($detailshotel->getTempsf());
+                $detailsarr1->setDetailsHotel($detailshotel);
                 $em->persist($detailsarr1);
                 $em->flush();
             }   
@@ -117,6 +119,7 @@ class TarifController extends Controller {
                 $detailsarr2->setEtat(1);
                 $detailsarr2->setTempsd($detailshotel->getTempsd());
                 $detailsarr2->setTempsf($detailshotel->getTempsf());
+                $detailsarr2->setDetailsHotel($detailshotel);
                 $em->persist($detailsarr2);
                 $em->flush();         
             }
@@ -128,6 +131,7 @@ class TarifController extends Controller {
                 $detailsarr2->setEtat(0);
                 $detailsarr2->setTempsd($detailshotel->getTempsd());
                 $detailsarr2->setTempsf($detailshotel->getTempsf());
+                $detailsarr2->setDetailsHotel($detailshotel);
                 $em->persist($detailsarr2);
                 $em->flush();
             } 
@@ -143,6 +147,7 @@ class TarifController extends Controller {
                 $detailsarr3->setEtat(1);
                 $detailsarr3->setTempsd($detailshotel->getTempsd());
                 $detailsarr3->setTempsf($detailshotel->getTempsf());
+                $detailsarr3->setDetailsHotel($detailshotel);
                 $em->persist($detailsarr3);
                 $em->flush();         
             }
@@ -154,6 +159,7 @@ class TarifController extends Controller {
                 $detailsarr3->setEtat(0);
                 $detailsarr3->setTempsd($detailshotel->getTempsd());
                 $detailsarr3->setTempsf($detailshotel->getTempsf());
+                $detailsarr3->setDetailsHotel($detailshotel);
                 $em->persist($detailsarr3);
                 $em->flush();
             } 
@@ -170,6 +176,7 @@ class TarifController extends Controller {
                 $detailsarr4->setEtat(1);
                 $detailsarr4->setTempsd($detailshotel->getTempsd());
                 $detailsarr4->setTempsf($detailshotel->getTempsf());
+                $detailsarr4->setDetailsHotel($detailshotel);
                 $em->persist($detailsarr4);
                 $em->flush();         
             }
@@ -181,6 +188,7 @@ class TarifController extends Controller {
                 $detailsarr4->setEtat(0);
                 $detailsarr4->setTempsd($detailshotel->getTempsd());
                 $detailsarr4->setTempsf($detailshotel->getTempsf());
+                $detailsarr4->setDetailsHotel($detailshotel);
                 $em->persist($detailsarr4);
                 $em->flush();
             } 
@@ -196,6 +204,7 @@ class TarifController extends Controller {
                 $detailsarr5->setEtat(1);
                 $detailsarr5->setTempsd($detailshotel->getTempsd());
                 $detailsarr5->setTempsf($detailshotel->getTempsf());
+                $detailsarr5->setDetailsHotel($detailshotel);
                 $em->persist($detailsarr5);
                 $em->flush();         
             }
@@ -207,6 +216,7 @@ class TarifController extends Controller {
                 $detailsarr5->setEtat(0);
                 $detailsarr5->setTempsd($detailshotel->getTempsd());
                 $detailsarr5->setTempsf($detailshotel->getTempsf());
+                $detailsarr5->setDetailsHotel($detailshotel);
                 $em->persist($detailsarr5);
                 $em->flush();
             } 
@@ -225,6 +235,7 @@ class TarifController extends Controller {
                 $detailsarr6->setEtat(1);
                 $detailsarr6->setTempsd($detailshotel->getTempsd());
                 $detailsarr6->setTempsf($detailshotel->getTempsf());
+                $detailsarr6->setDetailsHotel($detailshotel);
                 $em->persist($detailsarr6);
                 $em->flush();         
             }
@@ -236,6 +247,7 @@ class TarifController extends Controller {
                 $detailsarr6->setEtat(0);
                 $detailsarr6->setTempsd($detailshotel->getTempsd());
                 $detailsarr6->setTempsf($detailshotel->getTempsf());
+                $detailsarr6->setDetailsHotel($detailshotel);
                 $em->persist($detailsarr6);
                 $em->flush();
             } 
@@ -254,6 +266,7 @@ class TarifController extends Controller {
                 $detailsarr7->setEtat(1);
                 $detailsarr7->setTempsd($detailshotel->getTempsd());
                 $detailsarr7->setTempsf($detailshotel->getTempsf());
+                $detailsarr7->setDetailsHotel($detailshotel);
                 $em->persist($detailsarr7);
                 $em->flush();         
             }
@@ -265,6 +278,7 @@ class TarifController extends Controller {
                 $detailsarr7->setEtat(0);
                 $detailsarr7->setTempsd($detailshotel->getTempsd());
                 $detailsarr7->setTempsf($detailshotel->getTempsf());
+                $detailsarr7->setDetailsHotel($detailshotel);
                 $em->persist($detailsarr7);
                 $em->flush();
             } 
@@ -283,6 +297,7 @@ class TarifController extends Controller {
                 $detailsarr8->setEtat(1);
                 $detailsarr8->setTempsd($detailshotel->getTempsd());
                 $detailsarr8->setTempsf($detailshotel->getTempsf());
+                $detailsarr8->setDetailsHotel($detailshotel);
                 $em->persist($detailsarr8);
                 $em->flush();         
             }
@@ -294,6 +309,7 @@ class TarifController extends Controller {
                 $detailsarr8->setEtat(0);
                 $detailsarr8->setTempsd($detailshotel->getTempsd());
                 $detailsarr8->setTempsf($detailshotel->getTempsf());
+                $detailsarr8->setDetailsHotel($detailshotel);
                 $em->persist($detailsarr8);
                 $em->flush();
             } 
@@ -311,6 +327,7 @@ class TarifController extends Controller {
                 $detailsarr9->setEtat(1);
                 $detailsarr9->setTempsd($detailshotel->getTempsd());
                 $detailsarr9->setTempsf($detailshotel->getTempsf());
+                $detailsarr9->setDetailsHotel($detailshotel);
                 $em->persist($detailsarr9);
                 $em->flush();         
             }
@@ -322,12 +339,45 @@ class TarifController extends Controller {
                 $detailsarr9->setEtat(0);
                 $detailsarr9->setTempsd($detailshotel->getTempsd());
                 $detailsarr9->setTempsf($detailshotel->getTempsf());
+                $detailsarr9->setDetailsHotel($detailshotel);
                 $em->persist($detailsarr9);
                 $em->flush();
             } 
            }
            
            //9
+            $chambreS = $this->getDoctrine()->getRepository('HotelBundle:DetailsChambre')->findOneBy(array("hotel"=>$hotel->getId(),"chambre"=>1));
+            $chambreD = $this->getDoctrine()->getRepository('HotelBundle:DetailsChambre')->findOneBy(array("hotel"=>$hotel->getId(),"chambre"=>2));
+            $chambreT = $this->getDoctrine()->getRepository('HotelBundle:DetailsChambre')->findOneBy(array("hotel"=>$hotel->getId(),"chambre"=>3));
+            $chambreQ = $this->getDoctrine()->getRepository('HotelBundle:DetailsChambre')->findOneBy(array("hotel"=>$hotel->getId(),"chambre"=>4));
+            $detailsarrangementtemp = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findBy(array("hotel"=>$hotel->getId(),"tempsd"=>null,"tempsf"=>null));
+
+            foreach($detailsarrangementtemp as $arrangement){
+            if($chambreS!=null){
+                $occupantS = $this->getDoctrine()->getRepository('HotelBundle:Occupant')->find(1);
+                $tarif=new Tarif();
+                $tarifCalc = ($form['suppLpd']->getData()+$form['tarifBase']->getData()+$form['suppSingle']->getData())*(1+($form['marge']->getData()/100));
+               
+                $tarif->setArrangement($arrangement->getArrangement());
+                $tarif->setChambre($chambreS->getChambre());
+                $tarif->setHotel($hotel);
+                $tarif->setOccupant($occupantS);
+                $tarif->setPrix($tarifCalc);
+                $tarif->setTempsd($form['tempsd']->getData());
+                $tarif->setTempsf($form['tempsf']->getData());
+                $em->persist($tarif);
+                $em->flush();
+            }
+            if($chambreD!=null){
+                
+            }
+            if($chambreT!=null){
+                
+            }
+            if($chambreQ!=null){
+                
+            }
+            }
                 $this->get('session')->getFlashBag()->add(
                 'info', 'Tarif Bien ajouté'
                 );
@@ -657,5 +707,18 @@ class TarifController extends Controller {
         return $this->render('HotelBundle:Hotels:edittarifperiodhotel.html.twig', array('form' => $editForm->createView(),'entity' => $detailshotel));
     }
 
+    public function deleteTarifAction($id) {
+        $em = $this->getDoctrine()->getManager();
+        $tarif = $this->getDoctrine()->getRepository('HotelBundle:DetailsHotel')->find($id);
+        var_dump($id);
+        $em->remove($tarif);
+        $em->flush();
+
+        $this->get('session')->getFlashBag()->add(
+                'info', 'Tarif supprimé'
+        );
+        
+        return $this->redirect($this->generateUrl('list_tarif_hotel'));
+    }
 
 }
