@@ -3179,11 +3179,15 @@ table.text-center th {
 }
 .login-logo a,
 .register-logo a {
-  color: #444;
+  color: #ffffff;
 }
 .login-page,
 .register-page {
-  background: #d2d6de;
+  background-color: #150a29;
+  background-image: url("../img/bg.jpg");
+  background-size: cover;
+  height: 100%;
+  width: 100%;
 }
 .login-box,
 .register-box {

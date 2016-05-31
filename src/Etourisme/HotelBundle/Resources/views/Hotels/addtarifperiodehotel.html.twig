@@ -116,49 +116,41 @@
                                     
                             <div class="form-group">
                             <table class="table table-striped table-bordered table-hover table-responsive">
-                                 {% set ar1 = '0' %}
-                                 {% set ar2 = '0' %}
-                                 {% set ar3 = '0' %}
-                                 {% set ar4 = '0' %}
-                                 {% set ar5 = '0' %}
-                                 {% set ar6 = '0' %}
-                                 {% set ar7 = '0' %}
-                                 {% set ar8 = '0' %}
-                                 {% set ar9 = '0' %}
+                               
                             {% for ar in detailsarrangement%}
-                                {% if ar.arrangement.id=='1' and ar1!='1' %}
-                                    {% set ar1 = '1' %}
+                                {% if ar.arrangement.id=='1' %}
+                                    
                             <tr>
                                 <td>
-                                     {{ form_widget(form.suppLpd, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                     {{ form_widget(form.suppLpd, {'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
                                      {{ form_errors(form.suppLpd) }}
                                 </td>
                             <td>{{ ar.arrangement.libelle}}</td>
                             <td><input id="1" name="1"  type="checkbox" value="1"/></td>
                             </tr>
-                             {% elseif  (ar.arrangement.id=='2' and ar2!='1') %}                                
-                                    {% set ar2 = '1' %}
+                             {% elseif  ar.arrangement.id=='2' %}                                
+                                  
                             <tr>
                                 <td>
-                                     {{ form_widget(form.suppDp, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                     {{ form_widget(form.suppDp, {'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
                                      {{ form_errors(form.suppDp) }}
                                 </td>
                             <td>{{ ar.arrangement.libelle}}</td>
                             <td><input id="2" name="2"  type="checkbox" value="2"/></td>
                             </tr>
                             
-                             {% elseif ar.arrangement.id=='3' and ar3!='1' %}
-                                    {% set ar3 = '1' %}
+                             {% elseif ar.arrangement.id=='3'  %}
+                                    
                             <tr>
                                 <td>
-                                     {{ form_widget(form.suppPc, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
+                                     {{ form_widget(form.suppPc, {'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
                                      {{ form_errors(form.suppPc) }}
                                 </td>
                             <td>{{ ar.arrangement.libelle}}</td>
                             <td><input id="3" name="3"  type="checkbox" value="3"/></td>
                             </tr>
-                            {% elseif ar.arrangement.id=='4' and ar4!='1' %}
-                                    {% set ar4 = '1' %}
+                            {% elseif ar.arrangement.id=='4' %}
+                                
                             <tr>
                                 <td>
                                      {{ form_widget(form.suppAll, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
@@ -167,8 +159,8 @@
                             <td>{{ ar.arrangement.libelle}}</td>
                             <td><input id="4" name="4"  type="checkbox" value="4"/></td>
                             </tr>
-                            {% elseif ar.arrangement.id=='5' and ar5!='1' %}
-                                    {% set ar5 = '1' %}
+                            {% elseif ar.arrangement.id=='5'  %}
+                                    
                             <tr>
                                 <td>
                                      {{ form_widget(form.suppLs, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
@@ -177,8 +169,8 @@
                             <td>{{ ar.arrangement.libelle}}</td>
                             <td><input id="5" name="5"   type="checkbox" value="5"/></td>
                             </tr>
-                            {% elseif ar.arrangement.id=='6' and ar6!='1' %}
-                                    {% set ar6 = '1' %}
+                            {% elseif ar.arrangement.id=='6'  %}
+                                    
                             <tr>
                                 <td>
                                      {{ form_widget(form.suppAllSoft, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
@@ -187,8 +179,8 @@
                             <td>{{ ar.arrangement.libelle}}</td>
                             <td><input id="6" name="6"  type="checkbox" value="6"/></td>
                             </tr>   
-                            {% elseif ar.arrangement.id=='7' and ar7!='1' %}
-                                    {% set ar7 = '1' %}
+                            {% elseif ar.arrangement.id=='7' %}
+                                   
                             <tr>
                                 <td>
                                      {{ form_widget(form.suppUltraAll, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
@@ -197,8 +189,8 @@
                             <td>{{ ar.arrangement.libelle}}</td>
                             <td><input id="7" name="7"  type="checkbox" value="7"/></td>
                             </tr>
-                           {% elseif ar.arrangement.id=='8' and ar8!='1' %}
-                                    {% set ar8 = '1' %}
+                           {% elseif ar.arrangement.id=='8' %}
+                                    
                             <tr>
                                 <td>
                                      {{ form_widget(form.suppDpp, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}
@@ -207,8 +199,8 @@
                             <td>{{ ar.arrangement.libelle}}</td>
                             <td><input id="8" name="8"  type="checkbox" value="8"/></td>
                             </tr>
-                            {% elseif ar.arrangement.id=='9' and ar9!='1' %}
-                                    {% set ar9 = '1' %}
+                            {% elseif ar.arrangement.id=='9' %}
+                                    
                             <tr>
                                 <td>
                                      {{ form_widget(form.suppPcp, { 'attr': {'type': 'text', 'class': 'form-control', 'placeholder': ''} }) }}

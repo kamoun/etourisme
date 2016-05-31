@@ -11,7 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * Tarif
  *
- * @ORM\Table(name="tarif",uniqueConstraints={@ORM\UniqueConstraint(name="details_unique", columns={"hotel_id","arrangement_id","occupant_id","tempsd","tempsf"})})
+ * @ORM\Table(name="tarif",uniqueConstraints={@ORM\UniqueConstraint(name="tarif_unique", columns={"hotel_id","arrangement_id","chambre_id","occupant_id","tempsd","tempsf"})})
  * @ORM\Entity(repositoryClass="Etourisme\HotelBundle\Repository\TarifRepository")
  */
 class Tarif
