@@ -35,14 +35,14 @@ class Tarif
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="tempsd", type="datetime")
+     * @ORM\Column(name="tempsd", type="date")
      */
     private $tempsd;
 
      /**
      * @var \DateTime
      *
-     * @ORM\Column(name="tempsf", type="datetime")
+     * @ORM\Column(name="tempsf", type="date")
      */
     private $tempsf;
 
@@ -51,7 +51,7 @@ class Tarif
      * @ORM\ManyToOne(targetEntity="Etourisme\HotelBundle\Entity\Hotel")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $Hotel;
+    private $hotel;
     
      /**
      * @ORM\ManyToOne(targetEntity="Etourisme\HotelBundle\Entity\Arrangement")
@@ -164,7 +164,7 @@ class Tarif
      */
     public function setHotel(\Etourisme\HotelBundle\Entity\Hotel $hotel)
     {
-        $this->Hotel = $hotel;
+        $this->hotel = $hotel;
 
         return $this;
     }
@@ -176,7 +176,7 @@ class Tarif
      */
     public function getHotel()
     {
-        return $this->Hotel;
+        return $this->hotel;
     }
 
     /**

@@ -517,7 +517,10 @@ class TarifController extends Controller {
                 $tarifCalc3 = (($form['tarifBase']->getData()*(1-($form['reduc4']->getData()/100)))+$form[$arr]->getData())*(1+($form['marge']->getData()/100));
                 $tarifCalc4 = (($form[$arr]->getData()+$form['tarifBase']->getData())*(1-($form['reduc2']->getData()/100)))*(1+($form['marge']->getData()/100));
                 $tarifCalc5 = (($form[$arr]->getData()+$form['tarifBase']->getData())*(1-($form['reduc3']->getData()/100)))*(1+($form['marge']->getData()/100));
+                //var_dump($form['reduc5']->getData());
+                //die("here");
                 $tarifCalc6 = (($form['tarifBase']->getData()*(1-($form['reduc5']->getData()/100)))+$form[$arr]->getData())*(1+($form['marge']->getData()/100));
+                
                 }
                 }
                 $tarif1->setArrangement($arrangement->getArrangement());
@@ -569,7 +572,7 @@ class TarifController extends Controller {
                 $tarif6->setChambre($chambreQ->getChambre());
                 $tarif6->setHotel($hotel);
                 $tarif6->setOccupant($occupant6);
-                $tarif6->setPrix($tarifCalc5);
+                $tarif6->setPrix($tarifCalc6);
                 $tarif6->setTempsd($form['tempsd']->getData());
                 $tarif6->setTempsf($form['tempsf']->getData());
                 $em->persist($tarif6);

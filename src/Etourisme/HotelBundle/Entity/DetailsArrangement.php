@@ -51,14 +51,14 @@ class DetailsArrangement
      /**
      * @var \DateTime
      *
-     * @ORM\Column(name="tempsd", type="datetime",nullable=true)
+     * @ORM\Column(name="tempsd", type="date",nullable=true)
      */
     private $tempsd;
     
      /**
      * @var \DateTime
      *
-     * @ORM\Column(name="tempsf", type="datetime",nullable=true)
+     * @ORM\Column(name="tempsf", type="date",nullable=true)
      */
     private $tempsf;
     

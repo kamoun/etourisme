@@ -10,4 +10,14 @@ namespace Etourisme\HotelBundle\Repository;
  */
 class DetailsArrangementRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getDetailsArrangementByTemps($hotel_id,$checkin,$checkout) {
+        $qb = $this->createQueryBuilder('j')
+                ->where('j.hotel  = :hotel_id and j.tempsd <= :checkin and  j.tempsf >= :checkout')  
+                ->setParameter('hotel_id', $hotel_id)
+                ->setParameter('checkin', $checkin )
+                ->setParameter('checkout', $checkout )
+        ;
+        $query = $qb->getQuery();
+        return $query->getResult();
+    }
 }

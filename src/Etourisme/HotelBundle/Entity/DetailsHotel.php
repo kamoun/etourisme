@@ -38,14 +38,14 @@ class DetailsHotel
      /**
      * @var \DateTime
      *
-     * @ORM\Column(name="tempsd", type="datetime")
+     * @ORM\Column(name="tempsd", type="date")
      */
     private $tempsd;
     
       /**
      * @var \DateTime
      *
-     * @ORM\Column(name="tempsf", type="datetime")
+     * @ORM\Column(name="tempsf", type="date")
      */
     private $tempsf;
 
