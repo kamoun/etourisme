@@ -69,6 +69,11 @@ class Hotel {
      * 
      */
     private $detailsarrangement;
+    
+    /** @ORM\OneToMany(targetEntity="Etourisme\HotelBundle\Entity\Tarif",mappedBy="hotel", cascade={"All"})
+     * 
+     */
+    private $tarif;
 
      /** @ORM\OneToMany(targetEntity="Etourisme\HotelBundle\Entity\DetailsReduction",mappedBy="hotel", cascade={"All"})
      * 
@@ -601,5 +606,39 @@ class Hotel {
     public function getDetailshotel()
     {
         return $this->detailshotel;
+    }
+
+    /**
+     * Add tarif
+     *
+     * @param \Etourisme\HotelBundle\Entity\Tarif $tarif
+     *
+     * @return Hotel
+     */
+    public function addTarif(\Etourisme\HotelBundle\Entity\Tarif $tarif)
+    {
+        $this->tarif[] = $tarif;
+
+        return $this;
+    }
+
+    /**
+     * Remove tarif
+     *
+     * @param \Etourisme\HotelBundle\Entity\Tarif $tarif
+     */
+    public function removeTarif(\Etourisme\HotelBundle\Entity\Tarif $tarif)
+    {
+        $this->tarif->removeElement($tarif);
+    }
+
+    /**
+     * Get tarif
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTarif()
+    {
+        return $this->tarif;
     }
 }

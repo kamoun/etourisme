@@ -272,6 +272,13 @@ class DefaultController extends Controller {
                 $em->remove($detailtheme);
                 $em->flush();
             }
+            //delete tarif
+            $tarifs = $this->getDoctrine()->getRepository('HotelBundle:Tarif')->findByHotel($hotel->getId());
+            foreach ($tarifs as $tarif) {
+                $em->remove($tarif);
+                $em->flush();
+            }
+            
             foreach ($form['chambre']->getData() as $id) {
                 $chambre = $this->getDoctrine()->getRepository('HotelBundle:Chambre')->find($id);
 

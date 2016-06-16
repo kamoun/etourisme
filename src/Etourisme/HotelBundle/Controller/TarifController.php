@@ -223,9 +223,6 @@ class TarifController extends Controller {
                 $em->flush();
             } 
            }
-           
-           //5
-            
             //6
             $ar6 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findBy(array("hotel"=>$hotel->getId(),"arrangement"=>6));
            if($ar6!=null){
@@ -254,10 +251,7 @@ class TarifController extends Controller {
                 $em->persist($detailsarr6);
                 $em->flush();
             } 
-           }
-           
-           //6
-           
+           }          
            //7
             $ar7 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findBy(array("hotel"=>$hotel->getId(),"arrangement"=>7));
            if($ar7!=null){
@@ -628,7 +622,7 @@ class TarifController extends Controller {
        
 
         if (!$detailshotel) {
-            throw $this->createNotFoundException('Impossible de trouver Les details de cet hôtel');
+            throw $this->createNotFoundException('Impossible de trouver les détails de cet hôtel');
         }
         $editForm = $this->createEditTarifForm($detailshotel);
 
@@ -656,22 +650,24 @@ class TarifController extends Controller {
     
     
      public function updateTarifPeriodeHotelAction(Request $request,$id) {
-         $em = $this->getDoctrine()->getManager();
-       $detailshotel = $this->getDoctrine()->getRepository('HotelBundle:DetailsHotel')->find($id);
-       $hotel = $this->getDoctrine()->getRepository('HotelBundle:Hotel')->find($detailshotel->getHotel()->getId());
-      
+        $session = $request->getSession();
+        $data = $session->get('id'); 
+        $em = $this->getDoctrine()->getManager();
+        $detailshotel = $this->getDoctrine()->getRepository('HotelBundle:DetailsHotel')->find($id);
+        $hotel = $this->getDoctrine()->getRepository('HotelBundle:Hotel')->find($detailshotel->getHotel()->getId());
+        $libArr = array();
         $detailschambre = $this->getDoctrine()->getRepository('HotelBundle:DetailsChambre')->findByHotel($detailshotel->getHotel()->getId());
-        $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findByHotel($detailshotel->getHotel()->getId());
+        $detailsarrangement = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findBy(array("hotel"=>$hotel->getId(),"tempsd"=>null,"tempsf"=>null));
         $detailsreduction = $this->getDoctrine()->getRepository('HotelBundle:DetailsReduction')->findByHotel($detailshotel->getHotel()->getId());
        
 
         if (!$detailshotel) {
             throw $this->createNotFoundException('Unable to find Hotel entity.');
         }
-        $editForm = $this->createForm(DetailsHotelType::class, $detailshotel);
-        $editForm->handleRequest($request);
+        $form = $this->createForm(DetailsHotelType::class, $detailshotel);
+        $form->handleRequest($request);
        
-        if ($editForm->isValid()) {
+        if ($form->isValid()) {
            
            
             $em = $this->getDoctrine()->getManager();
@@ -679,222 +675,378 @@ class TarifController extends Controller {
             $em->merge($detailshotel);
             $em->flush();
            
-             $ar1 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array("hotel"=>$detailshotel->getHotel()->getId(),"arrangement"=>1,"tempsd"=>$editForm['tempsd']->getData(),"tempsf"=>$editForm['tempsf']->getData()));
+            $ar1 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array("hotel"=>$detailshotel->getHotel()->getId(),"arrangement"=>1,"tempsd"=>$form['tempsd']->getData(),"tempsf"=>$form['tempsf']->getData()));
              
              if($ar1!=null){
+             $libArr[] = 'suppLpd';    
              if(isset($_POST["1"])){
-               
-               // $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(1);
-                
                 $ar1 ->setEtat(1);
-               
-                $em->merge($ar1 );
+                $em->merge($ar1);
                 $em->flush();         
             }
             else{
-                
-                //$arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(1);
-                 
-                $ar1 ->setEtat(0);
-               
-                $em->merge($ar1 );
+                $ar1 ->setEtat(0);              
+                $em->merge($ar1);
                 $em->flush(); 
             }   
             }
-             $ar2 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array("hotel"=>$detailshotel->getHotel()->getId(),"arrangement"=>2,"tempsd"=>$editForm['tempsd']->getData(),"tempsf"=>$editForm['tempsf']->getData()));
-             
+             $ar2 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array("hotel"=>$detailshotel->getHotel()->getId(),"arrangement"=>2,"tempsd"=>$form['tempsd']->getData(),"tempsf"=>$form['tempsf']->getData()));            
              if($ar2!=null){
-             if(isset($_POST["2"])){
-               
-               // $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(1);
-                
-                $ar2 ->setEtat(1);
-               
-                $em->merge($ar2 );
+             $libArr[] = 'suppDp';    
+             if(isset($_POST["2"])){  
+                $ar2 ->setEtat(1);               
+                $em->merge($ar2);
                 $em->flush();         
             }
-            else{
-                
-                //$arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(1);
-                 
-                $ar2 ->setEtat(0);
-               
-                $em->merge($ar2 );
+            else{ 
+                $ar2 ->setEtat(0);              
+                $em->merge($ar2);
                 $em->flush(); 
             }   
-            }
-           
-           $ar3 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array("hotel"=>$detailshotel->getHotel()->getId(),"arrangement"=>3,"tempsd"=>$editForm['tempsd']->getData(),"tempsf"=>$editForm['tempsf']->getData()));
-             
+            }         
+            $ar3 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array("hotel"=>$detailshotel->getHotel()->getId(),"arrangement"=>3,"tempsd"=>$form['tempsd']->getData(),"tempsf"=>$form['tempsf']->getData()));  
              if($ar3!=null){
+             $libArr[] = 'suppPc';     
              if(isset($_POST["3"])){
-               
-               // $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(1);
-                
-                $ar3 ->setEtat(1);
-               
+                $ar3 ->setEtat(1);               
                 $em->merge($ar3 );
                 $em->flush();         
             }
             else{
-                
-                //$arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(1);
-                 
-                $ar3 ->setEtat(0);
-               
-                $em->merge($ar3 );
+                $ar3 ->setEtat(0);               
+                $em->merge($ar3);
                 $em->flush(); 
             }   
             }
            
            //4
-           $ar4 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array("hotel"=>$detailshotel->getHotel()->getId(),"arrangement"=>4,"tempsd"=>$editForm['tempsd']->getData(),"tempsf"=>$editForm['tempsf']->getData()));
-             
+           $ar4 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array("hotel"=>$detailshotel->getHotel()->getId(),"arrangement"=>4,"tempsd"=>$form['tempsd']->getData(),"tempsf"=>$form['tempsf']->getData()));            
              if($ar4!=null){
-             if(isset($_POST["4"])){
-               
-               // $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(1);
-                
-                $ar4 ->setEtat(1);
-               
-                $em->merge($ar4 );
+             $libArr[] = 'suppAll';     
+             if(isset($_POST["4"])){ 
+                $ar4 ->setEtat(1);             
+                $em->merge($ar4);
                 $em->flush();         
             }
             else{
-                
-                //$arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(1);
-                 
-                $ar4 ->setEtat(0);
-               
+                $ar4 ->setEtat(0);              
                 $em->merge($ar4);
                 $em->flush(); 
             }   
             }
             //5
-           $ar5 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array("hotel"=>$detailshotel->getHotel()->getId(),"arrangement"=>5,"tempsd"=>$editForm['tempsd']->getData(),"tempsf"=>$editForm['tempsf']->getData()));
-             
+           $ar5 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array("hotel"=>$detailshotel->getHotel()->getId(),"arrangement"=>5,"tempsd"=>$form['tempsd']->getData(),"tempsf"=>$form['tempsf']->getData()));          
              if($ar5!=null){
-             if(isset($_POST["5"])){
-               
-               // $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(1);
-                
-                $ar5 ->setEtat(1);
-               
+             $libArr[] = 'suppLs';    
+             if(isset($_POST["5"])){   
+                $ar5 ->setEtat(1);               
                 $em->merge($ar5);
                 $em->flush();         
             }
-            else{
-                
-                //$arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(1);
-                 
-                $ar5 ->setEtat(0);
-               
+            else{ 
+                $ar5 ->setEtat(0);             
                 $em->merge($ar5);
                 $em->flush(); 
             }   
             }
-           //5
-            
             //6
-            $ar6 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array("hotel"=>$detailshotel->getHotel()->getId(),"arrangement"=>6,"tempsd"=>$editForm['tempsd']->getData(),"tempsf"=>$editForm['tempsf']->getData()));
-             
+            $ar6 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array("hotel"=>$detailshotel->getHotel()->getId(),"arrangement"=>6,"tempsd"=>$form['tempsd']->getData(),"tempsf"=>$form['tempsf']->getData()));            
              if($ar6!=null){
-             if(isset($_POST["6"])){
-               
-               // $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(1);
-                
-                $ar6 ->setEtat(1);
-               
+             $libArr[] = 'suppAllSoft';     
+             if(isset($_POST["6"])){ 
+                $ar6 ->setEtat(1);              
                 $em->merge($ar6);
                 $em->flush();         
             }
-            else{
-                
-                //$arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(1);
-                 
-                $ar6 ->setEtat(0);
-               
+            else{            
+                $ar6 ->setEtat(0);              
                 $em->merge($ar6);
                 $em->flush(); 
             }   
-            }
-           
-           //6
-           
+            }   
            //7
-            $ar7 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array("hotel"=>$detailshotel->getHotel()->getId(),"arrangement"=>7,"tempsd"=>$editForm['tempsd']->getData(),"tempsf"=>$editForm['tempsf']->getData()));
-             
+            $ar7 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array("hotel"=>$detailshotel->getHotel()->getId(),"arrangement"=>7,"tempsd"=>$form['tempsd']->getData(),"tempsf"=>$form['tempsf']->getData()));             
              if($ar7!=null){
+             $libArr[] = 'suppUltraAll';    
              if(isset($_POST["7"])){
-               
-               // $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(1);
-                
-                $ar7 ->setEtat(1);
-               
+                $ar7 ->setEtat(1);               
                 $em->merge($ar7);
                 $em->flush();         
             }
-            else{
-                
-                //$arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(1);
-                 
-                $ar7 ->setEtat(0);
-               
+            else{     
+                $ar7 ->setEtat(0);              
                 $em->merge($ar7);
                 $em->flush(); 
             }   
             }
-           
-           //7
-           
            //8
-           $ar8 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array("hotel"=>$detailshotel->getHotel()->getId(),"arrangement"=>8,"tempsd"=>$editForm['tempsd']->getData(),"tempsf"=>$editForm['tempsf']->getData()));
-             
+           $ar8 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array("hotel"=>$detailshotel->getHotel()->getId(),"arrangement"=>8,"tempsd"=>$form['tempsd']->getData(),"tempsf"=>$form['tempsf']->getData()));            
              if($ar8!=null){
-             if(isset($_POST["8"])){
-               
-               // $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(1);
-                
-                $ar8 ->setEtat(1);
-               
+             $libArr[] = 'suppDpp';    
+             if(isset($_POST["8"])){   
+                $ar8 ->setEtat(1);              
                 $em->merge($ar8);
                 $em->flush();         
             }
-            else{
-                
-                //$arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(1);
-                 
-                $ar8 ->setEtat(0);
-               
+            else{               
+                $ar8 ->setEtat(0);               
                 $em->merge($ar8);
                 $em->flush(); 
             }   
             }
-           //8
             //9
-            $ar9 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array("hotel"=>$detailshotel->getHotel()->getId(),"arrangement"=>9,"tempsd"=>$editForm['tempsd']->getData(),"tempsf"=>$editForm['tempsf']->getData()));
-             
+            $ar9 = $this->getDoctrine()->getRepository('HotelBundle:DetailsArrangement')->findOneBy(array("hotel"=>$detailshotel->getHotel()->getId(),"arrangement"=>9,"tempsd"=>$form['tempsd']->getData(),"tempsf"=>$form['tempsf']->getData()));            
              if($ar9!=null){
+             $libArr[] = 'suppPcp';    
              if(isset($_POST["9"])){
-               
-               // $arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(1);
-                
-                $ar9 ->setEtat(1);
-               
+                $ar9 ->setEtat(1);              
                 $em->merge($ar9);
                 $em->flush();         
             }
             else{
-                
-                //$arrangement = $this->getDoctrine()->getRepository('HotelBundle:Arrangement')->find(1);
-                 
-                $ar9 ->setEtat(0);
-               
+                $ar9 ->setEtat(0);             
                 $em->merge($ar9);
                 $em->flush(); 
             }   
             }
-           //9
+       
+            //delete tarif
+            $tarifs = $this->getDoctrine()->getRepository('HotelBundle:Tarif')->findBy(array("hotel"=>$detailshotel->getHotel()->getId(),"tempsd"=>$detailshotel->getTempsd(),"tempsf"=>$detailshotel->getTempsf()));
+            foreach ($tarifs as $tarif) {
+                $em->remove($tarif);
+            }
+            $em->flush();
+                        
+            //add tarif
+            $chambreS = $this->getDoctrine()->getRepository('HotelBundle:DetailsChambre')->findOneBy(array("hotel"=>$hotel->getId(),"chambre"=>1));
+            $chambreD = $this->getDoctrine()->getRepository('HotelBundle:DetailsChambre')->findOneBy(array("hotel"=>$hotel->getId(),"chambre"=>2));
+            $chambreT = $this->getDoctrine()->getRepository('HotelBundle:DetailsChambre')->findOneBy(array("hotel"=>$hotel->getId(),"chambre"=>3));
+            $chambreQ = $this->getDoctrine()->getRepository('HotelBundle:DetailsChambre')->findOneBy(array("hotel"=>$hotel->getId(),"chambre"=>4));
+           
+            $occupant1 = $this->getDoctrine()->getRepository('HotelBundle:Occupant')->find(1);
+            $occupant2 = $this->getDoctrine()->getRepository('HotelBundle:Occupant')->find(2);
+            $occupant3 = $this->getDoctrine()->getRepository('HotelBundle:Occupant')->find(3);
+            $occupant4 = $this->getDoctrine()->getRepository('HotelBundle:Occupant')->find(4);
+            $occupant5 = $this->getDoctrine()->getRepository('HotelBundle:Occupant')->find(5);
+            $occupant6 = $this->getDoctrine()->getRepository('HotelBundle:Occupant')->find(6);
+            //if (is_array($detailsarrangement))
+            foreach($detailsarrangement as $key1=>$arrangement){
+            //chambre single    
+            if($chambreS!=null){
+                
+                $tarif1=new Tarif(); 
+                $tarif2=new Tarif(); 
+                foreach($libArr as $key2=>$arr){
+                if($key1==$key2){
+                $tarifCalc1 = ($form[$arr]->getData()+$form['tarifBase']->getData()+$form['suppSingle']->getData())*(1+($form['marge']->getData()/100));
+                $tarifCalc2 = (($form[$arr]->getData()+$form['tarifBase']->getData()+$form['suppSingle']->getData())*(1-($form['reduc3']->getData()/100)))*(1+($form['marge']->getData()/100));
+                }
+                }
+                $tarif1->setArrangement($arrangement->getArrangement());
+                $tarif1->setChambre($chambreS->getChambre());
+                $tarif1->setHotel($hotel);
+                $tarif1->setOccupant($occupant1);
+                $tarif1->setPrix($tarifCalc1);
+                $tarif1->setTempsd($form['tempsd']->getData());
+                $tarif1->setTempsf($form['tempsf']->getData());
+                $em->persist($tarif1);
+                $em->flush();
+                $tarif2->setArrangement($arrangement->getArrangement());
+                $tarif2->setChambre($chambreS->getChambre());
+                $tarif2->setHotel($hotel);
+                $tarif2->setOccupant($occupant2);
+                $tarif2->setPrix($tarifCalc2);
+                $tarif2->setTempsd($form['tempsd']->getData());
+                $tarif2->setTempsf($form['tempsf']->getData());
+                $em->persist($tarif2);
+                $em->flush();
+            }
+            
+            //chambre double
+            if($chambreD!=null){
+                
+                $tarif1=new Tarif(); 
+                $tarif2=new Tarif(); 
+                $tarif3=new Tarif(); 
+                foreach($libArr as $key2=>$arr){
+                if($key1==$key2){
+                $tarifCalc1 = ($form[$arr]->getData()+$form['tarifBase']->getData())*(1+($form['marge']->getData()/100));
+                $tarifCalc2 = (($form[$arr]->getData()+$form['tarifBase']->getData())*(1-($form['reduc2']->getData()/100)))*(1+($form['marge']->getData()/100));
+                $tarifCalc3 = (($form[$arr]->getData()+$form['tarifBase']->getData())*(1-($form['reduc3']->getData()/100)))*(1+($form['marge']->getData()/100));
+                }
+                }
+                $tarif1->setArrangement($arrangement->getArrangement());
+                $tarif1->setChambre($chambreD->getChambre());
+                $tarif1->setHotel($hotel);
+                $tarif1->setOccupant($occupant1);
+                $tarif1->setPrix($tarifCalc1);
+                $tarif1->setTempsd($form['tempsd']->getData());
+                $tarif1->setTempsf($form['tempsf']->getData());
+                $em->persist($tarif1);
+                $em->flush();
+                $tarif2->setArrangement($arrangement->getArrangement());
+                $tarif2->setChambre($chambreD->getChambre());
+                $tarif2->setHotel($hotel);
+                $tarif2->setOccupant($occupant4);
+                $tarif2->setPrix($tarifCalc2);
+                $tarif2->setTempsd($form['tempsd']->getData());
+                $tarif2->setTempsf($form['tempsf']->getData());
+                $em->persist($tarif2);
+                $em->flush();
+                $tarif3->setArrangement($arrangement->getArrangement());
+                $tarif3->setChambre($chambreD->getChambre());
+                $tarif3->setHotel($hotel);
+                $tarif3->setOccupant($occupant5);
+                $tarif3->setPrix($tarifCalc3);
+                $tarif3->setTempsd($form['tempsd']->getData());
+                $tarif3->setTempsf($form['tempsf']->getData());
+                $em->persist($tarif3);
+                $em->flush();
+                
+            }
+            
+            //chambre triple
+            if($chambreT!=null){
+                
+                $tarif1=new Tarif(); 
+                $tarif2=new Tarif(); 
+                $tarif3=new Tarif(); 
+                $tarif4=new Tarif(); 
+                $tarif5=new Tarif(); 
+                foreach($libArr as $key2=>$arr){
+                if($key1==$key2){
+                $tarifCalc1 = ($form[$arr]->getData()+$form['tarifBase']->getData())*(1+($form['marge']->getData()/100));
+                $tarifCalc2 = (($form[$arr]->getData()+$form['tarifBase']->getData())*(1-($form['reduc1']->getData()/100)))*(1+($form['marge']->getData()/100));               
+                $tarifCalc3 = (($form['tarifBase']->getData()*(1-($form['reduc4']->getData()/100)))+$form[$arr]->getData())*(1+($form['marge']->getData()/100));
+                $tarifCalc4 = (($form[$arr]->getData()+$form['tarifBase']->getData())*(1-($form['reduc2']->getData()/100)))*(1+($form['marge']->getData()/100));
+                $tarifCalc5 = (($form[$arr]->getData()+$form['tarifBase']->getData())*(1-($form['reduc3']->getData()/100)))*(1+($form['marge']->getData()/100));
+                }
+                }
+               
+                $tarif1->setArrangement($arrangement->getArrangement());
+                $tarif1->setChambre($chambreT->getChambre());
+                $tarif1->setHotel($hotel);
+                $tarif1->setOccupant($occupant1);
+                $tarif1->setPrix($tarifCalc1);
+                $tarif1->setTempsd($form['tempsd']->getData());
+                $tarif1->setTempsf($form['tempsf']->getData());
+                $em->persist($tarif1);
+                $em->flush();
+                $tarif2->setArrangement($arrangement->getArrangement());
+                $tarif2->setChambre($chambreT->getChambre());
+                $tarif2->setHotel($hotel);
+                $tarif2->setOccupant($occupant2);
+                $tarif2->setPrix($tarifCalc2);
+                $tarif2->setTempsd($form['tempsd']->getData());
+                $tarif2->setTempsf($form['tempsf']->getData());
+                $em->persist($tarif2);
+                $em->flush();
+                $tarif3->setArrangement($arrangement->getArrangement());
+                $tarif3->setChambre($chambreT->getChambre());
+                $tarif3->setHotel($hotel);
+                $tarif3->setOccupant($occupant3);
+                $tarif3->setPrix($tarifCalc3);
+                $tarif3->setTempsd($form['tempsd']->getData());
+                $tarif3->setTempsf($form['tempsf']->getData());
+                $em->persist($tarif3);
+                $em->flush();
+                $tarif4->setArrangement($arrangement->getArrangement());
+                $tarif4->setChambre($chambreT->getChambre());
+                $tarif4->setHotel($hotel);
+                $tarif4->setOccupant($occupant4);
+                $tarif4->setPrix($tarifCalc4);
+                $tarif4->setTempsd($form['tempsd']->getData());
+                $tarif4->setTempsf($form['tempsf']->getData());
+                $em->persist($tarif4);
+                $em->flush();
+                $tarif5->setArrangement($arrangement->getArrangement());
+                $tarif5->setChambre($chambreT->getChambre());
+                $tarif5->setHotel($hotel);
+                $tarif5->setOccupant($occupant5);
+                $tarif5->setPrix($tarifCalc5);
+                $tarif5->setTempsd($form['tempsd']->getData());
+                $tarif5->setTempsf($form['tempsf']->getData());
+                $em->persist($tarif5);
+                $em->flush();
+                
+            }
+            
+            //chambre quadruple
+            if($chambreQ!=null){
+                
+                $tarif1=new Tarif(); 
+                $tarif2=new Tarif(); 
+                $tarif3=new Tarif(); 
+                $tarif4=new Tarif(); 
+                $tarif5=new Tarif(); 
+                $tarif6=new Tarif(); 
+                foreach($libArr as $key2=>$arr){
+                if($key1==$key2){
+                $tarifCalc1 = ($form[$arr]->getData()+$form['tarifBase']->getData())*(1+($form['marge']->getData()/100));
+                $tarifCalc2 = (($form[$arr]->getData()+$form['tarifBase']->getData())*(1-($form['reduc1']->getData()/100)))*(1+($form['marge']->getData()/100));
+                $tarifCalc3 = (($form['tarifBase']->getData()*(1-($form['reduc4']->getData()/100)))+$form[$arr]->getData())*(1+($form['marge']->getData()/100));
+                $tarifCalc4 = (($form[$arr]->getData()+$form['tarifBase']->getData())*(1-($form['reduc2']->getData()/100)))*(1+($form['marge']->getData()/100));
+                $tarifCalc5 = (($form[$arr]->getData()+$form['tarifBase']->getData())*(1-($form['reduc3']->getData()/100)))*(1+($form['marge']->getData()/100));
+                $tarifCalc6 = (($form['tarifBase']->getData()*(1-($form['reduc5']->getData()/100)))+$form[$arr]->getData())*(1+($form['marge']->getData()/100));
+                
+                }
+                }
+                $tarif1->setArrangement($arrangement->getArrangement());
+                $tarif1->setChambre($chambreQ->getChambre());
+                $tarif1->setHotel($hotel);
+                $tarif1->setOccupant($occupant1);
+                $tarif1->setPrix($tarifCalc1);
+                $tarif1->setTempsd($form['tempsd']->getData());
+                $tarif1->setTempsf($form['tempsf']->getData());
+                $em->persist($tarif1);
+                $em->flush();
+                $tarif2->setArrangement($arrangement->getArrangement());
+                $tarif2->setChambre($chambreQ->getChambre());
+                $tarif2->setHotel($hotel);
+                $tarif2->setOccupant($occupant2);
+                $tarif2->setPrix($tarifCalc2);
+                $tarif2->setTempsd($form['tempsd']->getData());
+                $tarif2->setTempsf($form['tempsf']->getData());
+                $em->persist($tarif2);
+                $em->flush();
+                $tarif3->setArrangement($arrangement->getArrangement());
+                $tarif3->setChambre($chambreQ->getChambre());
+                $tarif3->setHotel($hotel);
+                $tarif3->setOccupant($occupant3);
+                $tarif3->setPrix($tarifCalc3);
+                $tarif3->setTempsd($form['tempsd']->getData());
+                $tarif3->setTempsf($form['tempsf']->getData());
+                $em->persist($tarif3);
+                $em->flush();
+                $tarif4->setArrangement($arrangement->getArrangement());
+                $tarif4->setChambre($chambreQ->getChambre());
+                $tarif4->setHotel($hotel);
+                $tarif4->setOccupant($occupant4);
+                $tarif4->setPrix($tarifCalc4);
+                $tarif4->setTempsd($form['tempsd']->getData());
+                $tarif4->setTempsf($form['tempsf']->getData());
+                $em->persist($tarif4);
+                $em->flush();
+                $tarif5->setArrangement($arrangement->getArrangement());
+                $tarif5->setChambre($chambreQ->getChambre());
+                $tarif5->setHotel($hotel);
+                $tarif5->setOccupant($occupant5);
+                $tarif5->setPrix($tarifCalc5);
+                $tarif5->setTempsd($form['tempsd']->getData());
+                $tarif5->setTempsf($form['tempsf']->getData());
+                $em->persist($tarif5);
+                $em->flush();
+                $tarif6->setArrangement($arrangement->getArrangement());
+                $tarif6->setChambre($chambreQ->getChambre());
+                $tarif6->setHotel($hotel);
+                $tarif6->setOccupant($occupant6);
+                $tarif6->setPrix($tarifCalc6);
+                $tarif6->setTempsd($form['tempsd']->getData());
+                $tarif6->setTempsf($form['tempsf']->getData());
+                $em->persist($tarif6);
+                $em->flush();
+            }
+            }
                 $this->get('session')->getFlashBag()->add(
                 'info', 'Tarif Bien modifiée'
                 );
