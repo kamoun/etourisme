@@ -418,7 +418,7 @@ class TarifController extends Controller {
                 $tarif2->setArrangement($arrangement->getArrangement());
                 $tarif2->setChambre($chambreD->getChambre());
                 $tarif2->setHotel($hotel);
-                $tarif2->setOccupant($occupant2);
+                $tarif2->setOccupant($occupant4);
                 $tarif2->setPrix($tarifCalc2);
                 $tarif2->setTempsd($form['tempsd']->getData());
                 $tarif2->setTempsf($form['tempsf']->getData());
@@ -453,6 +453,7 @@ class TarifController extends Controller {
                 $tarifCalc5 = (($form[$arr]->getData()+$form['tarifBase']->getData())*(1-($form['reduc3']->getData()/100)))*(1+($form['marge']->getData()/100));
                 }
                 }
+               
                 $tarif1->setArrangement($arrangement->getArrangement());
                 $tarif1->setChambre($chambreT->getChambre());
                 $tarif1->setHotel($hotel);
@@ -517,8 +518,6 @@ class TarifController extends Controller {
                 $tarifCalc3 = (($form['tarifBase']->getData()*(1-($form['reduc4']->getData()/100)))+$form[$arr]->getData())*(1+($form['marge']->getData()/100));
                 $tarifCalc4 = (($form[$arr]->getData()+$form['tarifBase']->getData())*(1-($form['reduc2']->getData()/100)))*(1+($form['marge']->getData()/100));
                 $tarifCalc5 = (($form[$arr]->getData()+$form['tarifBase']->getData())*(1-($form['reduc3']->getData()/100)))*(1+($form['marge']->getData()/100));
-                //var_dump($form['reduc5']->getData());
-                //die("here");
                 $tarifCalc6 = (($form['tarifBase']->getData()*(1-($form['reduc5']->getData()/100)))+$form[$arr]->getData())*(1+($form['marge']->getData()/100));
                 
                 }
@@ -908,10 +907,13 @@ class TarifController extends Controller {
 
     public function deleteTarifAction($id) {
         $em = $this->getDoctrine()->getManager();
-        $tarif = $this->getDoctrine()->getRepository('HotelBundle:DetailsHotel')->find($id);
-        $em->remove($tarif);
+        $detailsHotel = $this->getDoctrine()->getRepository('HotelBundle:DetailsHotel')->find($id);        
+        $tarifs = $this->getDoctrine()->getRepository('HotelBundle:Tarif')->findBy(array("hotel"=>$detailsHotel->getHotel()->getId(),"tempsd"=>$detailsHotel->getTempsd(),"tempsf"=>$detailsHotel->getTempsf()));
+        foreach ($tarifs as $tarif) {
+            $em->remove($tarif);
+        }
+        $em->remove($detailsHotel);
         $em->flush();
-
         $this->get('session')->getFlashBag()->add(
                 'info', 'Tarif supprimé'
         );
