@@ -135,6 +135,12 @@ class Hotel {
      * 
      */
     private $detailshotel;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Etourisme\HotelBundle\Entity\Reservation",mappedBy="hotel",cascade={"All"})
+     * 
+     */
+    private $reservation;
 
     /**
      * Get id
@@ -640,5 +646,39 @@ class Hotel {
     public function getTarif()
     {
         return $this->tarif;
+    }
+
+    /**
+     * Add reservation
+     *
+     * @param \Etourisme\HotelBundle\Entity\Reservation $reservation
+     *
+     * @return Hotel
+     */
+    public function addReservation(\Etourisme\HotelBundle\Entity\Reservation $reservation)
+    {
+        $this->reservation[] = $reservation;
+
+        return $this;
+    }
+
+    /**
+     * Remove reservation
+     *
+     * @param \Etourisme\HotelBundle\Entity\Reservation $reservation
+     */
+    public function removeReservation(\Etourisme\HotelBundle\Entity\Reservation $reservation)
+    {
+        $this->reservation->removeElement($reservation);
+    }
+
+    /**
+     * Get reservation
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReservation()
+    {
+        return $this->reservation;
     }
 }
